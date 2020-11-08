@@ -1,0 +1,37 @@
+/// @example 快速創建固定間距寬度(寬度可為各種長度單位)的flex grid system
+/// @param {Num} column_number 參數請填數字，grid欄數
+/// @param {Size} column_gutter 參數請填長度單位(px,rem,em,%,vw,...,etc), grid容器內部子容器的水平間距
+/// @param {Size} vertical_gutter 參數請填長度單位(px,rem,em,%,vw,...,etc), grid容器內部子容器的垂直間距, 預設等於column_gutter
+/// @param {String} grid_child_selector 參數請填gird容器內部子容器想要的class名稱, 預設為'*'
+/// @param {String} max_width 參數請填長度單位，gird容器的最大寬度
+/// @param {String} min_screen_width 參數請填長度單位，呈現出這個 mixin 參數所導出的grid樣式時，其最小視窗寬度，預設為0
+fixed-gutter-flex-grid($column_number = 3, $column_gutter = 30px, $vertical_gutter = $column_gutter, $grid_child_selector = "*", $max_width = 100%, $min_screen_width = 0px, $max_screen_width = 999999px){
+  @media screen and (min-width: $min_screen_width) and (max-width: $max_screen_width){
+    width: 100%;
+    display: inline-flex;
+    max-width: $max_width;
+    flex-wrap: wrap;
+    justify-content flex-start;
+    margin-bottom: -1*$vertical_gutter;
+    > {$grid_child_selector}:not(script){
+      display: inline-block;
+      flex: none;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: "calc((100% - (%s - 1) * %s) /%s)" % ($column_number $column_gutter $column_number);
+      margin-right: $column_gutter;
+      margin-bottom: $vertical_gutter;
+      &:nth-child({$column_number}n){
+        margin-right: 0;
+      }
+    }
+  }
+  @media all and (-ms-high-contrast: none) and (min-width: $min_screen_width) and (max-width: $max_screen_width){
+    > {$grid_child_selector}{
+      flex-basis: "calc((99.99% - (%s - 1) * %s) /%s)" % ($column_number $column_gutter $column_number);
+      &:nth-child({$column_number}n){
+        margin-right: 0;
+      }
+    }
+  }
+}

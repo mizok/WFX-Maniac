@@ -1,0 +1,65 @@
+.posts-montage{
+  fixed-gutter-flex-grid(3, 12px, 12px, "*", 100%, 769px, 999999px);
+  fixed-gutter-flex-grid(2, 12px, 12px, "*", 100%, 481px, 768px);
+  fixed-gutter-flex-grid(1, 12px, 12px, "*", 100%, 0px, 480px);
+  padding 20px
+  margin-left 12px
+  @media screen and (max-width 992px){
+    margin-left 0
+  }
+  .post-block{
+    height 300px;
+    position relative
+    border: 3px solid rgba(255,255,255,0.5);
+    box-sizing border-box
+    &:first-of-type{
+      padding-top 0
+    }
+    >article{
+      position absolute
+      left 0
+      right 0
+      bottom 0
+      top 0
+      padding-left 10px
+      padding-top 10px
+      margin auto;
+    }
+    .post-header{
+      height 100%
+      .post-title{
+        margin 0
+        &-link{
+          border-bottom:none;
+        }
+      }
+      .post-meta-container{
+        position absolute
+        bottom 0
+        right 0
+        padding-right 10px
+        padding-bottom 10px
+      }
+      .post-meta{
+        
+        justify-content flex-end
+        &-item{
+          &-icon{
+            display none
+          }
+          &-text{
+            display none
+          }
+        }
+      }
+    }
+
+    .post-body{
+    display none
+    }
+    .post-footer{
+      display none
+    }
+
+  }
+}
