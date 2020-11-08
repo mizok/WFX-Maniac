@@ -3125,7 +3125,7 @@ mark.search-keyword {
   height: 300px;
   position: relative;
   box-sizing: border-box;
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.25);
 }
 .posts-montage .post-block:first-of-type {
   padding-top: 0;
@@ -3184,7 +3184,7 @@ mark.search-keyword {
   background-color: transparent;
 }
 .site-brand-container {
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.25);
   background-color: transparent;
 }
 @media screen and (max-width: 992px) {
@@ -3195,7 +3195,7 @@ mark.search-keyword {
 }
 .site-nav {
   margin-top: 12px;
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.25);
 }
 @media screen and (max-width: 992px) {
   .site-nav {
@@ -3205,7 +3205,7 @@ mark.search-keyword {
   }
 }
 .sidebar {
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.25);
 }
 .sidebar-inner {
   background-color: transparent;
