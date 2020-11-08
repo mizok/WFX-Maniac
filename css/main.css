@@ -3239,3 +3239,15 @@ mark.search-keyword {
 body {
   background-color: #222;
 }
+.posts-collapse {
+  padding: 20px;
+}
+.posts-collapse .post-block:first-of-type {
+  padding-top: 20px;
+}
+.posts-expand {
+  padding: 20px;
+}
+.posts-expand .post-block:first-of-type {
+  padding-top: 20px;
+}
