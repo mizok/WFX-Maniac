@@ -13,7 +13,13 @@ fixed-gutter-flex-grid($column_number = 3, $column_gutter = 30px, $vertical_gutt
     flex-wrap: wrap;
     justify-content flex-start;
     margin-bottom: -1*$vertical_gutter;
-    > {$grid_child_selector}:not(script){
+    >*{
+      flex: none;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis:100%;
+    }
+    > {$grid_child_selector}{
       display: inline-block;
       flex: none;
       flex-grow: 0;

@@ -4,24 +4,12 @@ let removeRedundantString = (str) => {
   return str
 }
 
-let changeMainInnerClass = (str) => {
-  str = str.replace(/(<div class="main-inner index posts-expand">)/s, `<div class="main-inner index posts-montage">`);
-  return str
-}
-
-
-let changePostBlockToAnchorBlock = (str) => {
-
-}
 
 
 hexo.extend.filter.register('after_render:html', (str, data) => {
-  if (data.page.__index) {
+  if (data.config.theme_config.no_hexo_credit) {
     str = removeRedundantString(str);
-    str = changeMainInnerClass(str);
   }
-
-
   return str;
 })
 
