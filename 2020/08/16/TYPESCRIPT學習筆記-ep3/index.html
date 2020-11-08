@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/WFX-Maniac/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/WFX-Maniac/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="tags: 學習筆記TS 的class 跟 es6 有什麼差別？1. private與 public 宣告的存在:如果一個方法&#x2F;變數&#x2F;constructor被宣告為public 則能在聲明它的類的外部被取用反之若宣告為private， 那這個方法&#x2F;變數&#x2F;constructor 就只能在自己的class裡面被使用 所以說這樣會錯  實際上, 當private 方法&#x2F;變數&#x2F;constructor 在父">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TYPESCRIPT學習筆記-ep3">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/08/16/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/index.html">
+<meta property="og:site_name" content="WFX-Maniac">
+<meta property="og:description" content="tags: 學習筆記TS 的class 跟 es6 有什麼差別？1. private與 public 宣告的存在:如果一個方法&#x2F;變數&#x2F;constructor被宣告為public 則能在聲明它的類的外部被取用反之若宣告為private， 那這個方法&#x2F;變數&#x2F;constructor 就只能在自己的class裡面被使用 所以說這樣會錯  實際上, 當private 方法&#x2F;變數&#x2F;constructor 在父">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/qGgO47X.png">
+<meta property="article:published_time" content="2020-08-16T11:51:02.000Z">
+<meta property="article:modified_time" content="2020-11-08T11:44:31.625Z">
+<meta property="article:author" content="Mizok.H">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/qGgO47X.png">
+
+
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2020/08/16/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>TYPESCRIPT學習筆記-ep3 | WFX-Maniac</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/WFX-Maniac/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WFX-Maniac</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/WFX-Maniac/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">11</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+      
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#tags-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98"><span class="nav-number">1.</span> <span class="nav-text">tags: 學習筆記</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TS-%E7%9A%84class-%E8%B7%9F-es6-%E6%9C%89%E4%BB%80%E9%BA%BC%E5%B7%AE%E5%88%A5%EF%BC%9F"><span class="nav-number"></span> <span class="nav-text">TS 的class 跟 es6 有什麼差別？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-private%E8%88%87-public-%E5%AE%A3%E5%91%8A%E7%9A%84%E5%AD%98%E5%9C%A8"><span class="nav-number"></span> <span class="nav-text">1. private與 public 宣告的存在:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-protect-%E5%AE%A3%E5%91%8A%E7%9A%84%E5%AD%98%E5%9C%A8"><span class="nav-number"></span> <span class="nav-text">2. protect 宣告的存在:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%80%E5%80%8Bclass-%E7%9A%84%E6%96%B9%E6%B3%95-%E8%AE%8A%E6%95%B8-constructor%E8%A2%AB%E5%AE%A3%E5%91%8A%E7%82%BAprotected%EF%BC%8C-%E5%89%87"><span class="nav-number"></span> <span class="nav-text">如果一個class 的方法&#x2F;變數&#x2F;constructor被宣告為protected， 則:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-readonly-%E5%AE%A3%E5%91%8A%E7%9A%84%E5%AD%98%E5%9C%A8"><span class="nav-number"></span> <span class="nav-text">3. readonly 宣告的存在:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%80%E5%80%8Bclass-%E7%9A%84%E8%AE%8A%E6%95%B8%E8%A2%AB%E5%AE%A3%E5%91%8A%E7%82%BAreadonly%EF%BC%8C-%E5%89%87"><span class="nav-number"></span> <span class="nav-text">如果一個class 的變數被宣告為readonly， 則:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-getter%E8%88%87-setter"><span class="nav-number"></span> <span class="nav-text">4. getter與 setter</span></a></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mizok.H"
+      src="/WFX-Maniac/assets/logo.png">
+  <p class="site-author-name" itemprop="name">Mizok.H</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/WFX-Maniac/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/08/16/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TYPESCRIPT學習筆記-ep3
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-08-16 19:51:02" itemprop="dateCreated datePublished" datetime="2020-08-16T19:51:02+08:00">2020-08-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-11-08 19:44:31" itemprop="dateModified" datetime="2020-11-08T19:44:31+08:00">2020-11-08</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h6 id="tags-學習筆記"><a href="#tags-學習筆記" class="headerlink" title="tags: 學習筆記"></a>tags: <code>學習筆記</code></h6><h2 id="TS-的class-跟-es6-有什麼差別？"><a href="#TS-的class-跟-es6-有什麼差別？" class="headerlink" title="TS 的class 跟 es6 有什麼差別？"></a>TS 的class 跟 es6 有什麼差別？</h2><h4 id="1-private與-public-宣告的存在"><a href="#1-private與-public-宣告的存在" class="headerlink" title="1. private與 public 宣告的存在:"></a>1. private與 public 宣告的存在:</h4><p>如果一個方法/變數/constructor被宣告為public 則能在聲明它的類的外部被取用<br>反之若宣告為private， 那這個方法/變數/constructor 就只能在自己的class裡面被使用</p>
+<p>所以說這樣會錯</p>
+<blockquote>
+<p>實際上, 當private 方法/變數/constructor 在父類別被繼承出去的時候，<br>他是會進到子類別（或子類別的實例）裡面的，但是就是無法訪問而已</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">type</span> =<span class="string">&quot;fruit&quot;</span>;</span><br><span class="line">    <span class="function"><span class="title">method1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.type);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a  = <span class="keyword">new</span> fruit();</span><br><span class="line"><span class="built_in">console</span>.log(a.type);<span class="comment">//報錯, 因為type 只能在fruit裡面被使用，被new 出來的實例沒辦法取得他</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">apple</span> <span class="keyword">extends</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.type = <span class="string">&quot;aa&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">mm</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.type);<span class="comment">//報錯, 因為type 只能在fruit裡面被使用，就算是extend 過來也不行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="2-protect-宣告的存在"><a href="#2-protect-宣告的存在" class="headerlink" title="2. protect 宣告的存在:"></a>2. protect 宣告的存在:</h4><h5 id="如果一個class-的方法-變數-constructor被宣告為protected，-則"><a href="#如果一個class-的方法-變數-constructor被宣告為protected，-則" class="headerlink" title="如果一個class 的方法/變數/constructor被宣告為protected， 則:"></a>如果一個class 的方法/變數/constructor被宣告為protected， 則:</h5><ol>
+<li>這個方法/變數/constructor能在class裡面被叫用<br>但是我們不能透過這個class的實例去拿到他被 protect 的東西</li>
+<li>但若如果今天這個class被作為一個父類別被繼承下去的話，他的子類別在子類class的實例化前/後,<br>都可以去訪問這個被protected的東西</li>
+</ol>
+<h4 id="3-readonly-宣告的存在"><a href="#3-readonly-宣告的存在" class="headerlink" title="3. readonly 宣告的存在:"></a>3. readonly 宣告的存在:</h4><h5 id="如果一個class-的變數被宣告為readonly，-則"><a href="#如果一個class-的變數被宣告為readonly，-則" class="headerlink" title="如果一個class 的變數被宣告為readonly， 則:"></a>如果一個class 的變數被宣告為readonly， 則:</h5><ol>
+<li>這個方法/變數/constructor只能在class(實例化前後)被讀取，但不能被改變</li>
+<li>就算class被作為父類別繼承，他的子類別一樣不能去修改父類別繼承下來的變數</li>
+<li>注意 readonly只能用來把變數標注成唯讀，方法跟constructor 是不能設定的</li>
+</ol>
+<h4 id="4-getter與-setter"><a href="#4-getter與-setter" class="headerlink" title="4. getter與 setter"></a>4. getter與 setter</h4><blockquote>
+<p>typescript 的 class 可以把裡面的變數(屬性) 寫成 getter與setter 的形式[color=#36c169]</p>
+</blockquote>
+<blockquote>
+<p>如果是用VSCODE作為IDE的話，可以先把變數(屬性)反白，然後右鍵點左上角的小燈泡，這樣就可以自動產出ts 的get/set snippet 語法<br><img src="https://i.imgur.com/qGgO47X.png"></p>
+</blockquote>
+<p>以上面圖片這個例子來講, 當這個class的a屬性被改成get/set之後，就會變成下面這樣</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> _a: <span class="built_in">string</span> = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">a</span>(): <span class="title">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._a;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">set</span> <span class="title">a</span>(<span class="params">value: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._a = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後當這個class被實例化之後就可以透過setter去賦值，也就是</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> example  = <span class="keyword">new</span> test();</span><br><span class="line">test.a = <span class="string">&quot;def&quot;</span>;</span><br><span class="line"><span class="comment">//  這邊&quot;def&quot;會自動作為value 被帶入到set a(value)裡面去</span></span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2020/08/09/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" rel="prev" title="ES5/ES6學習筆記-ep3">
+                  <i class="fa fa-chevron-left"></i> ES5/ES6學習筆記-ep3
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2020/11/01/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/" rel="next" title="Proxy 的功用/實用的點">
+                  Proxy 的功用/實用的點 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="author" itemprop="copyrightHolder">Mizok.H</span>
+</div>
+  
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/WFX-Maniac/js/utils.js"></script><script src="/WFX-Maniac/js/motion.js"></script><script src="/WFX-Maniac/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js"></script>
+<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4.8.4/dist/instantsearch.production.min.js"></script><script src="/WFX-Maniac/js/algolia-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
