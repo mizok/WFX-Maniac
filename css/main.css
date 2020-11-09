@@ -3005,6 +3005,21 @@ mark.search-keyword {
   border: none;
   user-select: none;
 }
+.site-banner {
+  height: 300px;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-top: 15px;
+}
+@media (min-width: 992px) {
+  .site-banner {
+    width: 1160px;
+    background-color: #222;
+    box-shadow: 0 0.4px 2.2px rgba(0,0,0,0.037), 0 0.9px 5.3px rgba(0,0,0,0.053), 0 1.6px 10px rgba(0,0,0,0.065), 0 2.9px 17.9px rgba(0,0,0,0.077), 0 5.4px 33.4px rgba(0,0,0,0.093), 0 13px 80px rgba(0,0,0,0.13);
+  }
+}
 time {
   font-size: 12px;
 }
@@ -3026,12 +3041,48 @@ h5 {
 h6 {
   font-size: 0.5em;
 }
+h1 {
+  font-size: 1.625em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.375em;
+}
+h4 {
+  font-size: 1.25em;
+}
+h5 {
+  font-size: 1.125em;
+}
+h6 {
+  font-size: 1em;
+}
 .posts-expand {
   padding: 40px;
 }
 .posts-montage {
   padding: 0px;
   margin-left: 15px;
+}
+.posts-montage h1 {
+  font-size: 1.125em;
+}
+.posts-montage h2 {
+  font-size: 1em;
+}
+.posts-montage h3 {
+  font-size: 0.875em;
+}
+.posts-montage h4 {
+  font-size: 0.75em;
+}
+.posts-montage h5 {
+  font-size: 0.625em;
+}
+.posts-montage h6 {
+  font-size: 0.5em;
 }
 @media screen and (min-width: 769px) and (max-width: 999999px) {
   .posts-montage {
@@ -3158,7 +3209,7 @@ h6 {
   position: relative;
   box-sizing: border-box;
   background-color: #222;
-  box-shadow: 0 1.6px 2px rgba(0,0,0,0.08), 0 4.5px 5.5px rgba(0,0,0,0.115), 0 10.9px 13.3px rgba(0,0,0,0.15), 0 36px 44px rgba(0,0,0,0.23);
+  box-shadow: 0 0.4px 2.2px rgba(0,0,0,0.037), 0 0.9px 5.3px rgba(0,0,0,0.053), 0 1.6px 10px rgba(0,0,0,0.065), 0 2.9px 17.9px rgba(0,0,0,0.077), 0 5.4px 33.4px rgba(0,0,0,0.093), 0 13px 80px rgba(0,0,0,0.13);
 }
 .posts-montage .post-block:first-of-type {
   padding-top: 0;
@@ -3217,14 +3268,14 @@ h6 {
 .header-inner {
   background-color: transparent;
   background-color: #222;
-  box-shadow: 0 1.6px 2px rgba(0,0,0,0.08), 0 4.5px 5.5px rgba(0,0,0,0.115), 0 10.9px 13.3px rgba(0,0,0,0.15), 0 36px 44px rgba(0,0,0,0.23);
+  box-shadow: 0 0.4px 2.2px rgba(0,0,0,0.037), 0 0.9px 5.3px rgba(0,0,0,0.053), 0 1.6px 10px rgba(0,0,0,0.065), 0 2.9px 17.9px rgba(0,0,0,0.077), 0 5.4px 33.4px rgba(0,0,0,0.093), 0 13px 80px rgba(0,0,0,0.13);
 }
 .site-brand-container {
   background-color: transparent;
 }
 @media screen and (max-width: 992px) {
   .site-brand-container {
-    background-color: #333;
+    background-color: #222;
     border: none;
   }
 }
@@ -3240,7 +3291,7 @@ h6 {
 }
 .sidebar {
   background-color: #222;
-  box-shadow: 0 1.6px 2px rgba(0,0,0,0.08), 0 4.5px 5.5px rgba(0,0,0,0.115), 0 10.9px 13.3px rgba(0,0,0,0.15), 0 36px 44px rgba(0,0,0,0.23);
+  box-shadow: 0 0.4px 2.2px rgba(0,0,0,0.037), 0 0.9px 5.3px rgba(0,0,0,0.053), 0 1.6px 10px rgba(0,0,0,0.065), 0 2.9px 17.9px rgba(0,0,0,0.077), 0 5.4px 33.4px rgba(0,0,0,0.093), 0 13px 80px rgba(0,0,0,0.13);
 }
 .main-inner {
   background-color: transparent;
