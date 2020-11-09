@@ -7,10 +7,10 @@
 <meta name="generator" content="Hexo 5.2.0">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/logo.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/logo-x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/logo-x16.png">
-  <link rel="mask-icon" href="/WFX-Maniac/assets/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/images/logo-x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/images/logo-x16.png">
+  <link rel="mask-icon" href="/WFX-Maniac/assets/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/WFX-Maniac/css/main.css">
 
@@ -154,18 +154,21 @@
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
-  <div class="search-input-container"></div>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
   <span class="popup-btn-close">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
-<div class="search-result-container">
-  <div class="algolia-stats"><hr></div>
-  <div class="algolia-hits"></div>
-  <div class="algolia-pagination"></div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
 </div>
 
-      
     </div>
   </div>
 
@@ -200,7 +203,7 @@
         <section class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Mizok.H"
-      src="/WFX-Maniac/assets/logo.png">
+      src="/WFX-Maniac/assets/images/logo.png">
   <p class="site-author-name" itemprop="name">Mizok.H</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -254,7 +257,7 @@
     <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/01/ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-Proxy%20%E7%94%A8%E9%80%94_%E4%BB%8B%E7%B4%B9_%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/logo.png">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
       <meta itemprop="name" content="Mizok.H">
       <meta itemprop="description" content="">
     </span>
@@ -490,9 +493,7 @@
 
 
 
-  <script src="//cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4.8.4/dist/instantsearch.production.min.js"></script><script src="/WFX-Maniac/js/algolia-search.js"></script>
-
+  <script src="/WFX-Maniac/js/local-search.js"></script>
 
 
 
@@ -520,6 +521,6 @@
   
 
   
-
+<script src="assets/js/theme-next-default-canvas-fx.js"></script>
 </body>
 </html>
