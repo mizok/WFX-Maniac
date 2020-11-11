@@ -94,8 +94,30 @@
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
 
-  <div class="site-banner" id="site-banner"><canvas id="site-banner-canvas" class="site-banner-canvas"></canvas></div><main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  
+    <div class="site-banner" id="site-banner">
+      <canvas id="site-banner-canvas" class="site-banner-canvas"></canvas>
+      <script src="https://mizok.github.io/gonfalonJs/ripple.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  let ele = document.getElementById('site-banner-canvas');
+  let resizeHandler = () => {
+    let width = ele.parentElement.getBoundingClientRect().width;
+    let height = ele.parentElement.getBoundingClientRect().height;
+    ele.setAttribute('width', width);
+    ele.setAttribute('height', height);
+  }
+  resizeHandler();
+  window.addEventListener('resize', resizeHandler
+  )
+  let pulses = new RippleScreen(ele)
+})
+</script>
+
+    </div>
+    <main class="main">
+    <header class="header
+  " itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切換導航欄">
@@ -132,7 +154,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">0</span></a>
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/WFX-Maniac/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -216,6 +243,18 @@
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/WFX-Maniac/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/WFX-Maniac/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
   </nav>
 </div>
 
@@ -279,6 +318,22 @@
       <span class="post-meta-item-text">發表於</span>
 
       <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-11-12 00:42:28" itemprop="dateModified" datetime="2020-11-12T00:42:28+08:00">2020-11-12</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
+        </span>
     </span>
 
   
@@ -463,6 +518,6 @@
   
 
   
-<script src="https://mizok.github.io/gonfalonJs/ripple.js"></script>
+
 </body>
 </html>
