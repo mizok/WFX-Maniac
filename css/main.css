@@ -3175,7 +3175,7 @@ h6 {
 }
 .posts-montage .post-block {
   user-select: none;
-  height: 300px;
+  height: 250px;
   position: relative;
   box-sizing: border-box;
   background-color: #222;
@@ -3279,14 +3279,22 @@ h6 {
     margin-top: 0;
   }
 }
+@media (min-width: 1160px) {
+  .main {
+    width: 1160px;
+  }
+}
 .menu-item a:hover,
 .menu-item span.exturl:hover,
 .menu-item a.menu-item-active,
 .menu-item span.exturl.menu-item-active {
   background-color: transparent;
 }
+html,
 body {
-  background-color: #222;
+  height: auto;
+  background: linear-gradient(0deg, #191919 0%, #222 49%, #191919 100%);
+  background-size: cover;
 }
 .posts-collapse {
   padding: 20px;
@@ -3296,4 +3304,7 @@ body {
 }
 .posts-expand {
   padding: 40px;
+}
+.post-body {
+  font-size: 0.9em;
 }
