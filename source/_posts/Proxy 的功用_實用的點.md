@@ -3,7 +3,7 @@ title: Proxy 的功用/實用的點
 ---
 
 
-## 1. 實作雙/單向 prop trap綁定
+## 1. 實作雙/單向 prop trap綁定  
 
 ````javascript
 const input = document.querySelector('#username')
