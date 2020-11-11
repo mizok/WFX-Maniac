@@ -6,7 +6,7 @@ tags:
 - js
 ---
 
-###### tags: `學習筆記`
+
 
 ## 搞清楚並且用最簡單的方法解釋js的apply/call/bind
 

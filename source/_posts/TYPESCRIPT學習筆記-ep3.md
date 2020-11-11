@@ -6,7 +6,7 @@ tags:
 - ts
 ---
 
-###### tags: `學習筆記`
+
 
 ## TS 的class 跟 es6 有什麼差別？
 

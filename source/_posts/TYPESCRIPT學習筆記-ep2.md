@@ -6,7 +6,7 @@ tags:
 - ts
 ---
 
-###### tags: `學習筆記`
+
 
 ## 什麼是Interface(接口)?
 

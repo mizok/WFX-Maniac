@@ -6,7 +6,7 @@ tags:
 - js
 ---
 
-###### tags: `學習筆記`
+
 
 ## ES6 Promise 重點整理
 1. Promise 是什麼

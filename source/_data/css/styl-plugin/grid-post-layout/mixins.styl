@@ -64,7 +64,7 @@ grid-layout-index-montage-set(){
   }
   .post-block{
     user-select none;
-    height 300px;
+    height 250px;
     position relative
     box-sizing border-box
     grid-layout-shadow-set();
@@ -120,6 +120,12 @@ grid-layout-index-montage-set(){
 
   }
   custom-pagination();
+  }
+}
+
+grid-layout-post-body-set(){
+  .post-body{
+    font-size 0.9em;
   }
 }
 
@@ -194,6 +200,10 @@ grid-layout-main-set(){
     @media screen and (max-width :992px){
       margin-top 0
     }
+    @media (min-width: $content-desktop-large){
+      width $content-desktop-large
+    }
+
   }
   
 }
@@ -205,8 +215,10 @@ grid-layout-menu-set(){
 }
 
 grid-layout-body-set(){
-  body{
-      background-color: #222;
+  html,body{
+      height auto;
+      background: linear-gradient(180deg, rgba(34,34,34,1) 0%, rgba(34,34,34,1) 49%, rgba(25,25,25,1) 100%);
+      background-size:cover;
   }
 }
 
@@ -251,6 +263,7 @@ grid-layout-style-set(){
   grid-layout-body-set();
   grid-layout-posts-collapse-set();
   grid-layout-posts-expand-set();
+  grid-layout-post-body-set();
 }
 
 
