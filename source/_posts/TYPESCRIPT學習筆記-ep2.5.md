@@ -1,5 +1,9 @@
 ---
 title: TYPESCRIPT學習筆記-ep2.5
+categories: 
+- 心得
+tags:
+- ts
 ---
 
 ###### tags: `學習筆記`

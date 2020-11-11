@@ -1,5 +1,9 @@
 ---
 title: ES5/ES6學習筆記-ep1
+categories: 
+- 心得
+tags:
+- js
 ---
 
 ###### tags: `學習筆記`

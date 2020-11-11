@@ -1,5 +1,9 @@
 ---
 title: ES5/ES6學習筆記-ep2
+categories: 
+- 心得
+tags:
+- js
 ---
 
 

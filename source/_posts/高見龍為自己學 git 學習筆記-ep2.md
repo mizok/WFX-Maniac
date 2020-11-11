@@ -1,5 +1,9 @@
 ---
 title: 高見龍為自己學 git 學習筆記-ep2
+categories: 
+- 心得
+tags:
+- git
 ---
 
 ###### tags: `學習筆記`
