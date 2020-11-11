@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/images/logo-x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/images/logo-x16.png">
+  <link rel="mask-icon" href="/WFX-Maniac/assets/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/WFX-Maniac/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="tags: 學習筆記TYPESCRIPT的基礎常識基礎型別上與es5&#x2F;es6 較有差異的部分 數字ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數 1234let decLiteral: number &#x3D; 6;let hexLiteral: number &#x3D; 0xf00d;let binaryLiteral: number &#x3D; 0b1010;let oct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TYPESCRIPT學習筆記-ep1">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/index.html">
+<meta property="og:site_name" content="WFX-Maniac">
+<meta property="og:description" content="tags: 學習筆記TYPESCRIPT的基礎常識基礎型別上與es5&#x2F;es6 較有差異的部分 數字ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數 1234let decLiteral: number &#x3D; 6;let hexLiteral: number &#x3D; 0xf00d;let binaryLiteral: number &#x3D; 0b1010;let oct">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-11-11T14:34:46.771Z">
+<meta property="article:modified_time" content="2020-11-11T14:34:46.776Z">
+<meta property="article:author" content="Mizok.H">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>TYPESCRIPT學習筆記-ep1 | WFX-Maniac</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/WFX-Maniac/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WFX-Maniac</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/WFX-Maniac/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">11</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#tags-%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98"><span class="nav-number">1.</span> <span class="nav-text">tags: 學習筆記</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TYPESCRIPT%E7%9A%84%E5%9F%BA%E7%A4%8E%E5%B8%B8%E8%AD%98"><span class="nav-number"></span> <span class="nav-text">TYPESCRIPT的基礎常識</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A4%8E%E5%9E%8B%E5%88%A5%E4%B8%8A%E8%88%87es5-es6-%E8%BC%83%E6%9C%89%E5%B7%AE%E7%95%B0%E7%9A%84%E9%83%A8%E5%88%86"><span class="nav-number"></span> <span class="nav-text">基礎型別上與es5&#x2F;es6 較有差異的部分</span></a></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mizok.H"
+      src="/WFX-Maniac/assets/images/logo.png">
+  <p class="site-author-name" itemprop="name">Mizok.H</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/WFX-Maniac/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TYPESCRIPT學習筆記-ep1
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h6 id="tags-學習筆記"><a href="#tags-學習筆記" class="headerlink" title="tags: 學習筆記"></a>tags: <code>學習筆記</code></h6><h1 id="TYPESCRIPT的基礎常識"><a href="#TYPESCRIPT的基礎常識" class="headerlink" title="TYPESCRIPT的基礎常識"></a>TYPESCRIPT的基礎常識</h1><h2 id="基礎型別上與es5-es6-較有差異的部分"><a href="#基礎型別上與es5-es6-較有差異的部分" class="headerlink" title="基礎型別上與es5/es6 較有差異的部分"></a>基礎型別上與es5/es6 較有差異的部分</h2><ol>
+<li><p>數字<br>ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> decLiteral: <span class="built_in">number</span> = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> hexLiteral: <span class="built_in">number</span> = <span class="number">0xf00d</span>;</span><br><span class="line"><span class="keyword">let</span> binaryLiteral: <span class="built_in">number</span> = <span class="number">0b1010</span>;</span><br><span class="line"><span class="keyword">let</span> octalLiteral: <span class="built_in">number</span> = <span class="number">0o744</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>陣列</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原則上ts的變數都要寫型別，而如果一個變數的型別是array</span></span><br><span class="line"><span class="comment">//且這個array的子項型別都是number，則可寫成如下</span></span><br><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//承上，或如下利用泛型</span></span><br><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>元組(陣列型別專用)</li>
+</ol>
+<ul>
+<li><p>最基本的範例：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Declare a tuple type</span></span><br><span class="line"><span class="keyword">let</span> x: [<span class="built_in">string</span>, <span class="built_in">number</span>];</span><br><span class="line"><span class="comment">// Initialize it</span></span><br><span class="line">x = [<span class="string">&#x27;hello&#x27;</span>, <span class="number">10</span>]; <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// Initialize it incorrectly</span></span><br><span class="line">x = [<span class="number">10</span>, <span class="string">&#x27;hello&#x27;</span>]; <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>為陣列編寫型別的好處</p>
+</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x: [<span class="built_in">string</span>, <span class="built_in">number</span>];</span><br><span class="line">x = [<span class="string">&#x27;hello&#x27;</span>, <span class="number">10</span>]; <span class="comment">// OK</span></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">0</span>].substr(<span class="number">1</span>)); <span class="comment">// OK 因為x[0]在元組中定義為字串，可以使用substr方法</span></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">1</span>].substr(<span class="number">1</span>)); <span class="comment">// Error, 因為10屬於在元組中定義為數字，不能使用substr方法，所以會報錯</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>當偵測到陣列子項位置在元組定義範圍外的子項時，會用元組定義的型別的聯集來定義之</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x[<span class="number">3</span>] = <span class="string">&#x27;world&#x27;</span>; <span class="comment">// OK, 字符串可以赋值给(string | number)类型</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">5</span>].toString()); <span class="comment">// OK, &#x27;string&#x27; 和 &#x27;number&#x27; 都有 toString</span></span><br><span class="line"></span><br><span class="line">x[<span class="number">6</span>] = <span class="literal">true</span>; <span class="comment">// Error, 布尔不是(string | number)类型</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>列舉（Enumerate）</li>
+</ol>
+<ul>
+<li><p>能夠把變數的範圍限制在某些限制下進行存取並賦予其定義</p>
+</li>
+<li><p>舉個實用的例子，團隊裡的後端在 Server 處理資料發生錯誤時，定義了一些代碼，來告訴前端說，這個代碼代表什麼錯誤，那個又是什麼：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleWrongStatus = (status: string): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;C&#x27;</span>:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> (<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;No have wrong code!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然而像上面這樣寫的話，缺點會在於各個case之間沒有語意化，你很難去釐清Case A 實際上是什麼, Case B又是什麼，在這種狀況下就可以去使用enumerate</p>
+<p>enumerate的寫法跟js的物件接近，如下</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> requestStatusCodes &#123;</span><br><span class="line">  error,</span><br><span class="line">  success,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正常來講，如果不幫上述這個requestStatusCodes 的裡面每一個子項去做定義，TS的編譯器會直接把error的編號定為0, success的編號定為1（流水號）</p>
+<p>這樣我們就可以透過requestStatusCodes.error拿到0這個列舉值, requestStatusCodes.success拿到1這個列舉值;或者透過requestStatusCodes[0]拿到error 這個列舉子項</p>
+<p>這樣的話。上述的case switch就可以這樣改良</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> requestWrongCodes &#123;</span><br><span class="line">  missingParameter = <span class="string">&#x27;A&#x27;</span>,</span><br><span class="line">  wrongParameterType = <span class="string">&#x27;B&#x27;</span>,</span><br><span class="line">  invalidToken = <span class="string">&#x27;C&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handleWrongStatus = (status: <span class="built_in">string</span>): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//es6解構賦值的寫法</span></span><br><span class="line">  <span class="keyword">const</span> &#123; missingParameter, wrongParameterType, invalidToken, &#125; = requestWrongCodes;</span><br><span class="line">  <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">    <span class="keyword">case</span> missingParameter:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> wrongParameterType:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> invalidToken:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> (<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;No have wrong code!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>5.any/void 任意值與虛空值</p>
+<p>變數的型別如果不確定的話可以直接帶any，而函數的return type如果為空的話則可以直接帶:void</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> notSure: <span class="built_in">any</span> = <span class="number">4</span>;</span><br><span class="line">notSure = <span class="string">&quot;maybe a string instead&quot;</span>; <span class="comment">//這樣不會報錯</span></span><br><span class="line">notSure = <span class="literal">false</span>; <span class="comment">//這樣也不會報錯</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">warnUser</span>(<span class="params"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;This is my warning message&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6.undefined/null 未定義與空值</p>
+<blockquote>
+<p>TypeScript里，undefined和null两者各自有自己的类型分别叫做undefined和null。 和void相似，它们的本身的类型用处不是很大</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Not much else we can assign to these variables!</span><br><span class="line">let u: undefined &#x3D; undefined; </span><br><span class="line">let n: null &#x3D; null;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在默認狀況下 undefined和null 這兩種value也可以被賦予給任何型別作為其值</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> u: <span class="built_in">number</span> = <span class="literal">undefined</span>; </span><br><span class="line"><span class="keyword">let</span> n: syting = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>–strictNullChecks是什麼？<blockquote>
+<p>簡單來說就是typescript 的tsconfig.json裡面的一個設定，只要做了這個設定以後，undefined和null 這兩種value就再也不會被默認為任何型別的一種預設值。也許在某處你想嘗試一個字串或空或未定義，可以使用聯合類型 <code>ex: string|number|null</code></p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;compileOnSave&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">        ...</span><br><span class="line">        &quot;strictNullChecks&quot;: true,</span><br><span class="line">        &quot;skipLibCheck&quot;: true,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>Never 這個型別是用來幹嘛用的?</li>
+</ol>
+<p>never類型表示的是那些根本就不會有值的類型，例如一個只會return new Error(‘string’) 的function；<br>要注意值為never型別不接受null作為其值。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params">message: <span class="built_in">string</span></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> something: <span class="built_in">void</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> nothing: <span class="built_in">never</span> = <span class="literal">null</span>; <span class="comment">// Error: Type &#x27;null&#x27; is not assignable to type &#x27;never&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>類型斷言</li>
+</ol>
+<p>類型斷言好比其它語言裡的類型轉換，但是不進行特殊的數據檢查和解構。<br>.jsx檔案裡面只能用as的方式做類型斷言</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someValue: <span class="built_in">any</span> = <span class="string">&quot;this is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> strLength: <span class="built_in">number</span> = (&lt;<span class="built_in">string</span>&gt;someValue).length;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someValue: <span class="built_in">any</span> = <span class="string">&quot;this is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> strLength: <span class="built_in">number</span> = (someValue <span class="keyword">as</span> <span class="built_in">string</span>).length;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2020/11/11/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/" rel="prev" title="Proxy 的功用/實用的點">
+                  <i class="fa fa-chevron-left"></i> Proxy 的功用/實用的點
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/" rel="next" title="TYPESCRIPT學習筆記-ep2.5">
+                  TYPESCRIPT學習筆記-ep2.5 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="author" itemprop="copyrightHolder">Mizok.H</span>
+</div>
+  
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/WFX-Maniac/js/utils.js"></script><script src="/WFX-Maniac/js/motion.js"></script><script src="/WFX-Maniac/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/WFX-Maniac/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://mizok.github.io/gonfalonJs/ripple.js"></script>
+</body>
+</html>
