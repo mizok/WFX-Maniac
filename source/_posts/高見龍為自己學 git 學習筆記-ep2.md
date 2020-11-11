@@ -22,7 +22,7 @@ tags:
 
 > 想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add --all
 
-> git commit --allowed-empty -m "" 這樣寫就可以不用寫commit 
+> git commit --allowed-empty -m "" 這樣寫就可以產生一個空的commit點 
 log
 
 > git 可以分成 工作目錄/暫存區/儲存區
