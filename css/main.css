@@ -2993,6 +2993,16 @@ mark.search-keyword {
 .post-meta-item {
   font-size: 12px;
 }
+.post-meta-item a {
+  background-color: #fbb023;
+  text-decoration: none;
+  color: #000;
+  border-radius: 999px;
+  padding: 0 5px;
+}
+.post-meta-item a:hover {
+  text-decoration: none;
+}
 h1 {
   font-size: 1.125em;
 }
@@ -3293,7 +3303,7 @@ h6 {
 html,
 body {
   height: auto;
-  background: linear-gradient(0deg, #191919 0%, #222 49%, #191919 100%);
+  background: linear-gradient(180deg, #222 0%, #222 49%, #191919 100%);
   background-size: cover;
 }
 .posts-collapse {

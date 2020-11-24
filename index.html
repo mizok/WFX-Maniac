@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">11</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">12</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -292,6 +292,115 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/24/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/WFX-Maniac/2020/11/24/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" class="post-title-link" itemprop="url">高見龍為自己學 git 學習筆記-ep3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-11-24 23:21:37" itemprop="dateCreated datePublished" datetime="2020-11-24T23:21:37+08:00">2020-11-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-11-25 02:49:00" itemprop="dateModified" datetime="2020-11-25T02:49:00+08:00">2020-11-25</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="git-clone專案的方法"><a href="#git-clone專案的方法" class="headerlink" title="git clone專案的方法"></a>git clone專案的方法</h2><p>說到clone專案(這邊以github為例), 一般狀況下有下面幾種比較常見的狀況</p>
+<h3 id="作法一-遠端git倉庫直接clone到本地"><a href="#作法一-遠端git倉庫直接clone到本地" class="headerlink" title="作法一(遠端git倉庫直接clone到本地)"></a>作法一(遠端git倉庫直接clone到本地)</h3><ol>
+<li>首先第一步當然是直接在遠端倉庫的網頁(例如github的repo頁面)先開一個repo</li>
+<li>再來打開自己電腦的command line(或是也可以使用Vscode等IDE自帶的終端), 利用bash指令去把當前資料夾位置移到想要存放本地repo資料夾的地方</li>
+<li>然後就直接輸入<code>git clone &lt;遠端repo位址&gt;</code></li>
+<li>這樣就可以創建出一個和遠端倉庫關聯的本地倉庫</li>
+</ol>
+<h3 id="作法二-本地已經有一個裡面有檔案的資料夾-然後在遠端也有一個裡面有東西的git倉庫-上面有master-可能也有master以外的分支-想要把本地的東西推到遠端"><a href="#作法二-本地已經有一個裡面有檔案的資料夾-然後在遠端也有一個裡面有東西的git倉庫-上面有master-可能也有master以外的分支-想要把本地的東西推到遠端" class="headerlink" title="作法二(本地已經有一個裡面有檔案的資料夾, 然後在遠端也有一個裡面有東西的git倉庫,上面有master, 可能也有master以外的分支, 想要把本地的東西推到遠端)"></a>作法二(本地已經有一個裡面有檔案的資料夾, 然後在遠端也有一個裡面有東西的git倉庫,上面有master, 可能也有master以外的分支, 想要把本地的東西推到遠端)</h3><ol>
+<li>首先第一步先把本地的資料夾做git的初始化 <code>git init</code></li>
+<li>再來 <code>git remote add &lt;遠端資料庫的暱稱, 可以自訂&gt; &lt;遠端資料庫的位址&gt;</code></li>
+<li>上面這個動作是去為本地的這個倉庫”標記”, 他有關聯上哪一個遠端倉庫(所以其實一個本地倉庫可以關聯上很多個遠端倉庫，但是暱稱不能重複)</li>
+<li>所以說如果我想要去關聯一個新的遠端倉庫(我們這邊取名為apple), 那就是<code>git remote add apple &lt;apple的位址&gt;</code></li>
+<li>接下來因為我們這邊的狀況是本地已經有檔案, 想要推到遠端, 但遠端因為也是有東西的，所以這邊我們其實會有兩種做法，我們接著描述</li>
+</ol>
+<h4 id="作法二其1"><a href="#作法二其1" class="headerlink" title="作法二其1"></a>作法二其1</h4><ol>
+<li>直接 <code>git fetch &lt;指定遠端倉庫的暱稱&gt;</code> 這邊以apple為例, 也就是 <code>git fetch apple</code></li>
+<li>這麼做之後就可以把遠端倉庫的最新改動、所有分支與檔案下載回來, 而我們這邊因為本地倉庫是新開的，這個狀況叫做 “unborn branch”, 是一個只有HEAD在本地的狀況(這部分以後再討論)。</li>
+<li>在這邊講的”unborn branch”的狀況下去做 fetch, 以這邊來講，就會把遠端的master下載回拉本地端，這樣就會在本地端看到一個origin/master分支, 這個就是遠端master在本地的備份, 這時候我們可以直接<code>git checkout master</code>或者直接把本地本來就存在的檔案做<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>, 這樣就會發現第4步的狀況。</li>
+<li>我們會發現本地出現了本地自己的master(關於 unborn branch的介紹可以看這一篇<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/21252876/git-repository-created-without-a-master-branch">stackoverflow</a> )。</li>
+<li>如果我們在4.的時候是透過<code>git checkout master</code>產生本地master的話，會發現本地master是會自動跟遠端的備份(origin/master)同步好的, 而且遠端master也會同時被視為上游分支(上游分支的解釋可以看第7步)，這樣就可以直接跳過第6步進階到第7步。</li>
+<li>但是如果我們在4的時候是透過<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>去走到第5步，則會發現本地master只有原本就存在本地的檔案，這時候如果用的IDE是 vscode, 如過利用左下角的分支切換功能, 去切到apple/master , 就會發現報錯 “Git: fatal: A branch named ‘master’ already exists.”，這種狀況下我們要去執行 <code>git pull apple master</code>，然後就會發現多出了一個新的分支叫做 FETCHED_HEAD，我們接著可以進階到第7步(FETCHED_HEAD只是暫時的, 第七步結束後,FETCHED_HEAD就會消失, IDE也不會再報一樣的錯)。</li>
+<li><code>git push -u &lt;遠端倉庫的暱稱&gt; &lt;想要push過去的遠端倉庫分支&gt;</code> , 以這邊來講就是<code>git push -u apple master</code></li>
+<li>這邊的 <strong>-u</strong> 代表的是去把apple master去定為這個分支的上游分支，這樣以後在這個分支上做的git push, 最後都會把改動push到apple master。</li>
+<li>做完最後一步之後就會發現遠端repo的網頁上master的內容已經跟本地同步了</li>
+</ol>
+<h4 id="作法二其2"><a href="#作法二其2" class="headerlink" title="作法二其2"></a>作法二其2</h4><ol>
+<li>直接 <code>git pull &lt;指定遠端倉庫的暱稱&gt; &lt;指定想要pull下來的遠端倉庫分支&gt;</code>，這邊以apple上的master分支為例, 也就是 <code>git pull apple master</code></li>
+<li>其實這種狀況會跟前面其一的<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>狀況類似，接著也是直接<code>git push -u &lt;遠端倉庫的暱稱&gt; &lt;想要push過去的遠端倉庫分支&gt;</code> 就完事了（當然，如果有改動要commit的記得要commit）。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -324,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
+        <time title="修改時間：2020-11-24 23:30:53" itemprop="dateModified" datetime="2020-11-24T23:30:53+08:00">2020-11-24</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -355,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <p>想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add –all</p>
 </blockquote>
 <blockquote>
-<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點<br>log</p>
+<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點ˊ<br>log</p>
 </blockquote>
 <blockquote>
 <p>git 可以分成 工作目錄/暫存區/儲存區<br>用git add 把檔案從工作目錄記錄到暫存區, 用git commit 把檔案從暫存區記錄到儲存區</p>
@@ -858,7 +967,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
+        <time title="修改時間：2020-11-22 15:09:14" itemprop="dateModified" datetime="2020-11-22T15:09:14+08:00">2020-11-22</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1244,298 +1353,6 @@ document.addEventListener('DOMContentLoaded', function () {
 <h4 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 用reflect.has 去判斷 object 是不是有那個key 值</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">//如果方法不存在, 那就return 一個攔截用的function</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">// error 被攔截</span></span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="實作-interpolation"><a href="#實作-interpolation" class="headerlink" title="實作 interpolation"></a>實作 interpolation</h4><p>這個比較複雜，預計下週在補完</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="ES6-Promise-重點整理"><a href="#ES6-Promise-重點整理" class="headerlink" title="ES6 Promise 重點整理"></a>ES6 Promise 重點整理</h2><ol>
-<li>Promise 是什麼</li>
-</ol>
-<ul>
-<li>用來處理callback chain 的一種新JS語法</li>
-<li>本身是一個class, 但是他也有自己的靜態方法</li>
-<li>建立出來的實例物件具有三種狀態：pending/fulfilled/rejected</li>
-<li>狀態只可能是從pending 變成 fulfilled/rejected</li>
-</ul>
-<ol start="2">
-<li>promise.prototype.then()</li>
-</ol>
-<ul>
-<li>then()可以傳入兩個函數作為參數，第一個函數會在promise物件被fulfilled之後馬上發動，第二個函數則會在promise物件被reject的時候馬上發動</li>
-<li>會回傳一個新的promise物件</li>
-<li><strong>重要</strong> ： 當then與then串接的時候，後面的then 的 <strong>參數function</strong> 會得到前面的then 的 <strong>參數function</strong> return出來的值作為參數</li>
-</ul>
-<ol start="3">
-<li>promise.prototype.catch()</li>
-</ol>
-<ul>
-<li>catch()可以傳入一個函數作為參數，並且這個函數會接收到promise throw出來的error</li>
-<li>也會回傳一個新的promise物件</li>
-</ul>
-<ol start="4">
-<li>promise.all()</li>
-</ol>
-<ul>
-<li>也會回傳新的promise</li>
-<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
-<li>當這些內容物promise都被fullfill之後，all()本身回傳的promise就會被fullfill</li>
-<li>在all() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到all()的所有內容promise 在resolve 時使用的參數 所組成的陣列。</li>
-</ul>
-<ol start="5">
-<li>promise.race()</li>
-</ol>
-<ul>
-<li>也會回傳新的promise</li>
-<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
-<li>當這些內容物promise有其中一個被fullfill之後，race()本身回傳的promise就會被fullfill</li>
-<li>在race() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到race()的最快達成fullfilled 的內容promise 在resolve 時使用的參數。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="ES6解構賦值重點整理"><a href="#ES6解構賦值重點整理" class="headerlink" title="ES6解構賦值重點整理"></a>ES6解構賦值重點整理</h2><ol>
-<li>模式匹配：<blockquote>
-<p>只要等号两边的模式相同，左边的变量就会被赋予对应的值。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<ul>
-<li>這個<br>  let [a, b, c] = [1, 2, 3];</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>等同於這個<br>  let a = 1;<br>  let b = 2;<br>  let c = 3;</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>這個<br>  let [foo, [[bar], baz]] = [1, [[2], 3]];</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>等同於這個<br>  let foo = 1;<br>  let bar = 2;<br>  let baz = 3;</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>如果解構不成功，變量的值就等於undefined。<br>  let [foo] = [];<br>  let [bar，foo] = [1];<br>  以上兩種情況都屬於解構失敗，foo的值都會等於undefined。</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>解構賦值的等號右邊必須要是一個可以迭代的東西，如果不是的話會報錯<br>  let [qoo]=null //報錯</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>支援預設值，但也只有遇上對應的子項為 undefined才會採用預設值<br>  let [foo = true] = [];<br>  foo // true<br>  let [x, y = ‘b’] = [‘a’]; // x=’a’, y=’b’<br>  let [x, y = ‘b’] = [‘a’, undefined]; // x=’a’, y=’b’<br>  let [x = 1] = [null];x // null 因為子項不等於undefined</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>字串也可以做模式匹配<br>  const [a, b, c, d, e] = ‘hello’;<br>  會變成<br>  const a= ‘h’,<br>  const b= ‘e’<br>  …</li>
-</ul>
-</blockquote>
-<ol start="2">
-<li><p>對象匹配</p>
-<ul>
-<li><p>Basic</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; bar, foo &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line">foo <span class="comment">// &quot;aaa&quot;</span></span><br><span class="line">bar <span class="comment">// &quot;bbb&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; baz &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line">baz <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></li>
-<li><p>如果變數的名稱與複製目標的屬性名稱不一樣的話可以這樣做</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; <span class="attr">foo</span>: baz &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line">baz <span class="comment">// &quot;aaa&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">first</span>: <span class="string">&#x27;hello&#x27;</span>, <span class="attr">last</span>: <span class="string">&#x27;world&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">first</span>: f, <span class="attr">last</span>: l &#125; = obj;</span><br><span class="line">f <span class="comment">// &#x27;hello&#x27;</span></span><br><span class="line">l <span class="comment">// &#x27;world&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>對象匹配也可以有預設值，而採用預設值的標準跟模式匹配一樣:undefined</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;x = <span class="number">3</span>&#125; = &#123;&#125;;</span><br><span class="line">x <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> &#123;x, y = <span class="number">5</span>&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;</span><br><span class="line">x <span class="comment">// 1</span></span><br><span class="line">y <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//這個比較需要記憶</span></span><br><span class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>: y = <span class="number">3</span>&#125; = &#123;&#125;;</span><br><span class="line">y <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//這個比較需要記憶</span></span><br><span class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>: y = <span class="number">3</span>&#125; = &#123;<span class="attr">x</span>: <span class="number">5</span>&#125;;</span><br><span class="line">y <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> &#123; <span class="attr">message</span>: msg = <span class="string">&#x27;Something went wrong&#x27;</span> &#125; = &#123;&#125;;</span><br><span class="line">msg <span class="comment">// &quot;Something went wrong&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>注意不要把大括號寫在行首</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;x&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;<span class="comment">//報錯</span></span><br><span class="line"><span class="comment">//應該改寫成</span></span><br><span class="line"><span class="keyword">let</span> &#123;x&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line"><span class="keyword">let</span> x;<span class="comment">//這行不寫的話x 會變全域</span></span><br><span class="line">(&#123;x&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;)<span class="comment">//這種方式盡量不要用</span></span><br></pre></td></tr></table></figure></li>
-<li><p>函數參數的解構</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y]</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add([<span class="number">1</span>, <span class="number">2</span>]); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函数参数的解构也可以使用默认值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x = <span class="number">0</span>, y = <span class="number">0</span>&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>&#125;); <span class="comment">// [3, 8]</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>&#125;); <span class="comment">// [3, 0]</span></span><br><span class="line">move(&#123;&#125;); <span class="comment">// [0, 0]</span></span><br><span class="line">move(); <span class="comment">// [0, 0]</span></span><br></pre></td></tr></table></figure></li>
-<li><p>注意下列兩者的不同</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函數參數本身附帶預設值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x = <span class="number">0</span>, y = <span class="number">0</span>&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 傳進來的物件會取代掉&#123;&#125;</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>&#125;); <span class="comment">// [3, 8]</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>&#125;); <span class="comment">// [3, 0]</span></span><br><span class="line">move(&#123;&#125;); <span class="comment">// [0, 0]</span></span><br><span class="line">move(); <span class="comment">// [0, 0]</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x, y&#125; = &#123; x: <span class="number">0</span>, y: <span class="number">0</span> &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 傳進來的物件會取代掉&#123; x: 0, y: 0 &#125;</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>&#125;); <span class="comment">// [3, 8]</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>&#125;); <span class="comment">// [3, undefined]</span></span><br><span class="line">move(&#123;&#125;); <span class="comment">// [undefined, undefined]</span></span><br><span class="line">move(); <span class="comment">// [0, 0]</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>解構賦值的用途</p>
-<ul>
-<li><p>交換變數值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">[x, y] = [y, x];</span><br></pre></td></tr></table></figure></li>
-<li><p>從物件/陣列 快速宣告多個值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> [a, b, c] = example();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个对象</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    foo: <span class="number">1</span>,</span><br><span class="line">    bar: <span class="number">2</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123; foo, bar &#125; = example();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>快速指定函數預設參數值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.ajax = <span class="function"><span class="keyword">function</span> (<span class="params">url, &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">async</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  beforeSend = <span class="keyword">function</span> () &#123;&#125;,</span></span></span><br><span class="line"><span class="function"><span class="params">  cache = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  complete = <span class="keyword">function</span> () &#123;&#125;,</span></span></span><br><span class="line"><span class="function"><span class="params">  crossDomain = <span class="literal">false</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="built_in">global</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="regexp">//</span> ... more config</span></span></span><br><span class="line"><span class="function"><span class="params">&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ... do stuff</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>generator function(生成器函數)是什麼？</p>
-<ul>
-<li><p>在ES6中定義一個生成器函數很簡單，在函數後跟上「*」即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function* foo1() &#123; &#125;;</span><br><span class="line">function *foo2() &#123; &#125;;</span><br><span class="line">function * foo3() &#123; &#125;;</span><br><span class="line"></span><br><span class="line">foo1.toString(); &#x2F;&#x2F; &quot;function* foo1() &#123; &#125;&quot;</span><br><span class="line">foo2.toString(); &#x2F;&#x2F; &quot;function* foo2() &#123; &#125;&quot;</span><br><span class="line">foo3.toString(); &#x2F;&#x2F; &quot;function* foo3() &#123; &#125;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><p>调用生成器函数会产生一个生成器（generator）。生成器拥有的最重要的方法是 next()，用来迭代：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">fibs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">yield</span> a;<span class="comment">//碰到yield就會return 一個值</span></span><br><span class="line">    [a, b] = [b, a + b];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ol>
 
       
     </div>
