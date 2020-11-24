@@ -344,17 +344,17 @@
 <h2 id="git-基本操作"><a href="#git-基本操作" class="headerlink" title="git 基本操作"></a>git 基本操作</h2><ol>
 <li>使用者基本資料設定(bt device)，設定姓名/電子郵件</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Eddie Kao&quot;</span><br><span class="line">git config --global user.email &quot;eddiexxxx@gmail.com&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">&quot;Eddie Kao&quot;</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email <span class="string">&quot;eddiexxxx@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>這邊拿掉global 的話就會對專案直接做個別設定</li>
-<li>存取的global使用者資料會在user根資料夾底下的.gitconfig檔案裡<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure>
+<li>存取的global使用者資料會在user根資料夾底下的.gitconfig檔案裡<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.gitconfig</span><br></pre></td></tr></table></figure>
 
 
 </li>
 </ul>
 <ol start="2">
 <li><p>列出當前使用者資料設定</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--list</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>其實可以把git的預設編輯器改成 VSCODE<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git">https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git</a></p>
 </li>
@@ -371,7 +371,7 @@
 <li></li>
 </ol>
 <p><code>git add --all</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add -A stages all changes</span><br><span class="line"></span><br><span class="line">git add . stages new files and modifications, without deletions</span><br><span class="line"></span><br><span class="line">git add -u stages modifications and deletions, without new files</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">add</span> -A stages all changes</span><br><span class="line"></span><br><span class="line">git <span class="built_in">add</span> . stages <span class="built_in">new</span> <span class="built_in">files</span> <span class="keyword">and</span> modifications, <span class="keyword">without</span> deletions</span><br><span class="line"></span><br><span class="line">git <span class="built_in">add</span> -u stages modifications <span class="keyword">and</span> deletions, <span class="keyword">without</span> <span class="built_in">new</span> <span class="built_in">files</span></span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li><code>git commit -m &lt;commit log&gt;</code></li>

@@ -3316,5 +3316,11 @@ body {
   padding: 40px;
 }
 .post-body {
-  font-size: 0.9em;
+  font-size: 1em;
+}
+.post-body li+li {
+  margin-top: 30px;
+}
+.post-body code {
+  color: #ffb531;
 }

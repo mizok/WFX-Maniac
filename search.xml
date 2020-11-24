@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>ES5/ES6學習筆記-ep1</title>
+    <url>/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
+    <content><![CDATA[<h2 id="搞清楚並且用最簡單的方法解釋js的apply-call-bind"><a href="#搞清楚並且用最簡單的方法解釋js的apply-call-bind" class="headerlink" title="搞清楚並且用最簡單的方法解釋js的apply/call/bind"></a>搞清楚並且用最簡單的方法解釋js的apply/call/bind</h2><ul>
+<li>先解釋apply/call<blockquote>
+<p>apply/call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//假設有一個變數叫做qq, 初始值為&#x27;wow&#x27;</span></span><br><span class="line"><span class="keyword">var</span> qq = <span class="string">&#x27;wow&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poop</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,a,b);</span><br><span class="line">&#125;</span><br><span class="line">poop.apply(qq);<span class="comment">//wow undefine undefine</span></span><br><span class="line"><span class="comment">// 這邊其實就是把qq丟進去poop()裡面當作this, 用call 的話亦然</span></span><br></pre></td></tr></table></figure></li>
+<li>apply和call的差別<blockquote>
+<p>雖然差別都是丟變數進去函數當this用，但是這兩個的差異在於支援參數不同</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//apply的第一個參數傳入之後會變成函數中的this，但是第二個參數（必須要是array）傳入之後會變成函數原始支援的參數群</span></span><br><span class="line">theFunction.apply(valueForThis, arrayOfArgs)</span><br><span class="line"><span class="comment">//apply的第一個參數傳入之後會變成函數中的this，但是第二個以後的參數就是函數原始的所有參數群</span></span><br><span class="line">theFunction.call(valueForThis, arg1, arg2, ...)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以上面的poop()來看</span></span><br><span class="line">poop().apply(qq,[<span class="number">1</span>,<span class="number">2</span>])<span class="comment">//&#x27;wow&#x27; 1 2</span></span><br><span class="line">poop().call(qq,<span class="number">1</span>,<span class="number">2</span>)<span class="comment">//&#x27;wow&#x27; 1 2</span></span><br></pre></td></tr></table></figure></li>
+<li>解釋bind</li>
+</ul>
+<blockquote>
+<p>bind的用途跟apply/call 有點不同，他是會return 一個把指定變數綁進去當this的函數</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aa</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,a,b)</span><br><span class="line">&#125;</span><br><span class="line">aa(<span class="number">11</span>,<span class="number">22</span>);<span class="comment">//window 11 22 aa函數在沒被綁之前的this 都是window</span></span><br><span class="line"><span class="keyword">var</span> ccc=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> gg = aa.bind(ccc);<span class="comment">// 把ccc綁給aa之後重新包裝成一個gg, aa其實沒有被變動</span></span><br><span class="line">gg(<span class="number">44</span>,<span class="number">44</span>)<span class="comment">//[1,2,3] 44 44 從這邊開始this被綁死了</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>bind 的進階用法<blockquote>
+<p>固定上層scope 的this，這個其實就是ES6 arrow function內部的做法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    gg:<span class="string">&#x27;wow&#x27;</span>,</span><br><span class="line">    ff:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>.gg)</span><br><span class="line">        &#125;.bind(<span class="built_in">this</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.ff(); <span class="comment">//wow</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h2 id="變數提升與let"><a href="#變數提升與let" class="headerlink" title="變數提升與let:"></a>變數提升與let:</h2><ul>
+<li><p>變數提升最基本的案例:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"><span class="comment">//在&quot;var a = 10&quot; 之前去呼叫a, 其實會輸出undefine 而不是 ReferenceError: a is not defined.</span></span><br><span class="line"><span class="comment">//那是因為var 其實是先把a 在最開頭做一個宣告a為變數，然後最後才賦予值。</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函數中變數提升的狀況:</p>
+<ul>
+<li>這個狀況:<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(v)</span><br><span class="line">   <span class="keyword">var</span> v = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>)</span><br></pre></td></tr></table></figure></li>
+<li>其實等於這個狀況<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v=<span class="number">10</span></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> v;<span class="comment">// 引入的參數其實也會在開頭被先宣告，而且宣告的優先權會比函數內部的變數宣告來得高</span></span><br><span class="line">  <span class="keyword">var</span> v;</span><br><span class="line">  v = <span class="number">10</span></span><br><span class="line">  <span class="built_in">console</span>.log(v)</span><br><span class="line">  v = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>let/const 與暫時性死區（Temporal Dead Zone）</p>
+<ul>
+<li>雖然let 可以用來避免用var產生的hoisting狀況，但是這並不代表let沒有hoisting行為</li>
+<li>在「提升之後」以及「賦值之前」這段「期間」，如果你存取它就會拋出ReferenceError錯誤，而這段期間就稱做是 TDZ，它是一個為了解釋 let 與 const 的 hoisting 行為所提出的一個名詞。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="string">&#x27;outer value&#x27;</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 在函數的起始處會產生x的 TDZ起始點 x</span></span><br><span class="line">  <span class="built_in">console</span>.log(x) <span class="comment">// TDZ期間存取，產生ReferenceError錯誤</span></span><br><span class="line">  <span class="keyword">let</span> x = <span class="string">&#x27;inner value&#x27;</span> <span class="comment">// 對x的宣告語句，這裡結束 TDZ for x</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="let與if的搭配"><a href="#let與if的搭配" class="headerlink" title="let與if的搭配"></a>let與if的搭配</h2><ul>
+<li>單行的if宣告不能在判斷boolean 之後let宣告</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第一种写法，报错</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种写法，不报错</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>應該避免在塊級作用域內聲明函數。如果確實需要，也應該寫成函數表達式，而不是函數聲明語句。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 塊級作用域內部的函數聲明語句，建議不要使用</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="string">&#x27;secret&#x27;</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 塊級作用域內部，優先使用函數表達式</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="string">&#x27;secret&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="const的重要意義-–-固定傳址"><a href="#const的重要意義-–-固定傳址" class="headerlink" title="const的重要意義 – 固定傳址"></a>const的重要意義 – 固定傳址</h2><blockquote>
+<p>大家都知道const 宣告的值就是不變的常數，但是實際上const最重要的應用點其實是在於固定變數儲存位置的地址</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [];</span><br><span class="line">a.push(<span class="string">&#x27;Hello&#x27;</span>); <span class="comment">// 可執行</span></span><br><span class="line">a.length = <span class="number">0</span>;    <span class="comment">// 可執行</span></span><br><span class="line">a = [<span class="string">&#x27;Dave&#x27;</span>];    <span class="comment">// 錯誤，可以藉由這樣的方式避免a被換址</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果真的想將對象凍結，應該使用Object.freeze方法。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = <span class="built_in">Object</span>.freeze(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常規模式時，下面一行不起作用；</span></span><br><span class="line"><span class="comment">// 嚴格模式時，該行會報錯</span></span><br><span class="line">foo.prop = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>心得</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ES5/ES6學習筆記-ep2</title>
     <url>/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
     <content><![CDATA[<h2 id="ES6解構賦值重點整理"><a href="#ES6解構賦值重點整理" class="headerlink" title="ES6解構賦值重點整理"></a>ES6解構賦值重點整理</h2><ol>
@@ -85,7 +163,7 @@
 <li><p>generator function(生成器函數)是什麼？</p>
 <ul>
 <li><p>在ES6中定義一個生成器函數很簡單，在函數後跟上「*」即可：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function* foo1() &#123; &#125;;</span><br><span class="line">function *foo2() &#123; &#125;;</span><br><span class="line">function * foo3() &#123; &#125;;</span><br><span class="line"></span><br><span class="line">foo1.toString(); &#x2F;&#x2F; &quot;function* foo1() &#123; &#125;&quot;</span><br><span class="line">foo2.toString(); &#x2F;&#x2F; &quot;function* foo2() &#123; &#125;&quot;</span><br><span class="line">foo3.toString(); &#x2F;&#x2F; &quot;function* foo3() &#123; &#125;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo1</span>(<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo2</span>(<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> * <span class="title">foo3</span>(<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"></span><br><span class="line">foo1.toString(); <span class="comment">// &quot;function* foo1() &#123; &#125;&quot;</span></span><br><span class="line">foo2.toString(); <span class="comment">// &quot;function* foo2() &#123; &#125;&quot;</span></span><br><span class="line">foo3.toString(); <span class="comment">// &quot;function* foo3() &#123; &#125;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>调用生成器函数会产生一个生成器（generator）。生成器拥有的最重要的方法是 next()，用来迭代：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">fibs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">yield</span> a;<span class="comment">//碰到yield就會return 一個值</span></span><br><span class="line">    [a, b] = [b, a + b];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -93,84 +171,6 @@
 </ul>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ES5/ES6學習筆記-ep1</title>
-    <url>/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
-    <content><![CDATA[<h2 id="搞清楚並且用最簡單的方法解釋js的apply-call-bind"><a href="#搞清楚並且用最簡單的方法解釋js的apply-call-bind" class="headerlink" title="搞清楚並且用最簡單的方法解釋js的apply/call/bind"></a>搞清楚並且用最簡單的方法解釋js的apply/call/bind</h2><ul>
-<li>先解釋apply/call<blockquote>
-<p>apply/call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//假設有一個變數叫做qq, 初始值為&#x27;wow&#x27;</span></span><br><span class="line"><span class="keyword">var</span> qq = <span class="string">&#x27;wow&#x27;</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">poop</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,a,b);</span><br><span class="line">&#125;</span><br><span class="line">poop.apply(qq);<span class="comment">//wow undefine undefine</span></span><br><span class="line"><span class="comment">// 這邊其實就是把qq丟進去poop()裡面當作this, 用call 的話亦然</span></span><br></pre></td></tr></table></figure></li>
-<li>apply和call的差別<blockquote>
-<p>雖然差別都是丟變數進去函數當this用，但是這兩個的差異在於支援參數不同</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//apply的第一個參數傳入之後會變成函數中的this，但是第二個參數（必須要是array）傳入之後會變成函數原始支援的參數群</span></span><br><span class="line">theFunction.apply(valueForThis, arrayOfArgs)</span><br><span class="line"><span class="comment">//apply的第一個參數傳入之後會變成函數中的this，但是第二個以後的參數就是函數原始的所有參數群</span></span><br><span class="line">theFunction.call(valueForThis, arg1, arg2, ...)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以上面的poop()來看</span></span><br><span class="line">poop().apply(qq,[<span class="number">1</span>,<span class="number">2</span>])<span class="comment">//&#x27;wow&#x27; 1 2</span></span><br><span class="line">poop().call(qq,<span class="number">1</span>,<span class="number">2</span>)<span class="comment">//&#x27;wow&#x27; 1 2</span></span><br></pre></td></tr></table></figure></li>
-<li>解釋bind</li>
-</ul>
-<blockquote>
-<p>bind的用途跟apply/call 有點不同，他是會return 一個把指定變數綁進去當this的函數</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">aa</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>,a,b)</span><br><span class="line">&#125;</span><br><span class="line">aa(<span class="number">11</span>,<span class="number">22</span>);<span class="comment">//window 11 22 aa函數在沒被綁之前的this 都是window</span></span><br><span class="line"><span class="keyword">var</span> ccc=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> gg = aa.bind(ccc);<span class="comment">// 把ccc綁給aa之後重新包裝成一個gg, aa其實沒有被變動</span></span><br><span class="line">gg(<span class="number">44</span>,<span class="number">44</span>)<span class="comment">//[1,2,3] 44 44 從這邊開始this被綁死了</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>bind 的進階用法<blockquote>
-<p>固定上層scope 的this，這個其實就是ES6 arrow function內部的做法</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">    gg:<span class="string">&#x27;wow&#x27;</span>,</span><br><span class="line">    ff:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>.gg)</span><br><span class="line">        &#125;.bind(<span class="built_in">this</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.ff(); <span class="comment">//wow</span></span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<h2 id="變數提升與let"><a href="#變數提升與let" class="headerlink" title="變數提升與let:"></a>變數提升與let:</h2><ul>
-<li><p>變數提升最基本的案例:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"><span class="comment">//在&quot;var a = 10&quot; 之前去呼叫a, 其實會輸出undefine 而不是 ReferenceError: a is not defined.</span></span><br><span class="line"><span class="comment">//那是因為var 其實是先把a 在最開頭做一個宣告a為變數，然後最後才賦予值。</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>函數中變數提升的狀況:</p>
-<ul>
-<li>這個狀況:<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(v)</span><br><span class="line">   <span class="keyword">var</span> v = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>)</span><br></pre></td></tr></table></figure></li>
-<li>其實等於這個狀況<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v=<span class="number">10</span></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> v;<span class="comment">// 引入的參數其實也會在開頭被先宣告，而且宣告的優先權會比函數內部的變數宣告來得高</span></span><br><span class="line">  <span class="keyword">var</span> v;</span><br><span class="line">  v = <span class="number">10</span></span><br><span class="line">  <span class="built_in">console</span>.log(v)</span><br><span class="line">  v = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>let/const 與暫時性死區（Temporal Dead Zone）</p>
-<ul>
-<li>雖然let 可以用來避免用var產生的hoisting狀況，但是這並不代表let沒有hoisting行為</li>
-<li>在「提升之後」以及「賦值之前」這段「期間」，如果你存取它就會拋出ReferenceError錯誤，而這段期間就稱做是 TDZ，它是一個為了解釋 let 與 const 的 hoisting 行為所提出的一個名詞。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="string">&#x27;outer value&#x27;</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 在函數的起始處會產生x的 TDZ起始點 x</span></span><br><span class="line">  <span class="built_in">console</span>.log(x) <span class="comment">// TDZ期間存取，產生ReferenceError錯誤</span></span><br><span class="line">  <span class="keyword">let</span> x = <span class="string">&#x27;inner value&#x27;</span> <span class="comment">// 對x的宣告語句，這裡結束 TDZ for x</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="let與if的搭配"><a href="#let與if的搭配" class="headerlink" title="let與if的搭配"></a>let與if的搭配</h2><ul>
-<li>單行的if宣告不能在判斷boolean 之後let宣告</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第一种写法，报错</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) <span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种写法，不报错</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>應該避免在塊級作用域內聲明函數。如果確實需要，也應該寫成函數表達式，而不是函數聲明語句。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 塊級作用域內部的函數聲明語句，建議不要使用</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="string">&#x27;secret&#x27;</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 塊級作用域內部，優先使用函數表達式</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="string">&#x27;secret&#x27;</span>;</span><br><span class="line">  <span class="keyword">let</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="const的重要意義-–-固定傳址"><a href="#const的重要意義-–-固定傳址" class="headerlink" title="const的重要意義 – 固定傳址"></a>const的重要意義 – 固定傳址</h2><blockquote>
-<p>大家都知道const 宣告的值就是不變的常數，但是實際上const最重要的應用點其實是在於固定變數儲存位置的地址</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> a = [];</span><br><span class="line">a.push(<span class="string">&#x27;Hello&#x27;</span>); <span class="comment">// 可執行</span></span><br><span class="line">a.length = <span class="number">0</span>;    <span class="comment">// 可執行</span></span><br><span class="line">a = [<span class="string">&#x27;Dave&#x27;</span>];    <span class="comment">// 錯誤，可以藉由這樣的方式避免a被換址</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>如果真的想將對象凍結，應該使用Object.freeze方法。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = <span class="built_in">Object</span>.freeze(&#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常規模式時，下面一行不起作用；</span></span><br><span class="line"><span class="comment">// 嚴格模式時，該行會報錯</span></span><br><span class="line">foo.prop = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
 ]]></content>
       <categories>
         <category>心得</category>
@@ -359,6 +359,21 @@
       </tags>
   </entry>
   <entry>
+    <title>Proxy 的功用/實用的點</title>
+    <url>/WFX-Maniac/2020/11/11/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
+    <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>心得</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TYPESCRIPT學習筆記-ep1</title>
     <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
     <content><![CDATA[<h1 id="TYPESCRIPT的基礎常識"><a href="#TYPESCRIPT的基礎常識" class="headerlink" title="TYPESCRIPT的基礎常識"></a>TYPESCRIPT的基礎常識</h1><h2 id="基礎型別上與es5-es6-較有差異的部分"><a href="#基礎型別上與es5-es6-較有差異的部分" class="headerlink" title="基礎型別上與es5/es6 較有差異的部分"></a>基礎型別上與es5/es6 較有差異的部分</h2><ol>
@@ -455,21 +470,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Proxy 的功用/實用的點</title>
-    <url>/WFX-Maniac/2020/11/11/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
-    <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>TYPESCRIPT學習筆記-ep2.5</title>
     <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/</url>
     <content><![CDATA[<h4 id="如何使用interface-為函數定義參數型別與回傳值型別"><a href="#如何使用interface-為函數定義參數型別與回傳值型別" class="headerlink" title="如何使用interface 為函數定義參數型別與回傳值型別"></a>如何使用interface 為函數定義參數型別與回傳值型別</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, <span class="attr">subString</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125; <span class="comment">// 定義函數參數/return 的方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> customVariables &#123;</span><br><span class="line">  variableA: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -489,6 +489,30 @@
 <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Shape &#123;</span><br><span class="line">    color: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square <span class="keyword">extends</span> Shape &#123;</span><br><span class="line">    sideLength: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> square = &lt;Square&gt;&#123;&#125;;  </span><br><span class="line"><span class="comment">// 這邊也可以寫成 let square:Square = &#123;color:&#x27;blue&#x27;,sideLength=10&#125;, 但如果不寫預設值就會報錯</span></span><br><span class="line">square.color = <span class="string">&quot;blue&quot;</span>;</span><br><span class="line">square.sideLength = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
 
 <h4 id="interface-extend-class？-用意是什麼"><a href="#interface-extend-class？-用意是什麼" class="headerlink" title="interface extend class？ 用意是什麼?"></a>interface extend class？ 用意是什麼?</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> state: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> SelectableControl <span class="keyword">extends</span> Control &#123;</span><br><span class="line">    select(): <span class="built_in">void</span>; <span class="comment">// 這邊定義了一個extend了 control的接口, 所以意思是說，如果今天有class想要implement 這個接口，他必須要有control 的全內容, 不然就會報錯</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Control</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125; <span class="comment">// 因為button 有 extend Control, 所以他本身就具有private 的state, 所以這樣給過</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBox</span> <span class="keyword">extends</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error: Property &#x27;state&#x27; is missing in type &#x27;Image&#x27;.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Image</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">    <span class="comment">// 因為Image 本身沒有private 的state, 所以不能implement SelectableControl</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>心得</category>
+      </categories>
+      <tags>
+        <tag>ts</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TYPESCRIPT學習筆記-ep2</title>
+    <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
+    <content><![CDATA[<h2 id="什麼是Interface-接口"><a href="#什麼是Interface-接口" class="headerlink" title="什麼是Interface(接口)?"></a>什麼是Interface(接口)?</h2><blockquote>
+<p>簡單來說就是一個用來定義一個物件內部 必要變數/變數型別的寫法<br>好用的點在於可以去限制一個物件必須要具備什麼樣的property</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  label: <span class="built_in">string</span>;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">  <span class="keyword">readonly</span> color:<span class="string">&#x27;red&#x27;</span></span><br><span class="line">  <span class="comment">//前面有寫readonly的property，</span></span><br><span class="line">  <span class="comment">//代表這個項目只要被interface初始定義之後就沒有辦法再被覆寫</span></span><br><span class="line">  <span class="comment">//注意readonly只能在interface裡面使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printLabel</span>(<span class="params">labeledObj: LabeledValue</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="comment">//直接把labeledObj 內容的型別定義為labeledValue 接口 </span></span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(labeledObj.label);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myObj = &#123;<span class="attr">size</span>: <span class="number">10</span>, <span class="attr">label</span>: <span class="string">&quot;Size 10 Object&quot;</span>&#125;;</span><br><span class="line">printLabel(myObj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="什麼是ReadonlyArray-唯讀陣列"><a href="#什麼是ReadonlyArray-唯讀陣列" class="headerlink" title="什麼是ReadonlyArray(唯讀陣列)?"></a>什麼是ReadonlyArray(唯讀陣列)?</h2><blockquote>
+<p>用途是用來確保陣列被定義為唯獨之後再也不能被修改</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ro: ReadonlyArray&lt;<span class="built_in">number</span>&gt; = a;</span><br><span class="line">ro[<span class="number">0</span>] = <span class="number">12</span>; <span class="comment">// error!</span></span><br><span class="line">ro.push(<span class="number">5</span>); <span class="comment">// error!</span></span><br><span class="line">ro.length = <span class="number">100</span>; <span class="comment">// error!</span></span><br><span class="line">a = ro; <span class="comment">// error!</span></span><br><span class="line"><span class="comment">//但是可以用類型斷言強行複製</span></span><br><span class="line">a = ro <span class="keyword">as</span> <span class="built_in">number</span>[];</span><br></pre></td></tr></table></figure>
+
+<h2 id="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼"><a href="#我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼" class="headerlink" title="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?"></a>我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//所以基本上這樣寫是合法的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> qq = <span class="function">(<span class="params">bb:LabeledValue</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">qq(&#123;&#125;)<span class="comment">//傳入空物件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 這樣寫也是合法的</span></span><br><span class="line"><span class="keyword">let</span> apple:LabeledValue =&#123;&#125;;</span><br><span class="line">apple.name = <span class="string">&#x27;fuji&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//但是這樣寫就會fail</span></span><br><span class="line">apple.color = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>這說明了optional屬性只能接受”存在”或“不存在”這兩種值，用一個本來就不符合interface的property是不合法的</p>
+]]></content>
       <categories>
         <category>心得</category>
       </categories>
@@ -538,27 +562,58 @@
       </tags>
   </entry>
   <entry>
-    <title>TYPESCRIPT學習筆記-ep2</title>
-    <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
-    <content><![CDATA[<h2 id="什麼是Interface-接口"><a href="#什麼是Interface-接口" class="headerlink" title="什麼是Interface(接口)?"></a>什麼是Interface(接口)?</h2><blockquote>
-<p>簡單來說就是一個用來定義一個物件內部 必要變數/變數型別的寫法<br>好用的點在於可以去限制一個物件必須要具備什麼樣的property</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  label: <span class="built_in">string</span>;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">  <span class="keyword">readonly</span> color:<span class="string">&#x27;red&#x27;</span></span><br><span class="line">  <span class="comment">//前面有寫readonly的property，</span></span><br><span class="line">  <span class="comment">//代表這個項目只要被interface初始定義之後就沒有辦法再被覆寫</span></span><br><span class="line">  <span class="comment">//注意readonly只能在interface裡面使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printLabel</span>(<span class="params">labeledObj: LabeledValue</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="comment">//直接把labeledObj 內容的型別定義為labeledValue 接口 </span></span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(labeledObj.label);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myObj = &#123;<span class="attr">size</span>: <span class="number">10</span>, <span class="attr">label</span>: <span class="string">&quot;Size 10 Object&quot;</span>&#125;;</span><br><span class="line">printLabel(myObj);</span><br></pre></td></tr></table></figure>
+    <title>高見龍為自己學 git 學習筆記-ep1</title>
+    <url>/WFX-Maniac/2020/11/11/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
+    <content><![CDATA[<h2 id="一些簡單的基本：終端機指令"><a href="#一些簡單的基本：終端機指令" class="headerlink" title="一些簡單的基本：終端機指令"></a>一些簡單的基本：終端機指令</h2><ol>
+<li>複製檔案<code>cp</code></li>
+<li>重新命名檔案 <code>mv &#39;舊檔名&#39; ‘新檔名‘</code></li>
+<li>列出目前位置 <code>pwd</code></li>
+<li>移除檔案 <code>rm</code></li>
+<li>到根資料夾<code>cd ~</code></li>
+<li>顯示所有包括隱藏的檔案<code>ls -al</code></li>
+</ol>
+<h2 id="Vim操作"><a href="#Vim操作" class="headerlink" title="Vim操作"></a>Vim操作</h2><p><img src="https://i.imgur.com/mXktH1C.png"></p>
+<h2 id="git-基本操作"><a href="#git-基本操作" class="headerlink" title="git 基本操作"></a>git 基本操作</h2><ol>
+<li>使用者基本資料設定(bt device)，設定姓名/電子郵件</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">&quot;Eddie Kao&quot;</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email <span class="string">&quot;eddiexxxx@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>這邊拿掉global 的話就會對專案直接做個別設定</li>
+<li>存取的global使用者資料會在user根資料夾底下的.gitconfig檔案裡<figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">~/.gitconfig</span><br></pre></td></tr></table></figure>
 
-<h2 id="什麼是ReadonlyArray-唯讀陣列"><a href="#什麼是ReadonlyArray-唯讀陣列" class="headerlink" title="什麼是ReadonlyArray(唯讀陣列)?"></a>什麼是ReadonlyArray(唯讀陣列)?</h2><blockquote>
-<p>用途是用來確保陣列被定義為唯獨之後再也不能被修改</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ro: ReadonlyArray&lt;<span class="built_in">number</span>&gt; = a;</span><br><span class="line">ro[<span class="number">0</span>] = <span class="number">12</span>; <span class="comment">// error!</span></span><br><span class="line">ro.push(<span class="number">5</span>); <span class="comment">// error!</span></span><br><span class="line">ro.length = <span class="number">100</span>; <span class="comment">// error!</span></span><br><span class="line">a = ro; <span class="comment">// error!</span></span><br><span class="line"><span class="comment">//但是可以用類型斷言強行複製</span></span><br><span class="line">a = ro <span class="keyword">as</span> <span class="built_in">number</span>[];</span><br></pre></td></tr></table></figure>
 
-<h2 id="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼"><a href="#我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼" class="headerlink" title="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?"></a>我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?</h2><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//所以基本上這樣寫是合法的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> qq = <span class="function">(<span class="params">bb:LabeledValue</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">qq(&#123;&#125;)<span class="comment">//傳入空物件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 這樣寫也是合法的</span></span><br><span class="line"><span class="keyword">let</span> apple:LabeledValue =&#123;&#125;;</span><br><span class="line">apple.name = <span class="string">&#x27;fuji&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//但是這樣寫就會fail</span></span><br><span class="line">apple.color = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="2">
+<li><p>列出當前使用者資料設定</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其實可以把git的預設編輯器改成 VSCODE<br><a href="https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git">https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git</a></p>
+</li>
+<li><p>git 的操作指令其實也可以寫alias(縮寫)</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.co checkout</span><br><span class="line">&#x2F;&#x2F;把checkout指令改成co</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.l &quot;log--oneline--graph&quot;</span><br><span class="line">&#x2F;&#x2F;也可以把一些比較複雜的指令改成alias</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.ls &#39;log --graph --pretty&#x3D;format:&quot;%h &lt;%an&gt; %ar %s&quot;&#39;</span><br><span class="line">&#x2F;&#x2F;or more complicated</span><br><span class="line">&#x2F;&#x2F;把git log的格式簡化用</span><br></pre></td></tr></table></figure>
 
-<p>這說明了optional屬性只能接受”存在”或“不存在”這兩種值，用一個本來就不符合interface的property是不合法的</p>
+<h2 id="專案git初始化的流程"><a href="#專案git初始化的流程" class="headerlink" title="專案git初始化的流程"></a>專案git初始化的流程</h2><ol>
+<li><code>cd &lt;folder&gt;</code></li>
+<li><code>git init</code></li>
+<li></li>
+</ol>
+<p><code>git add --all</code></p>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">add</span> -A stages all changes</span><br><span class="line"></span><br><span class="line">git <span class="built_in">add</span> . stages <span class="built_in">new</span> <span class="built_in">files</span> <span class="keyword">and</span> modifications, <span class="keyword">without</span> deletions</span><br><span class="line"></span><br><span class="line">git <span class="built_in">add</span> -u stages modifications <span class="keyword">and</span> deletions, <span class="keyword">without</span> <span class="built_in">new</span> <span class="built_in">files</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><code>git commit -m &lt;commit log&gt;</code></li>
+</ol>
 ]]></content>
       <categories>
         <category>心得</category>
       </categories>
       <tags>
-        <tag>ts</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -592,7 +647,7 @@
 <p>可以使用 –cached ，這樣會變成單純的把檔案與git 斷聯，但是不會實際刪除檔案, 這樣該檔案在做完這個動作之後就會變成 untracked了</p>
 </blockquote>
 <h2 id="git-mv-改變檔名"><a href="#git-mv-改變檔名" class="headerlink" title="git mv 改變檔名"></a>git mv 改變檔名</h2><p>例如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">git mv aa.html bb.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">mv</span> <span class="selector-tag">aa</span><span class="selector-class">.html</span> <span class="selector-tag">bb</span><span class="selector-class">.html</span></span><br></pre></td></tr></table></figure>
 
 
 ]]></content>
@@ -634,61 +689,6 @@
 <h4 id="作法二其2"><a href="#作法二其2" class="headerlink" title="作法二其2"></a>作法二其2</h4><ol>
 <li>直接 <code>git pull &lt;指定遠端倉庫的暱稱&gt; &lt;指定想要pull下來的遠端倉庫分支&gt;</code>，這邊以apple上的master分支為例, 也就是 <code>git pull apple master</code></li>
 <li>其實這種狀況會跟前面其一的<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>狀況類似，接著也是直接<code>git push -u &lt;遠端倉庫的暱稱&gt; &lt;想要push過去的遠端倉庫分支&gt;</code> 就完事了（當然，如果有改動要commit的記得要commit）。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>心得</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高見龍為自己學 git 學習筆記-ep1</title>
-    <url>/WFX-Maniac/2020/11/11/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
-    <content><![CDATA[<h2 id="一些簡單的基本：終端機指令"><a href="#一些簡單的基本：終端機指令" class="headerlink" title="一些簡單的基本：終端機指令"></a>一些簡單的基本：終端機指令</h2><ol>
-<li>複製檔案<code>cp</code></li>
-<li>重新命名檔案 <code>mv &#39;舊檔名&#39; ‘新檔名‘</code></li>
-<li>列出目前位置 <code>pwd</code></li>
-<li>移除檔案 <code>rm</code></li>
-<li>到根資料夾<code>cd ~</code></li>
-<li>顯示所有包括隱藏的檔案<code>ls -al</code></li>
-</ol>
-<h2 id="Vim操作"><a href="#Vim操作" class="headerlink" title="Vim操作"></a>Vim操作</h2><p><img src="https://i.imgur.com/mXktH1C.png"></p>
-<h2 id="git-基本操作"><a href="#git-基本操作" class="headerlink" title="git 基本操作"></a>git 基本操作</h2><ol>
-<li>使用者基本資料設定(bt device)，設定姓名/電子郵件</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;Eddie Kao&quot;</span><br><span class="line">git config --global user.email &quot;eddiexxxx@gmail.com&quot;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>這邊拿掉global 的話就會對專案直接做個別設定</li>
-<li>存取的global使用者資料會在user根資料夾底下的.gitconfig檔案裡<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">~&#x2F;.gitconfig</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ol start="2">
-<li><p>列出當前使用者資料設定</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其實可以把git的預設編輯器改成 VSCODE<br><a href="https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git">https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git</a></p>
-</li>
-<li><p>git 的操作指令其實也可以寫alias(縮寫)</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.co checkout</span><br><span class="line">&#x2F;&#x2F;把checkout指令改成co</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.l &quot;log--oneline--graph&quot;</span><br><span class="line">&#x2F;&#x2F;也可以把一些比較複雜的指令改成alias</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.ls &#39;log --graph --pretty&#x3D;format:&quot;%h &lt;%an&gt; %ar %s&quot;&#39;</span><br><span class="line">&#x2F;&#x2F;or more complicated</span><br><span class="line">&#x2F;&#x2F;把git log的格式簡化用</span><br></pre></td></tr></table></figure>
-
-<h2 id="專案git初始化的流程"><a href="#專案git初始化的流程" class="headerlink" title="專案git初始化的流程"></a>專案git初始化的流程</h2><ol>
-<li><code>cd &lt;folder&gt;</code></li>
-<li><code>git init</code></li>
-<li></li>
-</ol>
-<p><code>git add --all</code></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git add -A stages all changes</span><br><span class="line"></span><br><span class="line">git add . stages new files and modifications, without deletions</span><br><span class="line"></span><br><span class="line">git add -u stages modifications and deletions, without new files</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><code>git commit -m &lt;commit log&gt;</code></li>
 </ol>
 ]]></content>
       <categories>
