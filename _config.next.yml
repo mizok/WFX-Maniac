@@ -375,7 +375,7 @@ codeblock:
     dark: tomorrow-night
   prism:
     light: prism
-    dark: prism-dark
+    dark: prism-xonokai
   # Add copy button on codeblock
   copy_button:
     enable: false
