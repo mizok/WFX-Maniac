@@ -1,5 +1,3 @@
-let canvasLibrary = `<script src="https://mizok.github.io/gonfalonJs/ripple.js"></script>`;
-
 let canvasInit = `
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -13,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   resizeHandler();
   window.addEventListener('resize', resizeHandler
   )
-  let pulses = new RippleScreen(ele)
+
 })
 </script>
 `;
@@ -23,7 +21,7 @@ let spawnBanner = (str) => {
   str = str.replace(/(<main class="main">\n\s*)(<header class="header)/s, `
     <div class="site-banner" id="site-banner">
       <canvas id="site-banner-canvas" class="site-banner-canvas"></canvas>
-      ${canvasLibrary}${canvasInit}
+      
     </div>
     $1$2
   `);
