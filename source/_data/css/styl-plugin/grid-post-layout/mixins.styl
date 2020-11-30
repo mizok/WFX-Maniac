@@ -270,17 +270,39 @@ grid-layout-sitemeta-add-canvas(){
   }
   .site-meta{
     padding 0
-    .brand{
+    @media screen and (max-width:991px){
+      padding 20px 0;
+    }
+   
+  }
+   .brand{
+      font-size:0px;
+      display:block;
+      width:100%;
+      position:relative;
+      padding-bottom:50%;
+       @media screen and (max-width:991px){
+         font-size 20px;
+          padding-bottom 0px;
+        }
       >*:not(#logo-canvas){
         display none
+        @media screen and (max-width:991px){
+          display block
+        }
       }
       #logo-canvas{
-        width 100%
+        width 100%;
+        position absolute;
+        left 0;
+        top 0;
         background-color rgba(0,0,0,0.35);
         box-shadow: inset 0px -10px 20px 3px rgba(0,0,0,0.25);
+        @media screen and (max-width:991px){
+          display none;
+        }
       }
     }
-  }
 }
 
 

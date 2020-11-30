@@ -1,4 +1,4 @@
-const DEFAULT = {
+let defaultConfig = {
   title: 'title', // 標題
   points: 3, // 總波紋數量
   maxBorder: 4, // 波紋最大線寬
@@ -18,7 +18,7 @@ class RippleLogo {
   constructor(
     ele, config
   ) {
-    config = Object.assign(DEFAULT, config);
+    config = Object.assign(defaultConfig, config);
     this.ele = ele;
     Object.assign(this, config);
     this.pool = [];
@@ -44,7 +44,7 @@ class RippleLogo {
     window.addEventListener('resize', $this.debounce(() => {
       $this.size();
       $this.drawAll();
-    }, 200));
+    }, 500));
     for (let i = 0; i < $this.points; i++) {
       const isFill = i % 2 === 0 && $this.randomFill;
       const newPulse = $this.createPulse(isFill, this.radiusMetaRate, this.speedMetaRate);
@@ -62,16 +62,19 @@ class RippleLogo {
       this.pulseMeta();
       this.drawAll();
     });
+    this.ctx.save();
+    this.ctx.globalAlpha = 1;
+    this.drawTitle();
+    this.ctx.restore();
   }
   drawTitle() {
-    this.offScreenCanvas = document.createElement('canvas');
-    let oCtx = this.oCtx = offScreenCanvas.getContext('2d');
-    oCtx.width = this.canvasWidth;
-    oCtx.height = this.canvasHeight;
-    oCtx.font = "20pt Arial";
-    oCtx.fillText()
-
+    this.ctx.textAlign = 'center';
+    this.ctx.font = `${this.canvasWidth / 7.2}px Roboto`;
+    this.ctx.textBaseline = 'middle';
+    this.ctx.fillStyle = "grey";
+    this.ctx.fillText(this.title, this.canvasWidth / 2, this.canvasHeight / 2);
   }
+
   pulseMeta() {
     this.pool.forEach((ele, i) => {
       ele.radius += .5;
@@ -127,23 +130,19 @@ class RippleLogo {
     return pulse;
   }
   size() {
-    let eleWidth, eleHeight;
-
     if (this.ele.tagName !== 'CANVAS') {
-      eleWidth = this.ele.parentElement.getBoundingClientRect().width;
-      eleHeight = this.ele.parentElement.getBoundingClientRect().height;
-    }
-    else {
-      eleWidth = this.ele.getBoundingClientRect().width;
-      eleHeight = this.ele.getBoundingClientRect().height;
-    }
-
-    if (this.space.width !== eleWidth || this.space.width !== eleHeight) {
       this.canvasWidth = this.ele.getBoundingClientRect().width;
       this.canvasHeight = this.ele.getBoundingClientRect().height;
       this.space.width = this.canvasWidth;
       this.space.height = this.canvasHeight;
     }
+    else {
+      this.canvasWidth = this.ele.parentElement.getBoundingClientRect().width;
+      this.canvasHeight = this.ele.parentElement.getBoundingClientRect().height;
+      this.ele.width = this.canvasWidth;
+      this.ele.height = this.canvasHeight;
+    }
+
   }
   debounce(func, delay) {
     let timer = null;
@@ -158,3 +157,5 @@ class RippleLogo {
     };
   }
 }
+
+

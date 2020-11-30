@@ -4,21 +4,16 @@ let canvasInit = `
   (()=>{
     let canvas = document.querySelector('#logo-canvas');
 
-    let resize = ()=>{
-      canvas.width = canvas.getBoundingClientRect().width;
-      canvas.height = canvas.getBoundingClientRect().height;
-    }
     let init= ()=>{
       let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
         points:2,
         randomFill:false,
         lineColor:'rgba(255,255,255,0.75)',
         maxSize:250
       });
-      resize();
     }
    
-    window.addEventListener('resize',resize);
     window.addEventListener('DOMContentLoaded',init);
   })()
 </script>
