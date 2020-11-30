@@ -9,7 +9,7 @@ let canvasInit = `
         title:'WFX-Maniac',
         points:2,
         randomFill:false,
-        lineColor:'rgba(255,255,255,0.75)',
+        lineColor:'rgba(255,255,255,0.35)',
         maxSize:250
       });
     }
