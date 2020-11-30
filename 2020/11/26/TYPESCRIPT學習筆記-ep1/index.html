@@ -27,18 +27,18 @@
   <meta name="description" content="TYPESCRIPT的基礎常識基礎型別上與es5&#x2F;es6 較有差異的部分 數字ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數 1234let decLiteral: number &#x3D; 6;let hexLiteral: number &#x3D; 0xf00d;let binaryLiteral: number &#x3D; 0b1010;let octalLiteral:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TYPESCRIPT學習筆記-ep1">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/index.html">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
 <meta property="og:description" content="TYPESCRIPT的基礎常識基礎型別上與es5&#x2F;es6 較有差異的部分 數字ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數 1234let decLiteral: number &#x3D; 6;let hexLiteral: number &#x3D; 0xf00d;let binaryLiteral: number &#x3D; 0b1010;let octalLiteral:">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-11-11T14:34:46.771Z">
-<meta property="article:modified_time" content="2020-11-22T07:09:14.438Z">
+<meta property="article:published_time" content="2020-11-25T17:01:45.844Z">
+<meta property="article:modified_time" content="2020-11-25T17:01:45.845Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="ts">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
 
 
 <script class="page-configurations">
@@ -49,7 +49,17 @@
     isPost : true,
     lang   : 'zh-TW'
   };
-</script>
+</script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
+
+<script src="/WFX-Maniac/js/ripple-logo.js"></script>
+<script src="/WFX-Maniac/js/silk-wave.js"></script>
+
+<style>
+  @font-face {
+  font-family: "Roboto";
+  src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
+}
+</style>
 
   <title>TYPESCRIPT學習筆記-ep1 | WFX-Maniac</title>
   
@@ -115,9 +125,27 @@
     <a href="/WFX-Maniac/" class="brand" rel="start">
       <i class="logo-line"></i>
       <h1 class="site-title">WFX-Maniac</h1>
-      <i class="logo-line"></i>
+      <canvas id="logo-canvas"></canvas><i class="logo-line"></i>
     </a>
   </div>
+<script>
+  (()=>{
+    let canvas = document.querySelector('#logo-canvas');
+
+    let init= ()=>{
+      let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
+        points:2,
+        randomFill:false,
+        lineColor:'rgba(255,255,255,0.35)',
+        maxSize:250
+      });
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
@@ -277,7 +305,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -301,15 +329,8 @@
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-22 15:09:14" itemprop="dateModified" datetime="2020-11-22T15:09:14+08:00">2020-11-22</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -431,12 +452,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2020/11/11/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/" rel="prev" title="Proxy 的功用/實用的點">
+                <a href="/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/" rel="prev" title="Proxy 的功用/實用的點">
                   <i class="fa fa-chevron-left"></i> Proxy 的功用/實用的點
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/" rel="next" title="TYPESCRIPT學習筆記-ep2.5">
+                <a href="/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/" rel="next" title="TYPESCRIPT學習筆記-ep2.5">
                   TYPESCRIPT學習筆記-ep2.5 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>

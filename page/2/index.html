@@ -44,7 +44,17 @@
     isPost : false,
     lang   : 'zh-TW'
   };
-</script>
+</script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
+
+<script src="/WFX-Maniac/js/ripple-logo.js"></script>
+<script src="/WFX-Maniac/js/silk-wave.js"></script>
+
+<style>
+  @font-face {
+  font-family: "Roboto";
+  src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
+}
+</style>
 
   <title>WFX-Maniac</title>
   
@@ -96,22 +106,18 @@
 
   
     <div class="site-banner" id="site-banner">
-      <canvas id="site-banner-canvas" class="site-banner-canvas"></canvas>
-      <script src="https://mizok.github.io/gonfalonJs/ripple.js"></script>
+      <canvas id="site-banner-canvas"></canvas>
+      
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  let ele = document.getElementById('site-banner-canvas');
-  let resizeHandler = () => {
-    let width = ele.parentElement.getBoundingClientRect().width;
-    let height = ele.parentElement.getBoundingClientRect().height;
-    ele.setAttribute('width', width);
-    ele.setAttribute('height', height);
-  }
-  resizeHandler();
-  window.addEventListener('resize', resizeHandler
-  )
-  let pulses = new RippleScreen(ele)
-})
+  (()=>{
+    let canvas = document.querySelector('#site-banner-canvas');
+
+    let init= ()=>{
+      let silkWave = new SilkWave(canvas);
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
 </script>
 
     </div>
@@ -132,9 +138,27 @@ document.addEventListener('DOMContentLoaded', function () {
     <a href="/WFX-Maniac/" class="brand" rel="start">
       <i class="logo-line"></i>
       <h1 class="site-title">WFX-Maniac</h1>
-      <i class="logo-line"></i>
+      <canvas id="logo-canvas"></canvas><i class="logo-line"></i>
     </a>
   </div>
+<script>
+  (()=>{
+    let canvas = document.querySelector('#logo-canvas');
+
+    let init= ()=>{
+      let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
+        points:2,
+        randomFill:false,
+        lineColor:'rgba(255,255,255,0.35)',
+        maxSize:250
+      });
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
@@ -292,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -306,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep3</a>
+            <a href="/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep3</a>
         </h2>
 
         <div class="post-meta-container">
@@ -317,15 +341,8 @@ document.addEventListener('DOMContentLoaded', function () {
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -414,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -428,7 +445,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep2</a>
+            <a href="/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep2</a>
         </h2>
 
         <div class="post-meta-container">
@@ -439,15 +456,8 @@ document.addEventListener('DOMContentLoaded', function () {
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -584,7 +594,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -598,7 +608,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep1</a>
+            <a href="/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep1</a>
         </h2>
 
         <div class="post-meta-container">
@@ -609,15 +619,8 @@ document.addEventListener('DOMContentLoaded', function () {
       </span>
       <span class="post-meta-item-text">發表於</span>
 
-      <time title="創建時間：2020-11-11 22:34:46" itemprop="dateCreated datePublished" datetime="2020-11-11T22:34:46+08:00">2020-11-11</time>
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-11-12 01:36:13" itemprop="dateModified" datetime="2020-11-12T01:36:13+08:00">2020-11-12</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>

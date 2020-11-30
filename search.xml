@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>ES5/ES6學習筆記-ep1</title>
-    <url>/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
+    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
     <content><![CDATA[<h2 id="搞清楚並且用最簡單的方法解釋js的apply-call-bind"><a href="#搞清楚並且用最簡單的方法解釋js的apply-call-bind" class="headerlink" title="搞清楚並且用最簡單的方法解釋js的apply/call/bind"></a>搞清楚並且用最簡單的方法解釋js的apply/call/bind</h2><ul>
 <li>先解釋apply/call<blockquote>
 <p>apply/call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”</p>
@@ -80,7 +80,7 @@
   </entry>
   <entry>
     <title>ES5/ES6學習筆記-ep2</title>
-    <url>/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
+    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
     <content><![CDATA[<h2 id="ES6解構賦值重點整理"><a href="#ES6解構賦值重點整理" class="headerlink" title="ES6解構賦值重點整理"></a>ES6解構賦值重點整理</h2><ol>
 <li>模式匹配：<blockquote>
 <p>只要等号两边的模式相同，左边的变量就会被赋予对应的值。</p>
@@ -181,7 +181,7 @@
   </entry>
   <entry>
     <title>ES5/ES6學習筆記-ep3</title>
-    <url>/WFX-Maniac/2020/11/11/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
+    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
     <content><![CDATA[<h2 id="ES6-Promise-重點整理"><a href="#ES6-Promise-重點整理" class="headerlink" title="ES6 Promise 重點整理"></a>ES6 Promise 重點整理</h2><ol>
 <li>Promise 是什麼</li>
 </ol>
@@ -234,7 +234,7 @@
   </entry>
   <entry>
     <title>ES6學習筆記-Proxy 用途/介紹/使用情境</title>
-    <url>/WFX-Maniac/2020/11/11/ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-Proxy%20%E7%94%A8%E9%80%94_%E4%BB%8B%E7%B4%B9_%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83/</url>
+    <url>/WFX-Maniac/2020/11/26/ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-Proxy%20%E7%94%A8%E9%80%94_%E4%BB%8B%E7%B4%B9_%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83/</url>
     <content><![CDATA[<h2 id="什麼是Proxy"><a href="#什麼是Proxy" class="headerlink" title="什麼是Proxy"></a>什麼是Proxy</h2><blockquote>
 <p>字面上的意思就是”代理” [color=red]</p>
 </blockquote>
@@ -360,7 +360,7 @@
   </entry>
   <entry>
     <title>Proxy 的功用/實用的點</title>
-    <url>/WFX-Maniac/2020/11/11/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
+    <url>/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
     <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
 
 
@@ -375,7 +375,7 @@
   </entry>
   <entry>
     <title>TYPESCRIPT學習筆記-ep1</title>
-    <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
+    <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
     <content><![CDATA[<h1 id="TYPESCRIPT的基礎常識"><a href="#TYPESCRIPT的基礎常識" class="headerlink" title="TYPESCRIPT的基礎常識"></a>TYPESCRIPT的基礎常識</h1><h2 id="基礎型別上與es5-es6-較有差異的部分"><a href="#基礎型別上與es5-es6-較有差異的部分" class="headerlink" title="基礎型別上與es5/es6 較有差異的部分"></a>基礎型別上與es5/es6 較有差異的部分</h2><ol>
 <li><p>數字<br>ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數</p>
 <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> decLiteral: <span class="built_in">number</span> = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> hexLiteral: <span class="built_in">number</span> = <span class="number">0xf00d</span>;</span><br><span class="line"><span class="keyword">let</span> binaryLiteral: <span class="built_in">number</span> = <span class="number">0b1010</span>;</span><br><span class="line"><span class="keyword">let</span> octalLiteral: <span class="built_in">number</span> = <span class="number">0o744</span>;</span><br></pre></td></tr></table></figure>
@@ -471,7 +471,7 @@
   </entry>
   <entry>
     <title>TYPESCRIPT學習筆記-ep2.5</title>
-    <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/</url>
+    <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/</url>
     <content><![CDATA[<h4 id="如何使用interface-為函數定義參數型別與回傳值型別"><a href="#如何使用interface-為函數定義參數型別與回傳值型別" class="headerlink" title="如何使用interface 為函數定義參數型別與回傳值型別"></a>如何使用interface 為函數定義參數型別與回傳值型別</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, <span class="attr">subString</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125; <span class="comment">// 定義函數參數/return 的方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> customVariables &#123;</span><br><span class="line">  variableA: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="如何使用interface-定義”可索引類型”"><a href="#如何使用interface-定義”可索引類型”" class="headerlink" title="如何使用interface 定義”可索引類型”"></a>如何使用interface 定義”可索引類型”</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">  [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 意思指的是[]內只能輸入數字, 並且return 值為字串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> readonlyArrayType &#123;</span><br><span class="line">  <span class="keyword">readonly</span> [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 與readonly屬性的搭配應用方式, 這樣就可以把陣列轉為唯讀陣列</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 問題狀況</span></span><br><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">   [index: <span class="built_in">string</span>]: <span class="built_in">number</span>; <span class="comment">//當索引值的型別是字串時會有一種特殊的問題, 會強制要求內部的變數型別跟這邊定義的一樣</span></span><br><span class="line">  value:<span class="built_in">string</span> <span class="comment">// 所以這樣會報錯 (必須是number)</span></span><br><span class="line">&#125; <span class="comment">// 當已經使用了strinf索引類型的定義時, 會強制要求回傳值是索引類型定義中的那個回傳值型別</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -498,7 +498,7 @@
   </entry>
   <entry>
     <title>TYPESCRIPT學習筆記-ep2</title>
-    <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
+    <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
     <content><![CDATA[<h2 id="什麼是Interface-接口"><a href="#什麼是Interface-接口" class="headerlink" title="什麼是Interface(接口)?"></a>什麼是Interface(接口)?</h2><blockquote>
 <p>簡單來說就是一個用來定義一個物件內部 必要變數/變數型別的寫法<br>好用的點在於可以去限制一個物件必須要具備什麼樣的property</p>
 </blockquote>
@@ -522,7 +522,7 @@
   </entry>
   <entry>
     <title>TYPESCRIPT學習筆記-ep3</title>
-    <url>/WFX-Maniac/2020/11/11/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
+    <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
     <content><![CDATA[<h2 id="TS-的class-跟-es6-有什麼差別？"><a href="#TS-的class-跟-es6-有什麼差別？" class="headerlink" title="TS 的class 跟 es6 有什麼差別？"></a>TS 的class 跟 es6 有什麼差別？</h2><h4 id="1-private與-public-宣告的存在"><a href="#1-private與-public-宣告的存在" class="headerlink" title="1. private與 public 宣告的存在:"></a>1. private與 public 宣告的存在:</h4><p>如果一個方法/變數/constructor被宣告為public 則能在聲明它的類的外部被取用<br>反之若宣告為private， 那這個方法/變數/constructor 就只能在自己的class裡面被使用</p>
 <p>所以說這樣會錯</p>
 <blockquote>
@@ -563,7 +563,7 @@
   </entry>
   <entry>
     <title>高見龍為自己學 git 學習筆記-ep1</title>
-    <url>/WFX-Maniac/2020/11/11/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
+    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
     <content><![CDATA[<h2 id="一些簡單的基本：終端機指令"><a href="#一些簡單的基本：終端機指令" class="headerlink" title="一些簡單的基本：終端機指令"></a>一些簡單的基本：終端機指令</h2><ol>
 <li>複製檔案<code>cp</code></li>
 <li>重新命名檔案 <code>mv &#39;舊檔名&#39; ‘新檔名‘</code></li>
@@ -618,7 +618,7 @@
   </entry>
   <entry>
     <title>高見龍為自己學 git 學習筆記-ep2</title>
-    <url>/WFX-Maniac/2020/11/11/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
+    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
     <content><![CDATA[<h2 id="關於git-add的一些常識"><a href="#關於git-add的一些常識" class="headerlink" title="關於git add的一些常識"></a>關於git add的一些常識</h2><p>當我git add 一個檔案之後, 我如果再去修改他, 接著再commit。<br>其實在這個commit，git 並不會去紀錄該檔案的改動, 因為這個檔案只是被加到暫存區而已，git沒有辦法去refer到他的歷史改動狀況。</p>
 <p>所以建議如果要git add檔案, 一律add完之後commit一次再做改動</p>
 <blockquote>
@@ -660,7 +660,7 @@
   </entry>
   <entry>
     <title>高見龍為自己學 git 學習筆記-ep3</title>
-    <url>/WFX-Maniac/2020/11/24/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
+    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
     <content><![CDATA[<h2 id="git-clone專案的方法"><a href="#git-clone專案的方法" class="headerlink" title="git clone專案的方法"></a>git clone專案的方法</h2><p>說到clone專案(這邊以github為例), 一般狀況下有下面幾種比較常見的狀況</p>
 <h3 id="作法一-遠端git倉庫直接clone到本地"><a href="#作法一-遠端git倉庫直接clone到本地" class="headerlink" title="作法一(遠端git倉庫直接clone到本地)"></a>作法一(遠端git倉庫直接clone到本地)</h3><ol>
 <li>首先第一步當然是直接在遠端倉庫的網頁(例如github的repo頁面)先開一個repo</li>
