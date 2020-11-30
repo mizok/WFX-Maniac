@@ -1,24 +1,46 @@
-let defaultConfig = {
-  title: 'title', // 標題
-  points: 3, // 總波紋數量
-  maxBorder: 4, // 波紋最大線寬
-  lineColor: 'white', // 波紋顏色
-  fillColor: 'rgba(255,255,255,.25)', // 波紋有填充時的顏色
-  fadeInSpan: 500, // 波紋淡入時的耗時
-  lifeSpan: 5000, // 波紋淡入到淡出至0的總耗時
-  maxSize: 750, // 波紋最大尺寸
-  minRate: 0.5, // 波紋最小尺寸倍率（取最大尺寸浮點百分比）
-  randomFill: true, // 是否隨機填充
-  radiusMetaRate: 10, // 波紋半徑擴張速度
-  speedMetaRate: 0.5, // 波紋中心點位移速度
-  globalAlpha: 0.35 // 波紋透明度
+const SILK_WAVE_DEFAULT = {
+  range: 100,
+  strokeWeight: 2,
+  strokeColor: 'white',
+  lineNumber: 10,
+  vertexGap: 20,
+  frequency: 0.005,
 }
 
-class SilkWave {
-  constructor() {
-
+class SilkWave extends CanvasFxBase {
+  constructor(ele, config) {
+    super(ele, config, SILK_WAVE_DEFAULT);
+    this.init();
   }
   init() {
+    super.init();
+    requestAnimationFrame(() => {
+      this.drawAll();
+    })
+  }
+  drawAll() {
+    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
+    for (let i = 0; i < this.range; i++) {
+      let thisLineAlpha = super.linearInterpolation(i, 0, this.range, 0, 1); //定義單一線條顏色
+      this.ctx.strokeStyle = `rgba(255,255,255,${thisLineAlpha})`;
+
+      //把水平座標分割成複數段落
+      for (let x = -(this.vertexGap / 2); x < this.space.width + (this.vertexGap / 2) + 1; x += this.vertexGap) {
+        let randomNoise = this.perlinNoise(x * 0.001, i * 0.01, this.frameCount * this.frequency);
+        let y = super.linearInterpolation(randomNoise, 0, 1, 0, this.space.height);
+        if (x === -(this.vertexGap / 2)) {
+          this.ctx.beginPath();
+          this.ctx.moveTo(x, y);
+        }
+        else if (x < this.space.width + (this.vertexGap / 2) + 1) {
+          this.ctx.lineTo(x, y, x, y + 100)
+        }
+      }
+      this.ctx.stroke();
+    }
+    requestAnimationFrame(() => {
+      this.drawAll();
+    })
   }
 }

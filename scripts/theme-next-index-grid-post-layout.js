@@ -5,7 +5,7 @@ let canvasInit = `
     let canvas = document.querySelector('#site-banner-canvas');
 
     let init= ()=>{
-      
+      let silkWave = new SilkWave(canvas);
     }
    
     window.addEventListener('DOMContentLoaded',init);

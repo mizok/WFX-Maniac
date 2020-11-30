@@ -1,4 +1,4 @@
-let defaultConfig = {
+const RIPPLE_LOGO_DEFAULT = {
   title: 'title', // 標題
   points: 3, // 總波紋數量
   maxBorder: 4, // 波紋最大線寬
@@ -14,41 +14,25 @@ let defaultConfig = {
   globalAlpha: 0.35 // 波紋透明度
 }
 
-class RippleLogo {
+class RippleLogo extends CanvasFxBase {
   constructor(
     ele, config
   ) {
-    config = Object.assign(defaultConfig, config);
-    this.ele = ele;
-    Object.assign(this, config);
+    super(ele, config, RIPPLE_LOGO_DEFAULT);
     this.pool = [];
     this.init();
   }
   init() {
-    if (this.ele.tagName !== 'CANVAS') {
-      const space = document.createElement('canvas');
-      this.ele.appendChild(space);
-      this.space = this.ele.querySelectorAll('canvas')[0];
-      this.canvasWidth = this.ele.getBoundingClientRect().width;
-      this.canvasHeight = this.ele.getBoundingClientRect().height;
-    }
-    else {
-      this.space = this.ele;
-      this.canvasWidth = this.ele.parentElement.getBoundingClientRect().width;
-      this.canvasHeight = this.ele.parentElement.getBoundingClientRect().height;
-    }
+    super.init();
 
-    this.ctx = this.space.getContext('2d');
-    this.size();
-    const $this = this;
-    window.addEventListener('resize', $this.debounce(() => {
-      $this.size();
-      $this.drawAll();
+    window.addEventListener('resize', super.debounce(() => {
+      this.drawAll();
     }, 500));
-    for (let i = 0; i < $this.points; i++) {
-      const isFill = i % 2 === 0 && $this.randomFill;
-      const newPulse = $this.createPulse(isFill, this.radiusMetaRate, this.speedMetaRate);
-      $this.pool.push(newPulse);
+
+    for (let i = 0; i < this.points; i++) {
+      const isFill = i % 2 === 0 && this.randomFill;
+      const newPulse = this.createPulse(isFill, this.radiusMetaRate, this.speedMetaRate);
+      this.pool.push(newPulse);
     }
     this.drawAll();
   }
@@ -74,7 +58,6 @@ class RippleLogo {
     this.ctx.fillStyle = "grey";
     this.ctx.fillText(this.title, this.canvasWidth / 2, this.canvasHeight / 2);
   }
-
   pulseMeta() {
     this.pool.forEach((ele, i) => {
       ele.radius += .5;
@@ -128,33 +111,6 @@ class RippleLogo {
       }
     };
     return pulse;
-  }
-  size() {
-    if (this.ele.tagName !== 'CANVAS') {
-      this.canvasWidth = this.ele.getBoundingClientRect().width;
-      this.canvasHeight = this.ele.getBoundingClientRect().height;
-      this.space.width = this.canvasWidth;
-      this.space.height = this.canvasHeight;
-    }
-    else {
-      this.canvasWidth = this.ele.parentElement.getBoundingClientRect().width;
-      this.canvasHeight = this.ele.parentElement.getBoundingClientRect().height;
-      this.ele.width = this.canvasWidth;
-      this.ele.height = this.canvasHeight;
-    }
-
-  }
-  debounce(func, delay) {
-    let timer = null;
-    const $this = this;
-    return () => {
-      const context = $this;
-      const args = arguments;
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(context, args);
-      }, delay);
-    };
   }
 }
 
