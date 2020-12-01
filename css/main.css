@@ -3271,6 +3271,8 @@ h6 {
 }
 .main-inner.posts-expand {
   background-color: #222;
+  background-color: #222;
+  box-shadow: 0 0px 1.4px rgba(0,0,0,0.128), 0 0px 3.6px rgba(0,0,0,0.15), 0 0px 7.4px rgba(0,0,0,0.178), 0 0px 15.3px rgba(0,0,0,0.23), 0 0px 42px rgba(0,0,0,0.32);
 }
 @media screen and (max-width: 992px) {
   .main-inner {
