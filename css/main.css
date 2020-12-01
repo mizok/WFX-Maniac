@@ -3335,6 +3335,18 @@ body {
 }
 .site-subtitle {
   color: rgba(255,255,255,0.35);
+  margin: 0px;
+  padding: 10px;
+  background-color: rgba(0,0,0,0.35);
+  user-select: none;
+}
+@media screen and (max-width: 991px) {
+  .site-subtitle {
+    padding: 0;
+    margin: 10px;
+    margin-bottom: 0;
+    background-color: transparent;
+  }
 }
 .site-description {
   display: none;
