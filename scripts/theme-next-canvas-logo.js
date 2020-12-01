@@ -20,7 +20,7 @@ let canvasInit = `
 `
 
 let replaceLogoWithCanvas = (str) => {
-  str = str.replace(/(<div class="site-meta">\n*.*class="brand"\srel="start">)(.*)(<i class="logo-line"><\/i>\n\s*<\/a>\n\s*<\/div>?)/s, `$1$2${logoCanvas}$3${canvasInit}`);
+  str = str.replace(/(<div class="site-meta">\n*.*class="brand"\srel="start">)(.*)(<i class="logo-line"><\/i>\n\s*<\/a>)/s, `$1$2${logoCanvas}$3${canvasInit}`);
   return str;
 }
 
