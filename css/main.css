@@ -3333,6 +3333,12 @@ body {
     padding: 20px 0;
   }
 }
+.site-subtitle {
+  color: rgba(255,255,255,0.35);
+}
+.site-description {
+  display: none;
+}
 .brand {
   font-size: 0px;
   display: block;
