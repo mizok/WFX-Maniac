@@ -21,10 +21,9 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="git clone專案的方法說到clone專案(這邊以github為例), 一般狀況下有下面幾種比較常見的狀況 作法一(遠端git倉庫直接clone到本地) 首先第一步當然是直接在遠端倉庫的網頁(例如github的repo頁面)先開一個repo 再來打開自己電腦的command line(或是也可以使用Vscode等IDE自帶的終端), 利用bash指令去把當前資料夾位置移到想要存放本地repo資">
+<meta name="description" content="git clone專案的方法說到clone專案(這邊以github為例), 一般狀況下有下面幾種比較常見的狀況 作法一(遠端git倉庫直接clone到本地) 首先第一步當然是直接在遠端倉庫的網頁(例如github的repo頁面)先開一個repo 再來打開自己電腦的command line(或是也可以使用Vscode等IDE自帶的終端), 利用bash指令去把當前資料夾位置移到想要存放本地repo資">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高見龍為自己學 git 學習筆記-ep3">
 <meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/index.html">
@@ -60,12 +59,8 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-
-  <title>高見龍為自己學 git 學習筆記-ep3 | WFX-Maniac</title>
+<title>高見龍為自己學 git 學習筆記-ep3 | WFX-Maniac</title>
   
-
-
-
 
 
 
@@ -145,7 +140,6 @@
   })()
 </script>
 
-      <p class="site-subtitle" itemprop="description">- WebFx-Maniac - 特效狂熱 -</p>
   </div>
 
   <div class="site-nav-right">
@@ -176,7 +170,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">12</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">13</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -189,8 +183,7 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
@@ -252,7 +245,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -294,9 +287,7 @@
 
 
     <div class="main-inner post posts-expand">
-      
 
-      
 
   
 
@@ -402,6 +393,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -413,7 +407,6 @@
 
 
 
-      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -436,18 +429,14 @@
     });
   }
 </script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="author" itemprop="copyrightHolder">Mizok.H</span>
@@ -461,19 +450,7 @@
 
   
 
-
-
-
-  <script src="/WFX-Maniac/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/WFX-Maniac/js/local-search.js"></script>
 
 
 
@@ -486,12 +463,6 @@
 
 
 
-
-
-
-  
-
-  
 
 </body>
 </html>

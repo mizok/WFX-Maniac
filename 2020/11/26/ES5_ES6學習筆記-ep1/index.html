@@ -21,10 +21,9 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-
-  <meta name="description" content="搞清楚並且用最簡單的方法解釋js的apply&#x2F;call&#x2F;bind 先解釋apply&#x2F;call apply&#x2F;call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”  1234567&#x2F;&#x2F;假設有一個變數叫做qq, 初始值為&amp;#x27;wow&amp;#x27;var qq &#x3D; &amp;#x27;wow&amp;#x27;;function poop(a,b)&amp;#123;    console.log(th">
+<meta name="description" content="搞清楚並且用最簡單的方法解釋js的apply&#x2F;call&#x2F;bind 先解釋apply&#x2F;call apply&#x2F;call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”  1234567&#x2F;&#x2F;假設有一個變數叫做qq, 初始值為&amp;#x27;wow&amp;#x27;var qq &#x3D; &amp;#x27;wow&amp;#x27;;function poop(a,b)&amp;#123;    console.log(th">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES5&#x2F;ES6學習筆記-ep1">
 <meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/index.html">
@@ -60,12 +59,8 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-
-  <title>ES5/ES6學習筆記-ep1 | WFX-Maniac</title>
+<title>ES5/ES6學習筆記-ep1 | WFX-Maniac</title>
   
-
-
-
 
 
 
@@ -145,7 +140,6 @@
   })()
 </script>
 
-      <p class="site-subtitle" itemprop="description">- WebFx-Maniac - 特效狂熱 -</p>
   </div>
 
   <div class="site-nav-right">
@@ -176,7 +170,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">12</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">13</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -189,8 +183,7 @@
 
 
   <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
+    <div class="popup search-popup"><div class="search-header">
   <span class="search-icon">
     <i class="fa fa-search"></i>
   </span>
@@ -252,7 +245,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -294,9 +287,7 @@
 
 
     <div class="main-inner post posts-expand">
-      
 
-      
 
   
 
@@ -451,7 +442,6 @@
 
 
 
-      
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -474,18 +464,14 @@
     });
   }
 </script>
-
-    </div>
+</div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
-      
 
-      
 
 <div class="copyright">
-  
   &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="author" itemprop="copyrightHolder">Mizok.H</span>
@@ -499,19 +485,7 @@
 
   
 
-
-
-
-  <script src="/WFX-Maniac/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
+<script src="/WFX-Maniac/js/local-search.js"></script>
 
 
 
@@ -524,12 +498,6 @@
 
 
 
-
-
-
-  
-
-  
 
 </body>
 </html>
