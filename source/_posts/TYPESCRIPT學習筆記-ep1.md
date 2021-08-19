@@ -1,7 +1,7 @@
 ---
 title: TYPESCRIPT學習筆記-ep1
 categories: 
-- 心得
+- 前端技術學習心得
 tags:
 - ts
 ---

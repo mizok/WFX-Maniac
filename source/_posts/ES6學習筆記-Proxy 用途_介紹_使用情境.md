@@ -1,7 +1,7 @@
 ---
 title: ES6學習筆記-Proxy 用途/介紹/使用情境
 categories: 
-- 心得
+- 前端技術學習心得
 tags:
 - js
 ---

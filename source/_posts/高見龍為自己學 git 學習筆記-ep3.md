@@ -1,7 +1,7 @@
 ---
 title: 高見龍為自己學 git 學習筆記-ep3
 categories: 
-- 心得
+- 前端技術學習心得
 tags:
 - git
 ---
