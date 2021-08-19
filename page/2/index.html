@@ -175,7 +175,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">3</span></a>
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -185,7 +185,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">13</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">14</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -259,7 +259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -272,7 +272,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/WFX-Maniac/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -310,6 +310,89 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/" class="post-title-link" itemprop="url">Proxy 的功用/實用的點</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:16" itemprop="dateModified" datetime="2020-12-13T03:52:16+08:00">2020-12-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-Proxy%20%E7%94%A8%E9%80%94_%E4%BB%8B%E7%B4%B9_%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -336,13 +419,20 @@
 
       <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:13" itemprop="dateModified" datetime="2020-12-13T03:52:13+08:00">2020-12-13</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
         </span>
     </span>
 
@@ -523,13 +613,20 @@
 
       <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:08" itemprop="dateModified" datetime="2020-12-13T03:52:08+08:00">2020-12-13</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
         </span>
     </span>
 
@@ -637,13 +734,20 @@
 
       <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:04" itemprop="dateModified" datetime="2020-12-13T03:52:04+08:00">2020-12-13</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
         </span>
     </span>
 
@@ -799,13 +903,20 @@
 
       <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:00" itemprop="dateModified" datetime="2020-12-13T03:52:00+08:00">2020-12-13</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">分類於</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">心得</span></a>
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
         </span>
     </span>
 
@@ -939,7 +1050,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="author" itemprop="copyrightHolder">Mizok.H</span>
 </div>
   
