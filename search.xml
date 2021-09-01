@@ -79,6 +79,59 @@
       </tags>
   </entry>
   <entry>
+    <title>ES5/ES6學習筆記-ep3</title>
+    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
+    <content><![CDATA[<h2 id="ES6-Promise-重點整理"><a href="#ES6-Promise-重點整理" class="headerlink" title="ES6 Promise 重點整理"></a>ES6 Promise 重點整理</h2><ol>
+<li>Promise 是什麼</li>
+</ol>
+<ul>
+<li>用來處理callback chain 的一種新JS語法</li>
+<li>本身是一個class, 但是他也有自己的靜態方法</li>
+<li>建立出來的實例物件具有三種狀態：pending/fulfilled/rejected</li>
+<li>狀態只可能是從pending 變成 fulfilled/rejected</li>
+</ul>
+<ol start="2">
+<li>promise.prototype.then()</li>
+</ol>
+<ul>
+<li>then()可以傳入兩個函數作為參數，第一個函數會在promise物件被fulfilled之後馬上發動，第二個函數則會在promise物件被reject的時候馬上發動</li>
+<li>會回傳一個新的promise物件</li>
+<li><strong>重要</strong> ： 當then與then串接的時候，後面的then 的 <strong>參數function</strong> 會得到前面的then 的 <strong>參數function</strong> return出來的值作為參數</li>
+</ul>
+<ol start="3">
+<li>promise.prototype.catch()</li>
+</ol>
+<ul>
+<li>catch()可以傳入一個函數作為參數，並且這個函數會接收到promise throw出來的error</li>
+<li>也會回傳一個新的promise物件</li>
+</ul>
+<ol start="4">
+<li>promise.all()</li>
+</ol>
+<ul>
+<li>也會回傳新的promise</li>
+<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
+<li>當這些內容物promise都被fullfill之後，all()本身回傳的promise就會被fullfill</li>
+<li>在all() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到all()的所有內容promise 在resolve 時使用的參數 所組成的陣列。</li>
+</ul>
+<ol start="5">
+<li>promise.race()</li>
+</ol>
+<ul>
+<li>也會回傳新的promise</li>
+<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
+<li>當這些內容物promise有其中一個被fullfill之後，race()本身回傳的promise就會被fullfill</li>
+<li>在race() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到race()的最快達成fullfilled 的內容promise 在resolve 時使用的參數。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ES5/ES6學習筆記-ep2</title>
     <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
     <content><![CDATA[<h2 id="ES6解構賦值重點整理"><a href="#ES6解構賦值重點整理" class="headerlink" title="ES6解構賦值重點整理"></a>ES6解構賦值重點整理</h2><ol>
@@ -180,51 +233,13 @@
       </tags>
   </entry>
   <entry>
-    <title>ES5/ES6學習筆記-ep3</title>
-    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
-    <content><![CDATA[<h2 id="ES6-Promise-重點整理"><a href="#ES6-Promise-重點整理" class="headerlink" title="ES6 Promise 重點整理"></a>ES6 Promise 重點整理</h2><ol>
-<li>Promise 是什麼</li>
-</ol>
-<ul>
-<li>用來處理callback chain 的一種新JS語法</li>
-<li>本身是一個class, 但是他也有自己的靜態方法</li>
-<li>建立出來的實例物件具有三種狀態：pending/fulfilled/rejected</li>
-<li>狀態只可能是從pending 變成 fulfilled/rejected</li>
-</ul>
-<ol start="2">
-<li>promise.prototype.then()</li>
-</ol>
-<ul>
-<li>then()可以傳入兩個函數作為參數，第一個函數會在promise物件被fulfilled之後馬上發動，第二個函數則會在promise物件被reject的時候馬上發動</li>
-<li>會回傳一個新的promise物件</li>
-<li><strong>重要</strong> ： 當then與then串接的時候，後面的then 的 <strong>參數function</strong> 會得到前面的then 的 <strong>參數function</strong> return出來的值作為參數</li>
-</ul>
-<ol start="3">
-<li>promise.prototype.catch()</li>
-</ol>
-<ul>
-<li>catch()可以傳入一個函數作為參數，並且這個函數會接收到promise throw出來的error</li>
-<li>也會回傳一個新的promise物件</li>
-</ul>
-<ol start="4">
-<li>promise.all()</li>
-</ol>
-<ul>
-<li>也會回傳新的promise</li>
-<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
-<li>當這些內容物promise都被fullfill之後，all()本身回傳的promise就會被fullfill</li>
-<li>在all() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到all()的所有內容promise 在resolve 時使用的參數 所組成的陣列。</li>
-</ul>
-<ol start="5">
-<li>promise.race()</li>
-</ol>
-<ul>
-<li>也會回傳新的promise</li>
-<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
-<li>當這些內容物promise有其中一個被fullfill之後，race()本身回傳的promise就會被fullfill</li>
-<li>在race() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到race()的最快達成fullfilled 的內容promise 在resolve 時使用的參數。</li>
-</ul>
-]]></content>
+    <title>Proxy 的功用/實用的點</title>
+    <url>/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
+    <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
@@ -359,6 +374,33 @@
       </tags>
   </entry>
   <entry>
+    <title>TYPESCRIPT學習筆記-ep2.5</title>
+    <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/</url>
+    <content><![CDATA[<h4 id="如何使用interface-為函數定義參數型別與回傳值型別"><a href="#如何使用interface-為函數定義參數型別與回傳值型別" class="headerlink" title="如何使用interface 為函數定義參數型別與回傳值型別"></a>如何使用interface 為函數定義參數型別與回傳值型別</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, <span class="attr">subString</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125; <span class="comment">// 定義函數參數/return 的方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> customVariables &#123;</span><br><span class="line">  variableA: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="如何使用interface-定義”可索引類型”"><a href="#如何使用interface-定義”可索引類型”" class="headerlink" title="如何使用interface 定義”可索引類型”"></a>如何使用interface 定義”可索引類型”</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">  [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 意思指的是[]內只能輸入數字, 並且return 值為字串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> readonlyArrayType &#123;</span><br><span class="line">  <span class="keyword">readonly</span> [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 與readonly屬性的搭配應用方式, 這樣就可以把陣列轉為唯讀陣列</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 問題狀況</span></span><br><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">   [index: <span class="built_in">string</span>]: <span class="built_in">number</span>; <span class="comment">//當索引值的型別是字串時會有一種特殊的問題, 會強制要求內部的變數型別跟這邊定義的一樣</span></span><br><span class="line">  value:<span class="built_in">string</span> <span class="comment">// 所以這樣會報錯 (必須是number)</span></span><br><span class="line">&#125; <span class="comment">// 當已經使用了strinf索引類型的定義時, 會強制要求回傳值是索引類型定義中的那個回傳值型別</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="使用implement-將class與-interface-對接"><a href="#使用implement-將class與-interface-對接" class="headerlink" title="使用implement 將class與 interface 對接"></a>使用implement 將class與 interface 對接</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">    currentTime: <span class="built_in">Date</span>;</span><br><span class="line">    setTime(d: <span class="built_in">Date</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="title">implements</span> <span class="title">ClockInterface</span> </span>&#123;</span><br><span class="line">    currentTime: <span class="built_in">Date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(); <span class="comment">//如果class裡面沒有寫這個變數就會報錯</span></span><br><span class="line">    <span class="function"><span class="title">setTime</span>(<span class="params">d: <span class="built_in">Date</span></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.currentTime = d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="如何快速定義一個class的constructor-參數型別與其建立出來的實例型別？"><a href="#如何快速定義一個class的constructor-參數型別與其建立出來的實例型別？" class="headerlink" title="如何快速定義一個class的constructor 參數型別與其建立出來的實例型別？"></a>如何快速定義一個class的constructor 參數型別與其建立出來的實例型別？</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//建議直接使用表達式</span></span><br><span class="line"><span class="keyword">interface</span> ClockConstructor &#123;</span><br><span class="line">  <span class="keyword">new</span> (hour: <span class="built_in">number</span>, <span class="attr">minute</span>: <span class="built_in">number</span>); <span class="comment">//定義ctor 參數內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">  tick(); <span class="comment">// 定義實例內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Clock: ClockConstructor = <span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="title">implements</span> <span class="title">ClockInterface</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="function"><span class="title">tick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="interface也可以extend"><a href="#interface也可以extend" class="headerlink" title="interface也可以extend"></a>interface也可以extend</h4><blockquote>
+<p>實際使用起來就跟class的extend 差不多</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Shape &#123;</span><br><span class="line">    color: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square <span class="keyword">extends</span> Shape &#123;</span><br><span class="line">    sideLength: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> square = &lt;Square&gt;&#123;&#125;;  </span><br><span class="line"><span class="comment">// 這邊也可以寫成 let square:Square = &#123;color:&#x27;blue&#x27;,sideLength=10&#125;, 但如果不寫預設值就會報錯</span></span><br><span class="line">square.color = <span class="string">&quot;blue&quot;</span>;</span><br><span class="line">square.sideLength = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="interface-extend-class？-用意是什麼"><a href="#interface-extend-class？-用意是什麼" class="headerlink" title="interface extend class？ 用意是什麼?"></a>interface extend class？ 用意是什麼?</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> state: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> SelectableControl <span class="keyword">extends</span> Control &#123;</span><br><span class="line">    select(): <span class="built_in">void</span>; <span class="comment">// 這邊定義了一個extend了 control的接口, 所以意思是說，如果今天有class想要implement 這個接口，他必須要有control 的全內容, 不然就會報錯</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Control</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125; <span class="comment">// 因為button 有 extend Control, 所以他本身就具有private 的state, 所以這樣給過</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBox</span> <span class="keyword">extends</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error: Property &#x27;state&#x27; is missing in type &#x27;Image&#x27;.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Image</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">    <span class="comment">// 因為Image 本身沒有private 的state, 所以不能implement SelectableControl</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>ts</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>TYPESCRIPT學習筆記-ep1</title>
     <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
     <content><![CDATA[<h1 id="TYPESCRIPT的基礎常識"><a href="#TYPESCRIPT的基礎常識" class="headerlink" title="TYPESCRIPT的基礎常識"></a>TYPESCRIPT的基礎常識</h1><h2 id="基礎型別上與es5-es6-較有差異的部分"><a href="#基礎型別上與es5-es6-較有差異的部分" class="headerlink" title="基礎型別上與es5/es6 較有差異的部分"></a>基礎型別上與es5/es6 較有差異的部分</h2><ol>
@@ -455,48 +497,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Proxy 的功用/實用的點</title>
-    <url>/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
-    <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>TYPESCRIPT學習筆記-ep2.5</title>
-    <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/</url>
-    <content><![CDATA[<h4 id="如何使用interface-為函數定義參數型別與回傳值型別"><a href="#如何使用interface-為函數定義參數型別與回傳值型別" class="headerlink" title="如何使用interface 為函數定義參數型別與回傳值型別"></a>如何使用interface 為函數定義參數型別與回傳值型別</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, <span class="attr">subString</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125; <span class="comment">// 定義函數參數/return 的方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> customVariables &#123;</span><br><span class="line">  variableA: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="如何使用interface-定義”可索引類型”"><a href="#如何使用interface-定義”可索引類型”" class="headerlink" title="如何使用interface 定義”可索引類型”"></a>如何使用interface 定義”可索引類型”</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">  [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 意思指的是[]內只能輸入數字, 並且return 值為字串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> readonlyArrayType &#123;</span><br><span class="line">  <span class="keyword">readonly</span> [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 與readonly屬性的搭配應用方式, 這樣就可以把陣列轉為唯讀陣列</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 問題狀況</span></span><br><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">   [index: <span class="built_in">string</span>]: <span class="built_in">number</span>; <span class="comment">//當索引值的型別是字串時會有一種特殊的問題, 會強制要求內部的變數型別跟這邊定義的一樣</span></span><br><span class="line">  value:<span class="built_in">string</span> <span class="comment">// 所以這樣會報錯 (必須是number)</span></span><br><span class="line">&#125; <span class="comment">// 當已經使用了strinf索引類型的定義時, 會強制要求回傳值是索引類型定義中的那個回傳值型別</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="使用implement-將class與-interface-對接"><a href="#使用implement-將class與-interface-對接" class="headerlink" title="使用implement 將class與 interface 對接"></a>使用implement 將class與 interface 對接</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">    currentTime: <span class="built_in">Date</span>;</span><br><span class="line">    setTime(d: <span class="built_in">Date</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="title">implements</span> <span class="title">ClockInterface</span> </span>&#123;</span><br><span class="line">    currentTime: <span class="built_in">Date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(); <span class="comment">//如果class裡面沒有寫這個變數就會報錯</span></span><br><span class="line">    <span class="function"><span class="title">setTime</span>(<span class="params">d: <span class="built_in">Date</span></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.currentTime = d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="如何快速定義一個class的constructor-參數型別與其建立出來的實例型別？"><a href="#如何快速定義一個class的constructor-參數型別與其建立出來的實例型別？" class="headerlink" title="如何快速定義一個class的constructor 參數型別與其建立出來的實例型別？"></a>如何快速定義一個class的constructor 參數型別與其建立出來的實例型別？</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//建議直接使用表達式</span></span><br><span class="line"><span class="keyword">interface</span> ClockConstructor &#123;</span><br><span class="line">  <span class="keyword">new</span> (hour: <span class="built_in">number</span>, <span class="attr">minute</span>: <span class="built_in">number</span>); <span class="comment">//定義ctor 參數內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">  tick(); <span class="comment">// 定義實例內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Clock: ClockConstructor = <span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="title">implements</span> <span class="title">ClockInterface</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="function"><span class="title">tick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="interface也可以extend"><a href="#interface也可以extend" class="headerlink" title="interface也可以extend"></a>interface也可以extend</h4><blockquote>
-<p>實際使用起來就跟class的extend 差不多</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Shape &#123;</span><br><span class="line">    color: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square <span class="keyword">extends</span> Shape &#123;</span><br><span class="line">    sideLength: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> square = &lt;Square&gt;&#123;&#125;;  </span><br><span class="line"><span class="comment">// 這邊也可以寫成 let square:Square = &#123;color:&#x27;blue&#x27;,sideLength=10&#125;, 但如果不寫預設值就會報錯</span></span><br><span class="line">square.color = <span class="string">&quot;blue&quot;</span>;</span><br><span class="line">square.sideLength = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="interface-extend-class？-用意是什麼"><a href="#interface-extend-class？-用意是什麼" class="headerlink" title="interface extend class？ 用意是什麼?"></a>interface extend class？ 用意是什麼?</h4><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> state: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> SelectableControl <span class="keyword">extends</span> Control &#123;</span><br><span class="line">    select(): <span class="built_in">void</span>; <span class="comment">// 這邊定義了一個extend了 control的接口, 所以意思是說，如果今天有class想要implement 這個接口，他必須要有control 的全內容, 不然就會報錯</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Control</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125; <span class="comment">// 因為button 有 extend Control, 所以他本身就具有private 的state, 所以這樣給過</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBox</span> <span class="keyword">extends</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error: Property &#x27;state&#x27; is missing in type &#x27;Image&#x27;.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Image</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">    <span class="comment">// 因為Image 本身沒有private 的state, 所以不能implement SelectableControl</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>ts</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>TYPESCRIPT學習筆記-ep2</title>
     <url>/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
     <content><![CDATA[<h2 id="什麼是Interface-接口"><a href="#什麼是Interface-接口" class="headerlink" title="什麼是Interface(接口)?"></a>什麼是Interface(接口)?</h2><blockquote>
@@ -518,24 +518,6 @@
       </categories>
       <tags>
         <tag>ts</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>rxjs 學習筆記 - ep1</title>
-    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/</url>
-    <content><![CDATA[<h1 id="Opening"><a href="#Opening" class="headerlink" title="Opening"></a>Opening</h1><p>前陣子講了很久要來學習RxJs, 但是實際上卻是拖到了現在才要認真開始把它學好~<br>事不宜遲，我們這邊就馬上開始基礎的部分</p>
-<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>首先，我們先來說說為什麼要學<code>rxjs</code>, 平常寫前端UI真的有常常需要用到這東西嗎?</p>
-<p>之前偶爾有聽說<code>RxJs</code>可以用來做高頻率事件的監聽與處理(例如<code>mousemove</code>或<code>touchmove</code>), 但是這跟一般的<code>addEventListener</code> 或 <code>jquery</code> 的<code>.on</code> 方法又差在哪裡? 有必要為了一個高頻事件處理去特地學這麼一個看上去很複雜的東西嗎?</p>
-<p>實際上，如果只是要處理高頻事件監聽，確實是沒有需要特地去學習<code>Rxjs</code>。<br>但是<code>Rxjs</code> 其實並不是一個只能用來做高頻事件監聽控管的library。</p>
-<p>Rxjs最重要的意義之一就是<code>Reactive Programming</code>，也就是<code>當變數或資源發生變動時，由變數或資源自動告訴我發生變動了</code>。</p>
-<p>Rxjs 把很多東西都當成Reactive的對象, 除了前面提到的高頻事件的event object，另外也可以把單純的變數(物件/數值等)作為reavtive對象, 而這個概念也就是所謂的 <code>Observable</code>。</p>
-]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>rxjs</tag>
       </tags>
   </entry>
   <entry>
@@ -580,9 +562,15 @@
       </tags>
   </entry>
   <entry>
-    <title>rxjs 學習筆記 - ep2</title>
-    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/</url>
-    <content><![CDATA[<h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>]]></content>
+    <title>rxjs 學習筆記 - ep1</title>
+    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/</url>
+    <content><![CDATA[<h1 id="Opening"><a href="#Opening" class="headerlink" title="Opening"></a>Opening</h1><p>前陣子講了很久要來學習RxJs, 但是實際上卻是拖到了現在才要認真開始把它學好~<br>事不宜遲，我們這邊就馬上開始基礎的部分</p>
+<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>首先，我們先來說說為什麼要學<code>rxjs</code>, 平常寫前端UI真的有常常需要用到這東西嗎?</p>
+<p>之前偶爾有聽說<code>RxJs</code>可以用來做高頻率事件的監聽與處理(例如<code>mousemove</code>或<code>touchmove</code>), 但是這跟一般的<code>addEventListener</code> 或 <code>jquery</code> 的<code>.on</code> 方法又差在哪裡? 有必要為了一個高頻事件處理去特地學這麼一個看上去很複雜的東西嗎?</p>
+<p>實際上，如果只是要處理高頻事件監聽，確實是沒有需要特地去學習<code>Rxjs</code>。<br>但是<code>Rxjs</code> 其實並不是一個只能用來做高頻事件監聽控管的library。</p>
+<p>Rxjs最重要的意義之一就是<code>Reactive Programming</code>，也就是<code>當變數或資源發生變動時，由變數或資源自動告訴我發生變動了</code>。</p>
+<p>Rxjs 把很多東西都當成Reactive的對象, 除了前面提到的高頻事件的event object，另外也可以把單純的變數(物件/數值等)作為reavtive對象, 而這個概念也就是所謂的 <code>Observable</code>。</p>
+]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
@@ -592,45 +580,15 @@
       </tags>
   </entry>
   <entry>
-    <title>高見龍為自己學 git 學習筆記-ep2</title>
-    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
-    <content><![CDATA[<h2 id="關於git-add的一些常識"><a href="#關於git-add的一些常識" class="headerlink" title="關於git add的一些常識"></a>關於git add的一些常識</h2><p>當我git add 一個檔案之後, 我如果再去修改他, 接著再commit。<br>其實在這個commit，git 並不會去紀錄該檔案的改動, 因為這個檔案只是被加到暫存區而已，git沒有辦法去refer到他的歷史改動狀況。</p>
-<p>所以建議如果要git add檔案, 一律add完之後commit一次再做改動</p>
-<blockquote>
-<p>要commit之前一定要先add –all, 或者可以直接使用 git commit -a</p>
-</blockquote>
-<blockquote>
-<p>想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add –all</p>
-</blockquote>
-<blockquote>
-<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點ˊ<br>log</p>
-</blockquote>
-<blockquote>
-<p>git 可以分成 工作目錄/暫存區/儲存區<br>用git add 把檔案從工作目錄記錄到暫存區, 用git commit 把檔案從暫存區記錄到儲存區</p>
-</blockquote>
-<h2 id="git-log-內容有些什麼"><a href="#git-log-內容有些什麼" class="headerlink" title="git log 內容有些什麼"></a>git log 內容有些什麼</h2><p>可以看到每一個commit點</p>
-<ol>
-<li>commit 的人是誰?</li>
-<li>時間點</li>
-<li>commit log</li>
-</ol>
-<blockquote>
-<p>可以搭配 –oneline 或 –graph 來做不同模式的log顯示<br>可以用 –author 查詢特定開發者的commit內容<br>–author=”” 的使用, 如果開發者有兩位以上, 可以使用 userA | userB<br>–grep=”” 的使用, 可以尋找commit log裡面有特定字串的commit點<br>-S”” 的使用, 可以尋找commit 點之中，改動內容含有特定字串的commit 點<br>–since=”” &amp; –until=”” &amp; –after=”2019-01”  可以顯示特定時間點區間的commit點</p>
-</blockquote>
-<h2 id="git-rm-是幹嘛用的-跟一般的rm-差在哪裡"><a href="#git-rm-是幹嘛用的-跟一般的rm-差在哪裡" class="headerlink" title="git rm 是幹嘛用的? 跟一般的rm 差在哪裡?"></a>git rm 是幹嘛用的? 跟一般的rm 差在哪裡?</h2><p>git rm 等於 先使用一般的rm , 然後再把這個rm 的改動 用add 加到暫存區</p>
-<blockquote>
-<p>可以使用 –cached ，這樣會變成單純的把檔案與git 斷聯，但是不會實際刪除檔案, 這樣該檔案在做完這個動作之後就會變成 untracked了</p>
-</blockquote>
-<h2 id="git-mv-改變檔名"><a href="#git-mv-改變檔名" class="headerlink" title="git mv 改變檔名"></a>git mv 改變檔名</h2><p>例如</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">mv</span> <span class="selector-tag">aa</span><span class="selector-class">.html</span> <span class="selector-tag">bb</span><span class="selector-class">.html</span></span><br></pre></td></tr></table></figure>
-
-
-]]></content>
+    <title>rxjs 學習筆記 - ep2</title>
+    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/</url>
+    <content><![CDATA[<h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>js</tag>
+        <tag>rxjs</tag>
       </tags>
   </entry>
   <entry>
@@ -680,6 +638,48 @@
 <ol start="4">
 <li><code>git commit -m &lt;commit log&gt;</code></li>
 </ol>
+]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高見龍為自己學 git 學習筆記-ep2</title>
+    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
+    <content><![CDATA[<h2 id="關於git-add的一些常識"><a href="#關於git-add的一些常識" class="headerlink" title="關於git add的一些常識"></a>關於git add的一些常識</h2><p>當我git add 一個檔案之後, 我如果再去修改他, 接著再commit。<br>其實在這個commit，git 並不會去紀錄該檔案的改動, 因為這個檔案只是被加到暫存區而已，git沒有辦法去refer到他的歷史改動狀況。</p>
+<p>所以建議如果要git add檔案, 一律add完之後commit一次再做改動</p>
+<blockquote>
+<p>要commit之前一定要先add –all, 或者可以直接使用 git commit -a</p>
+</blockquote>
+<blockquote>
+<p>想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add –all</p>
+</blockquote>
+<blockquote>
+<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點ˊ<br>log</p>
+</blockquote>
+<blockquote>
+<p>git 可以分成 工作目錄/暫存區/儲存區<br>用git add 把檔案從工作目錄記錄到暫存區, 用git commit 把檔案從暫存區記錄到儲存區</p>
+</blockquote>
+<h2 id="git-log-內容有些什麼"><a href="#git-log-內容有些什麼" class="headerlink" title="git log 內容有些什麼"></a>git log 內容有些什麼</h2><p>可以看到每一個commit點</p>
+<ol>
+<li>commit 的人是誰?</li>
+<li>時間點</li>
+<li>commit log</li>
+</ol>
+<blockquote>
+<p>可以搭配 –oneline 或 –graph 來做不同模式的log顯示<br>可以用 –author 查詢特定開發者的commit內容<br>–author=”” 的使用, 如果開發者有兩位以上, 可以使用 userA | userB<br>–grep=”” 的使用, 可以尋找commit log裡面有特定字串的commit點<br>-S”” 的使用, 可以尋找commit 點之中，改動內容含有特定字串的commit 點<br>–since=”” &amp; –until=”” &amp; –after=”2019-01”  可以顯示特定時間點區間的commit點</p>
+</blockquote>
+<h2 id="git-rm-是幹嘛用的-跟一般的rm-差在哪裡"><a href="#git-rm-是幹嘛用的-跟一般的rm-差在哪裡" class="headerlink" title="git rm 是幹嘛用的? 跟一般的rm 差在哪裡?"></a>git rm 是幹嘛用的? 跟一般的rm 差在哪裡?</h2><p>git rm 等於 先使用一般的rm , 然後再把這個rm 的改動 用add 加到暫存區</p>
+<blockquote>
+<p>可以使用 –cached ，這樣會變成單純的把檔案與git 斷聯，但是不會實際刪除檔案, 這樣該檔案在做完這個動作之後就會變成 untracked了</p>
+</blockquote>
+<h2 id="git-mv-改變檔名"><a href="#git-mv-改變檔名" class="headerlink" title="git mv 改變檔名"></a>git mv 改變檔名</h2><p>例如</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">mv</span> <span class="selector-tag">aa</span><span class="selector-class">.html</span> <span class="selector-tag">bb</span><span class="selector-class">.html</span></span><br></pre></td></tr></table></figure>
+
+
 ]]></content>
       <categories>
         <category>前端技術學習心得</category>
