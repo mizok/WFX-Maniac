@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/images/logo-x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/images/logo-x16.png">
+  <link rel="mask-icon" href="/WFX-Maniac/assets/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/WFX-Maniac/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Let’s Start From Scratch本系列文章的頭幾篇我決定還是帶點基礎的東西，所以首先，我打算介紹一些不常被一般教學提到的資料來當熱身。  The HTMLCanvasElement interface provides properties and methods for manipulating the layout and presentation of &lt;canvas&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day2 - 基礎篇:Canvas基礎概論 我要成為Canvas Ninja!">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/09/%E5%9F%BA%E7%A4%8E%E7%AF%87%20-%20Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20/index.html">
+<meta property="og:site_name" content="WFX-Maniac">
+<meta property="og:description" content="Let’s Start From Scratch本系列文章的頭幾篇我決定還是帶點基礎的東西，所以首先，我打算介紹一些不常被一般教學提到的資料來當熱身。  The HTMLCanvasElement interface provides properties and methods for manipulating the layout and presentation of &lt;canvas&amp;">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/Ta8eGWm.png">
+<meta property="og:image" content="https://i.imgur.com/d7l62h9.png">
+<meta property="article:published_time" content="2021-09-09T13:42:59.166Z">
+<meta property="article:modified_time" content="2021-09-09T17:22:29.285Z">
+<meta property="article:author" content="Mizok.H">
+<meta property="article:tag" content="2021鐵人賽">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/Ta8eGWm.png">
+
+
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/09/%E5%9F%BA%E7%A4%8E%E7%AF%87%20-%20Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
+
+<script src="/WFX-Maniac/js/ripple-logo.js"></script>
+<script src="/WFX-Maniac/js/silk-wave.js"></script>
+
+<style>
+  @font-face {
+  font-family: "Roboto";
+  src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
+}
+</style>
+<title>Day2 - 基礎篇:Canvas基礎概論 我要成為Canvas Ninja! | WFX-Maniac</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/WFX-Maniac/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WFX-Maniac</h1>
+      <canvas id="logo-canvas"></canvas><i class="logo-line"></i>
+    </a>
+<script>
+  (()=>{
+    let canvas = document.querySelector('#logo-canvas');
+
+    let init= ()=>{
+      let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
+        points:2,
+        randomFill:false,
+        lineColor:'rgba(255,255,255,0.35)',
+        maxSize:250
+      });
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/WFX-Maniac/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/WFX-Maniac/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">16</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Let%E2%80%99s-Start-From-Scratch"><span class="nav-number">1.</span> <span class="nav-text">Let’s Start From Scratch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Canvas-%E8%88%87-%E4%B8%80%E8%88%AC-Dom%E5%85%83%E7%B4%A0%E7%9A%84%E5%B7%AE%E7%95%B0%E4%B8%80%EF%BC%9A%E7%B7%A8%E8%AD%AF%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Canvas 與 一般 Dom元素的差異一：編譯流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Canvas-%E8%88%87-%E4%B8%80%E8%88%AC-Dom%E5%85%83%E7%B4%A0%E7%9A%84%E5%B7%AE%E7%95%B0%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">Canvas 與 一般 Dom元素的差異二：使用情境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Dom%E5%85%83%E7%B4%A0%E9%81%A9%E5%90%88%E7%9A%84%E6%83%85%E5%A2%83"><span class="nav-number">3.0.1.</span> <span class="nav-text">1. Dom元素適合的情境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Canvas%E6%B8%B2%E6%9F%93%E9%81%A9%E5%90%88%E7%9A%84%E6%83%85%E5%A2%83"><span class="nav-number">3.0.2.</span> <span class="nav-text">2. Canvas渲染適合的情境</span></a></li></ol></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mizok.H"
+      src="/WFX-Maniac/assets/images/logo.png">
+  <p class="site-author-name" itemprop="name">Mizok.H</p>
+  <div class="site-description" itemprop="description">網頁特效開發/個人前端學習歷程</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/WFX-Maniac/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/WFX-Maniac/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/WFX-Maniac/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/09/%E5%9F%BA%E7%A4%8E%E7%AF%87%20-%20Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day2 - 基礎篇:Canvas基礎概論 我要成為Canvas Ninja!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-09 21:42:59" itemprop="dateCreated datePublished" datetime="2021-09-09T21:42:59+08:00">2021-09-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-10 01:22:29" itemprop="dateModified" datetime="2021-09-10T01:22:29+08:00">2021-09-10</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Let’s-Start-From-Scratch"><a href="#Let’s-Start-From-Scratch" class="headerlink" title="Let’s Start From Scratch"></a>Let’s Start From Scratch</h2><p>本系列文章的頭幾篇我決定還是帶點基礎的東西，所以首先，我打算介紹一些不常被一般教學提到的資料來當熱身。</p>
+<blockquote>
+<p>The HTMLCanvasElement interface provides properties and methods for manipulating the layout and presentation of <code>&lt;canvas&gt;</code> elements. The HTMLCanvasElement interface also inherits the properties and methods of the HTMLElement interface.  — from MDN<br>The HTML <code>&lt;canvas&gt;</code> element is used to draw graphics on a web page. — from <a target="_blank" rel="noopener" href="http://www.w3schools.com/">www.w3schools.com</a></p>
+</blockquote>
+<p>上述是在MDN還有W3school上關於<code>canvas</code> 元素 的解釋。簡單來說<code>canvas</code>就是一種自帶複數api, 然後可以用來在網頁上做動態繪圖的元素。<br>簡單的介紹就到這邊，接下來是疑問時間。<br>有些人看到上述的解釋，可能會覺得很疑惑，例如：</p>
+<blockquote>
+<p>那麼我們平常在用的CSS和html基礎元素，那樣子的東西難道不也是一種繪圖嗎? 差別在哪裡?</p>
+</blockquote>
+<p>接下來我們將針對這個問題做一系列的說明。</p>
+<h2 id="Canvas-與-一般-Dom元素的差異一：編譯流程"><a href="#Canvas-與-一般-Dom元素的差異一：編譯流程" class="headerlink" title="Canvas 與 一般 Dom元素的差異一：編譯流程"></a>Canvas 與 一般 Dom元素的差異一：編譯流程</h2><p>通常在80%以上的web專案內容中，我們都是使用普通的Dom元素來對頁面進行版面規劃。<br>所謂『普通』的Dom元素指的就是 <code>div</code>、<code>span</code>、<code>ul</code>、<code>li</code>…,etc. 而我們都知道，<code>HTML</code>本身是一種標記語言，<br>一篇完整的標記語言範本其實就有點像某種<strong>願望清單</strong>，為什麼說是願望清單呢? 那是因為瀏覽器在接收到一份HTML時，他做的事其實就是根據這份文件，上面提到的: 這份文件有多少元素? 元素個別是哪些？ 元素的先後排列順序、元素的巢狀化邏輯…etc. 去生成各個元素的物件實例，然後再透過瀏覽器的渲染引擎去把這些元素渲染在畫面上。</p>
+<p><img src="https://i.imgur.com/Ta8eGWm.png" alt="retain mode"></p>
+<p>像這樣子先確認頁面需求模型(也就是我們提到的願望清單)，然後將模型中的細節一一轉譯實現的這種行為模式，我們把它稱為<code>Retained Mode</code>(保留模式)。<br>接著一定就會有人問：  </p>
+<blockquote>
+<p>那麼是不是還有別的模式呢？</p>
+</blockquote>
+<p>Of course.<br>當瀏覽器需要做這類把文字邏輯轉化成視覺的工作時(我們把這種行為稱為轉譯)，會有兩種固定模式，其一是<code>Retained Mode</code>(保留模式), 然後再來就是與<code>Canvas</code>密切相關的<code>Immediate Mode</code>(立即模式)。  </p>
+<p><img src="https://i.imgur.com/d7l62h9.png" alt="img"></p>
+<p>從上面這張圖片我們可以發現，<code>Canvas</code> 元素和<code>Dom</code>元素最大的區別就是創建模型的這一個環節。<br>所謂的模型指的其實就是彼此之間具有<strong>關聯</strong>的物件(<code>Object</code>)的群集。<br>一個使用Canvas 畫一個藍色方塊，和一個使用<code>div</code>搭配<code>css</code>樣式做出的紅色方塊，本質上最大的區別除了顏色之外，就是這個方塊背後物件的內容差。  </p>
+<p>舉個簡單的例子，我們在做網頁動畫的時候，常常會需要用到<code>getBoundingClientRect</code> 這個<code>api</code> 來獲取一個區塊的大小、座標等。<br>而我們在使用這個api的時候，一般就是先去抓取(<code>query</code>)這個元素，然後就可以用這個元素實例底下的<code>api</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// ele 本身是透過selector 字串所抓到的元素實例(instance), 這個實例其實是在瀏覽器創建Dom模型的時候new出來的</span></span><br><span class="line"><span class="keyword">let</span> ele = <span class="built_in">document</span>.querySelecor(<span class="string">&#x27;div&#x27;</span>); </span><br><span class="line"><span class="comment">// getBoundingClientRect 則是ele 這個實例物件的一個方法</span></span><br><span class="line"><span class="keyword">let</span> divWidth = ele.getBoundingClientRect().width; </span><br></pre></td></tr></table></figure>
+<p>上述對大部分人來說應該都是一個稀鬆平常的操作。<br>但是當我們用Canvas 繪製一個方塊時，我們所創建的實例並不是透過去<code>new</code> 瀏覽器內建的<code>Element</code> 類(<code>class</code>)所建立出來的，而是透過我們自己定義的一個具有客製化方法的類，例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">block</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">ctx</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx = ctx;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">draw</span>(<span class="params">x, y, width, height</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx.fillRect(x, y, width, height);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當我們用這樣的一個客製類<code>Block</code>去產生一個方塊的實例時，這個實例底下所有的方法，都是來自於這個客製類<code>Block</code>的定義（所以當然也就沒有<code>getBoundingClientRect</code>這麼方便的api可以用）。<br>但是相對的，因為產生實例的類可以自己定義，自由度也當然就跟著大幅提高，平常一些不能用基礎Dom元素做到的操作，甚至都變得有可能了（ex：繪製不規則圖形、創作複雜動畫）</p>
+<h2 id="Canvas-與-一般-Dom元素的差異二：使用情境"><a href="#Canvas-與-一般-Dom元素的差異二：使用情境" class="headerlink" title="Canvas 與 一般 Dom元素的差異二：使用情境"></a>Canvas 與 一般 Dom元素的差異二：使用情境</h2><p>前面我們有提到, Canvas 相較於 基礎Dom元素而言，具有相對高（不只高! 而是非常高！）的自由度。<br>用一個簡單的例子來描述，就好比<strong>訂製手工賽車</strong>和<strong>國產普通轎車</strong> 的區別，這邊絕對不是要說國產貨不好，畢竟我也沒有說訂製的手工賽車的來源是哪一家廠商XD  </p>
+<p>講到這邊應該就可以理解到兩種繪圖方式的使用情境其分野：</p>
+<h4 id="1-Dom元素適合的情境"><a href="#1-Dom元素適合的情境" class="headerlink" title="1. Dom元素適合的情境"></a>1. Dom元素適合的情境</h4><ul>
+<li>快速/大量生產的需求</li>
+<li>不想花費過多時間處理效能問題</li>
+<li>有大量的互動操作行為, 例如UI/UX</li>
+</ul>
+<h4 id="2-Canvas渲染適合的情境"><a href="#2-Canvas渲染適合的情境" class="headerlink" title="2. Canvas渲染適合的情境"></a>2. Canvas渲染適合的情境</h4><ul>
+<li>當有天馬行空的創意</li>
+<li>較少的時間壓力，且能夠自行處理圖形重繪/ 效能問題</li>
+<li>像素操作（這個後面的章節會提到）</li>
+</ul>
+<p>就像我們前面提到的，以現階段來講，前端工程師80%的職業生涯中面對到的多半是第一種情境(當然也有少數人不是)，<br>而我們需要為了這20%的狀況去學習的原因，除了要應對未來的不時之需以外，當然就是有挑戰自我創作的意義存在。</p>
+<p>那麼話就說到這邊。<br>在接下來的章節，我們將會進入2D渲染的環節，首先當然還是會從2D渲染的基礎開始，然後再逐漸的解釋Canva繪圖的實作，還請各位拭目以待～。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 2021鐵人賽</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/02/%E5%BA%8F%E8%A8%80%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/" rel="prev" title="Day1 - 序言 - 我要成為Canvas Ninja!">
+                  <i class="fa fa-chevron-left"></i> Day1 - 序言 - 我要成為Canvas Ninja!
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">Mizok.H</span>
+</div>
+  
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/WFX-Maniac/js/utils.js"></script><script src="/WFX-Maniac/js/motion.js"></script><script src="/WFX-Maniac/js/next-boot.js"></script>
+
+  
+
+<script src="/WFX-Maniac/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
