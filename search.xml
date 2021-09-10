@@ -233,21 +233,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Proxy 的功用/實用的點</title>
-    <url>/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
-    <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ES6學習筆記-Proxy 用途/介紹/使用情境</title>
     <url>/WFX-Maniac/2020/11/26/ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-Proxy%20%E7%94%A8%E9%80%94_%E4%BB%8B%E7%B4%B9_%E4%BD%BF%E7%94%A8%E6%83%85%E5%A2%83/</url>
     <content><![CDATA[<h2 id="什麼是Proxy"><a href="#什麼是Proxy" class="headerlink" title="什麼是Proxy"></a>什麼是Proxy</h2><blockquote>
@@ -366,6 +351,21 @@
 
 <h4 id="實作-interpolation"><a href="#實作-interpolation" class="headerlink" title="實作 interpolation"></a>實作 interpolation</h4><p>這個比較複雜，預計下週在補完</p>
 ]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Proxy 的功用/實用的點</title>
+    <url>/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/</url>
+    <content><![CDATA[<h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
@@ -630,7 +630,7 @@
 <li>像素操作（這個後面的章節會提到）</li>
 </ul>
 <p>就像我們前面提到的，以現階段來講，前端工程師80%的職業生涯中面對到的多半是第一種情境(當然也有少數人不是)，<br>而我們需要為了這20%的狀況去學習的原因，除了要應對未來的不時之需以外，當然就是有挑戰自我創作的意義存在。</p>
-<p>那麼話就說到這邊。<br>在接下來的章節，我們將會進入2D渲染的環節，首先當然還是會從2D渲染的基礎開始，然後再逐漸的解釋Canva繪圖的實作，還請各位拭目以待～。</p>
+<p>那麼話就說到這邊。<br>在接下來的章節，我們將會進入2D渲染的環節，首先當然還是會從2D渲染的基礎開始，然後再逐漸的解釋Canvas繪圖的實作，還請各位拭目以待～。</p>
 ]]></content>
       <categories>
         <category>前端技術學習心得</category>
@@ -662,48 +662,6 @@
       </categories>
       <tags>
         <tag>2021鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高見龍為自己學 git 學習筆記-ep2</title>
-    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
-    <content><![CDATA[<h2 id="關於git-add的一些常識"><a href="#關於git-add的一些常識" class="headerlink" title="關於git add的一些常識"></a>關於git add的一些常識</h2><p>當我git add 一個檔案之後, 我如果再去修改他, 接著再commit。<br>其實在這個commit，git 並不會去紀錄該檔案的改動, 因為這個檔案只是被加到暫存區而已，git沒有辦法去refer到他的歷史改動狀況。</p>
-<p>所以建議如果要git add檔案, 一律add完之後commit一次再做改動</p>
-<blockquote>
-<p>要commit之前一定要先add –all, 或者可以直接使用 git commit -a</p>
-</blockquote>
-<blockquote>
-<p>想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add –all</p>
-</blockquote>
-<blockquote>
-<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點ˊ<br>log</p>
-</blockquote>
-<blockquote>
-<p>git 可以分成 工作目錄/暫存區/儲存區<br>用git add 把檔案從工作目錄記錄到暫存區, 用git commit 把檔案從暫存區記錄到儲存區</p>
-</blockquote>
-<h2 id="git-log-內容有些什麼"><a href="#git-log-內容有些什麼" class="headerlink" title="git log 內容有些什麼"></a>git log 內容有些什麼</h2><p>可以看到每一個commit點</p>
-<ol>
-<li>commit 的人是誰?</li>
-<li>時間點</li>
-<li>commit log</li>
-</ol>
-<blockquote>
-<p>可以搭配 –oneline 或 –graph 來做不同模式的log顯示<br>可以用 –author 查詢特定開發者的commit內容<br>–author=”” 的使用, 如果開發者有兩位以上, 可以使用 userA | userB<br>–grep=”” 的使用, 可以尋找commit log裡面有特定字串的commit點<br>-S”” 的使用, 可以尋找commit 點之中，改動內容含有特定字串的commit 點<br>–since=”” &amp; –until=”” &amp; –after=”2019-01”  可以顯示特定時間點區間的commit點</p>
-</blockquote>
-<h2 id="git-rm-是幹嘛用的-跟一般的rm-差在哪裡"><a href="#git-rm-是幹嘛用的-跟一般的rm-差在哪裡" class="headerlink" title="git rm 是幹嘛用的? 跟一般的rm 差在哪裡?"></a>git rm 是幹嘛用的? 跟一般的rm 差在哪裡?</h2><p>git rm 等於 先使用一般的rm , 然後再把這個rm 的改動 用add 加到暫存區</p>
-<blockquote>
-<p>可以使用 –cached ，這樣會變成單純的把檔案與git 斷聯，但是不會實際刪除檔案, 這樣該檔案在做完這個動作之後就會變成 untracked了</p>
-</blockquote>
-<h2 id="git-mv-改變檔名"><a href="#git-mv-改變檔名" class="headerlink" title="git mv 改變檔名"></a>git mv 改變檔名</h2><p>例如</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">mv</span> <span class="selector-tag">aa</span><span class="selector-class">.html</span> <span class="selector-tag">bb</span><span class="selector-class">.html</span></span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -753,6 +711,48 @@
 <ol start="4">
 <li><code>git commit -m &lt;commit log&gt;</code></li>
 </ol>
+]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高見龍為自己學 git 學習筆記-ep2</title>
+    <url>/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/</url>
+    <content><![CDATA[<h2 id="關於git-add的一些常識"><a href="#關於git-add的一些常識" class="headerlink" title="關於git add的一些常識"></a>關於git add的一些常識</h2><p>當我git add 一個檔案之後, 我如果再去修改他, 接著再commit。<br>其實在這個commit，git 並不會去紀錄該檔案的改動, 因為這個檔案只是被加到暫存區而已，git沒有辦法去refer到他的歷史改動狀況。</p>
+<p>所以建議如果要git add檔案, 一律add完之後commit一次再做改動</p>
+<blockquote>
+<p>要commit之前一定要先add –all, 或者可以直接使用 git commit -a</p>
+</blockquote>
+<blockquote>
+<p>想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add –all</p>
+</blockquote>
+<blockquote>
+<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點ˊ<br>log</p>
+</blockquote>
+<blockquote>
+<p>git 可以分成 工作目錄/暫存區/儲存區<br>用git add 把檔案從工作目錄記錄到暫存區, 用git commit 把檔案從暫存區記錄到儲存區</p>
+</blockquote>
+<h2 id="git-log-內容有些什麼"><a href="#git-log-內容有些什麼" class="headerlink" title="git log 內容有些什麼"></a>git log 內容有些什麼</h2><p>可以看到每一個commit點</p>
+<ol>
+<li>commit 的人是誰?</li>
+<li>時間點</li>
+<li>commit log</li>
+</ol>
+<blockquote>
+<p>可以搭配 –oneline 或 –graph 來做不同模式的log顯示<br>可以用 –author 查詢特定開發者的commit內容<br>–author=”” 的使用, 如果開發者有兩位以上, 可以使用 userA | userB<br>–grep=”” 的使用, 可以尋找commit log裡面有特定字串的commit點<br>-S”” 的使用, 可以尋找commit 點之中，改動內容含有特定字串的commit 點<br>–since=”” &amp; –until=”” &amp; –after=”2019-01”  可以顯示特定時間點區間的commit點</p>
+</blockquote>
+<h2 id="git-rm-是幹嘛用的-跟一般的rm-差在哪裡"><a href="#git-rm-是幹嘛用的-跟一般的rm-差在哪裡" class="headerlink" title="git rm 是幹嘛用的? 跟一般的rm 差在哪裡?"></a>git rm 是幹嘛用的? 跟一般的rm 差在哪裡?</h2><p>git rm 等於 先使用一般的rm , 然後再把這個rm 的改動 用add 加到暫存區</p>
+<blockquote>
+<p>可以使用 –cached ，這樣會變成單純的把檔案與git 斷聯，但是不會實際刪除檔案, 這樣該檔案在做完這個動作之後就會變成 untracked了</p>
+</blockquote>
+<h2 id="git-mv-改變檔名"><a href="#git-mv-改變檔名" class="headerlink" title="git mv 改變檔名"></a>git mv 改變檔名</h2><p>例如</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">mv</span> <span class="selector-tag">aa</span><span class="selector-class">.html</span> <span class="selector-tag">bb</span><span class="selector-class">.html</span></span><br></pre></td></tr></table></figure>
+
+
 ]]></content>
       <categories>
         <category>前端技術學習心得</category>
