@@ -185,7 +185,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">16</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">17</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -259,7 +259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -301,6 +301,98 @@
 
 
     <div class="main-inner index posts-montage">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">TYPESCRIPT學習筆記-ep2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:57" itemprop="dateModified" datetime="2020-12-13T03:52:57+08:00">2020-12-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="什麼是Interface-接口"><a href="#什麼是Interface-接口" class="headerlink" title="什麼是Interface(接口)?"></a>什麼是Interface(接口)?</h2><blockquote>
+<p>簡單來說就是一個用來定義一個物件內部 必要變數/變數型別的寫法<br>好用的點在於可以去限制一個物件必須要具備什麼樣的property</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  label: <span class="built_in">string</span>;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">  <span class="keyword">readonly</span> color:<span class="string">&#x27;red&#x27;</span></span><br><span class="line">  <span class="comment">//前面有寫readonly的property，</span></span><br><span class="line">  <span class="comment">//代表這個項目只要被interface初始定義之後就沒有辦法再被覆寫</span></span><br><span class="line">  <span class="comment">//注意readonly只能在interface裡面使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printLabel</span>(<span class="params">labeledObj: LabeledValue</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="comment">//直接把labeledObj 內容的型別定義為labeledValue 接口 </span></span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(labeledObj.label);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myObj = &#123;<span class="attr">size</span>: <span class="number">10</span>, <span class="attr">label</span>: <span class="string">&quot;Size 10 Object&quot;</span>&#125;;</span><br><span class="line">printLabel(myObj);</span><br></pre></td></tr></table></figure>
+
+<h2 id="什麼是ReadonlyArray-唯讀陣列"><a href="#什麼是ReadonlyArray-唯讀陣列" class="headerlink" title="什麼是ReadonlyArray(唯讀陣列)?"></a>什麼是ReadonlyArray(唯讀陣列)?</h2><blockquote>
+<p>用途是用來確保陣列被定義為唯獨之後再也不能被修改</p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ro: ReadonlyArray&lt;<span class="built_in">number</span>&gt; = a;</span><br><span class="line">ro[<span class="number">0</span>] = <span class="number">12</span>; <span class="comment">// error!</span></span><br><span class="line">ro.push(<span class="number">5</span>); <span class="comment">// error!</span></span><br><span class="line">ro.length = <span class="number">100</span>; <span class="comment">// error!</span></span><br><span class="line">a = ro; <span class="comment">// error!</span></span><br><span class="line"><span class="comment">//但是可以用類型斷言強行複製</span></span><br><span class="line">a = ro <span class="keyword">as</span> <span class="built_in">number</span>[];</span><br></pre></td></tr></table></figure>
+
+<h2 id="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼"><a href="#我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼" class="headerlink" title="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?"></a>我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//所以基本上這樣寫是合法的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> qq = <span class="function">(<span class="params">bb:LabeledValue</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">qq(&#123;&#125;)<span class="comment">//傳入空物件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 這樣寫也是合法的</span></span><br><span class="line"><span class="keyword">let</span> apple:LabeledValue =&#123;&#125;;</span><br><span class="line">apple.name = <span class="string">&#x27;fuji&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//但是這樣寫就會fail</span></span><br><span class="line">apple.color = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>這說明了optional屬性只能接受”存在”或“不存在”這兩種值，用一個本來就不符合interface的property是不合法的</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
