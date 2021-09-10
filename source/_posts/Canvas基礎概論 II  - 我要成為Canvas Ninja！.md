@@ -51,9 +51,9 @@ tags:
   
   實際上在定義一張canvas的大小時，並不是使用css來賦值，而是使用width和height這兩個attribute，直接下在canvas元素上面。
 
-  只有width和height這兩個attribute數值才能夠直接定義canvas的像素總量，而如果這時硬是要用css去擴大一張100＊100的canvas為10000px*10000，就會出現像素密度過低(也就是圖像模糊的情形)的狀況
+  只有width和height這兩個attribute數值才能夠直接定義canvas的像素總量，而如果這時硬是要用css去擴大一張100＊100的canvas為10000px*10000px，就會出現像素密度過低(也就是圖像模糊的情形)的狀況
 
-
+  關於Canvas的像素操作技術，我們在之後的章節會提到更多實操的範例。
 ## Context? What The Hell Is That?
 
 > SO, 你在前面的介紹文一直提到『渲染環境』這一個詞彙，那個到底指的是什麼？
