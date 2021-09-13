@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Day5 - 2D渲染環境基礎篇 II -  我要成為Canvas Ninja!</title>
+    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
+    <content><![CDATA[<h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，而且也可以快速掌握2D渲染環境路徑繪圖的概念。</p>
+<blockquote>
+<p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
+</blockquote>
+<p>如果要白話一點的解釋『路徑(Path)』這個概念，可以想像成他是一種透明，但是有形的一段曲線，在canvas中我們可以利用(接下來會提到的)上色填充相關api為已經成形的路徑設定填充色(fill)/邊框色(stroke)。</p>
+<img src="https://i.imgur.com/7TfVMlG.png" width="500">
+
+<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標，假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
+<h2 id="來畫一條線看看吧"><a href="#來畫一條線看看吧" class="headerlink" title="來畫一條線看看吧!"></a>來畫一條線看看吧!</h2><h3 id="畫上框線！"><a href="#畫上框線！" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h2 id="接著來畫一個圓"><a href="#接著來畫一個圓" class="headerlink" title="接著來畫一個圓!"></a>接著來畫一個圓!</h2><h3 id="畫上框線！-1"><a href="#畫上框線！-1" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！"><a href="#填充！" class="headerlink" title="填充！"></a>填充！</h3><h2 id="畫一個不規則形狀"><a href="#畫一個不規則形狀" class="headerlink" title="畫一個不規則形狀!"></a>畫一個不規則形狀!</h2><h3 id="畫上框線！-2"><a href="#畫上框線！-2" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！-1"><a href="#填充！-1" class="headerlink" title="填充！"></a>填充！</h3><h2 id="Canvas-Property的紀錄-save-與復原-restore"><a href="#Canvas-Property的紀錄-save-與復原-restore" class="headerlink" title="Canvas Property的紀錄(save)與復原(restore)"></a>Canvas Property的紀錄(save)與復原(restore)</h2><h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2>]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>2021鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</title>
     <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
     <content><![CDATA[<h2 id="進入2D渲染的世界"><a href="#進入2D渲染的世界" class="headerlink" title="進入2D渲染的世界"></a>進入2D渲染的世界</h2><p>我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境</p>
@@ -42,39 +61,20 @@
       </tags>
   </entry>
   <entry>
-    <title>Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</title>
-    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
-    <content><![CDATA[<h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，而且也可以快速掌握2D渲染環境路徑繪圖的概念。</p>
-<blockquote>
-<p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
-</blockquote>
-<p>如果要白話一點的解釋『路徑(Path)』這個概念，可以想像成他是一種透明，但是有形的一段曲線，在canvas中我們可以利用(接下來會提到的)上色填充相關api為已經成形的路徑設定填充色(fill)/邊框色(stroke)。</p>
-<img src="https://i.imgur.com/7TfVMlG.png" width="500">
-
-<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標，假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
-<h2 id="來畫一條線看看吧"><a href="#來畫一條線看看吧" class="headerlink" title="來畫一條線看看吧!"></a>來畫一條線看看吧!</h2><h3 id="畫上框線！"><a href="#畫上框線！" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h2 id="接著來畫一個圓"><a href="#接著來畫一個圓" class="headerlink" title="接著來畫一個圓!"></a>接著來畫一個圓!</h2><h3 id="畫上框線！-1"><a href="#畫上框線！-1" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！"><a href="#填充！" class="headerlink" title="填充！"></a>填充！</h3><h2 id="畫一個不規則形狀"><a href="#畫一個不規則形狀" class="headerlink" title="畫一個不規則形狀!"></a>畫一個不規則形狀!</h2><h3 id="畫上框線！-2"><a href="#畫上框線！-2" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！-1"><a href="#填充！-1" class="headerlink" title="填充！"></a>填充！</h3><h2 id="Canvas-Property的紀錄-save-與復原-restore"><a href="#Canvas-Property的紀錄-save-與復原-restore" class="headerlink" title="Canvas Property的紀錄(save)與復原(restore)"></a>Canvas Property的紀錄(save)與復原(restore)</h2><h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>2021鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</title>
-    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
-    <content><![CDATA[<h2 id="變形相關"><a href="#變形相關" class="headerlink" title="變形相關"></a>變形相關</h2>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>2021鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</title>
+    <title>Day7 - 2D渲染環境基礎篇 IV -  我要成為Canvas Ninja!</title>
     <url>/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
     <content><![CDATA[<h2 id="像素操作相關"><a href="#像素操作相關" class="headerlink" title="像素操作相關"></a>像素操作相關</h2>]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>2021鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!</title>
+    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
+    <content><![CDATA[<h2 id="變形相關"><a href="#變形相關" class="headerlink" title="變形相關"></a>變形相關</h2>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
@@ -746,15 +746,9 @@
       </tags>
   </entry>
   <entry>
-    <title>rxjs 學習筆記 - ep1</title>
-    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/</url>
-    <content><![CDATA[<h1 id="Opening"><a href="#Opening" class="headerlink" title="Opening"></a>Opening</h1><p>前陣子講了很久要來學習RxJs, 但是實際上卻是拖到了現在才要認真開始把它學好~<br>事不宜遲，我們這邊就馬上開始基礎的部分</p>
-<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>首先，我們先來說說為什麼要學<code>rxjs</code>, 平常寫前端UI真的有常常需要用到這東西嗎?</p>
-<p>之前偶爾有聽說<code>RxJs</code>可以用來做高頻率事件的監聽與處理(例如<code>mousemove</code>或<code>touchmove</code>), 但是這跟一般的<code>addEventListener</code> 或 <code>jquery</code> 的<code>.on</code> 方法又差在哪裡? 有必要為了一個高頻事件處理去特地學這麼一個看上去很複雜的東西嗎?</p>
-<p>實際上，如果只是要處理高頻事件監聽，確實是沒有需要特地去學習<code>Rxjs</code>。<br>但是<code>Rxjs</code> 其實並不是一個只能用來做高頻事件監聽控管的library。</p>
-<p>Rxjs最重要的意義之一就是<code>Reactive Programming</code>，也就是<code>當變數或資源發生變動時，由變數或資源自動告訴我發生變動了</code>。</p>
-<p>Rxjs 把很多東西都當成Reactive的對象, 除了前面提到的高頻事件的event object，另外也可以把單純的變數(物件/數值等)作為reavtive對象, 而這個概念也就是所謂的 <code>Observable</code>。</p>
-]]></content>
+    <title>rxjs 學習筆記 - ep2</title>
+    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/</url>
+    <content><![CDATA[<h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
@@ -764,9 +758,15 @@
       </tags>
   </entry>
   <entry>
-    <title>rxjs 學習筆記 - ep2</title>
-    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/</url>
-    <content><![CDATA[<h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>]]></content>
+    <title>rxjs 學習筆記 - ep1</title>
+    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/</url>
+    <content><![CDATA[<h1 id="Opening"><a href="#Opening" class="headerlink" title="Opening"></a>Opening</h1><p>前陣子講了很久要來學習RxJs, 但是實際上卻是拖到了現在才要認真開始把它學好~<br>事不宜遲，我們這邊就馬上開始基礎的部分</p>
+<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>首先，我們先來說說為什麼要學<code>rxjs</code>, 平常寫前端UI真的有常常需要用到這東西嗎?</p>
+<p>之前偶爾有聽說<code>RxJs</code>可以用來做高頻率事件的監聽與處理(例如<code>mousemove</code>或<code>touchmove</code>), 但是這跟一般的<code>addEventListener</code> 或 <code>jquery</code> 的<code>.on</code> 方法又差在哪裡? 有必要為了一個高頻事件處理去特地學這麼一個看上去很複雜的東西嗎?</p>
+<p>實際上，如果只是要處理高頻事件監聽，確實是沒有需要特地去學習<code>Rxjs</code>。<br>但是<code>Rxjs</code> 其實並不是一個只能用來做高頻事件監聽控管的library。</p>
+<p>Rxjs最重要的意義之一就是<code>Reactive Programming</code>，也就是<code>當變數或資源發生變動時，由變數或資源自動告訴我發生變動了</code>。</p>
+<p>Rxjs 把很多東西都當成Reactive的對象, 除了前面提到的高頻事件的event object，另外也可以把單純的變數(物件/數值等)作為reavtive對象, 而這個概念也就是所謂的 <code>Observable</code>。</p>
+]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
