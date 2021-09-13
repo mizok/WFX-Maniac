@@ -185,7 +185,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">17</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">21</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -259,7 +259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -310,6 +310,342 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2021-09-14 01:43:18 / 修改時間：02:07:32" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:18+08:00">2021-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，而且也可以快速掌握2D渲染環境路徑繪圖的概念。</p>
+<blockquote>
+<p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
+</blockquote>
+<p>如果要白話一點的解釋『路徑(Path)』這個概念，可以想像成他是一種透明，但是有形的一段曲線，在canvas中我們可以利用(接下來會提到的)上色填充相關api為已經成形的路徑設定填充色(fill)/邊框色(stroke)。</p>
+<img src="https://i.imgur.com/7TfVMlG.png" width="500">
+
+<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標，假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
+<h2 id="來畫一條線看看吧"><a href="#來畫一條線看看吧" class="headerlink" title="來畫一條線看看吧!"></a>來畫一條線看看吧!</h2><h3 id="畫上框線！"><a href="#畫上框線！" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h2 id="接著來畫一個圓"><a href="#接著來畫一個圓" class="headerlink" title="接著來畫一個圓!"></a>接著來畫一個圓!</h2><h3 id="畫上框線！-1"><a href="#畫上框線！-1" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！"><a href="#填充！" class="headerlink" title="填充！"></a>填充！</h3><h2 id="畫一個不規則形狀"><a href="#畫一個不規則形狀" class="headerlink" title="畫一個不規則形狀!"></a>畫一個不規則形狀!</h2><h3 id="畫上框線！-2"><a href="#畫上框線！-2" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！-1"><a href="#填充！-1" class="headerlink" title="填充！"></a>填充！</h3><h2 id="Canvas-Property的紀錄-save-與復原-restore"><a href="#Canvas-Property的紀錄-save-與復原-restore" class="headerlink" title="Canvas Property的紀錄(save)與復原(restore)"></a>Canvas Property的紀錄(save)與復原(restore)</h2><h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2021-09-14 01:43:17 / 修改時間：01:56:05" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:17+08:00">2021-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="進入2D渲染的世界"><a href="#進入2D渲染的世界" class="headerlink" title="進入2D渲染的世界"></a>進入2D渲染的世界</h2><p>我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cvs = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> ctx = cvs.getContext(<span class="string">&#x27;2d&#x27;</span>); <span class="comment">//這個ctx就是2d模式的渲染環境</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2D渲染環境下的座標系"><a href="#2D渲染環境下的座標系" class="headerlink" title="2D渲染環境下的座標系"></a>2D渲染環境下的座標系</h2><p>  在國高中上數學課的提到座標系時，我們會很習慣的去畫一個X軸向右為正，Y軸向上為正的座標軸，像這樣的座標系也就是所謂的『卡氏座標』，他是一種遵循右手定則的坐標系。  </p>
+<p>  我猜大家應該都已經把過去學過的數學/理化都還給老師了，所以這邊我們稍微複習一下『右手定則』這個概念：  </p>
+<p>  所謂的『右手定則』指的是：  </p>
+  <img src="https://i.imgur.com/rJUSy76.png" width="250">
+
+<p>  把右手伸出來，掌心朝自己，四指的方向會跟上圖Y軸同向，而大拇指方向則跟X軸同向，同時，你不管怎麼旋轉這張圖，你都可以用你的右手(手心必須朝自己)四指去比出Ｙ軸方向/用大拇指比出Ｘ軸方向，這就是所謂的『右手定則座標系』</p>
+<p>  但是在Canvas 2D渲染環境的世界中，它所採取的座標系並不是『右手定則座標系』，而是『左手定則座標系』。</p>
+<p>  『左手定則座標系』其實就是『右手定則座標系』的鏡像版～也就是說，我們其實可以直接把上面這張圖水平翻轉，它就直接成為了『左手定則座標系』，這時候你會發現，像剛剛同樣的操作，會變成只有左手才做得到。</p>
+<p>  『左手定則座標系』和 『右手定則座標系』最重要的差別就在於：  </p>
+<blockquote>
+<p>右手定則的座標系，逆時針是正的旋轉方向，但是左手定則的座標系，順時針才是正的旋轉方向</p>
+</blockquote>
+<p>  這點必須要熟記。</p>
+<h2 id="2D渲染環境下常見的API與Property"><a href="#2D渲染環境下常見的API與Property" class="headerlink" title="2D渲染環境下常見的API與Property"></a>2D渲染環境下常見的API與Property</h2><p>  實際上，比起我們之後會提到的webgl環境，2D渲染環境的API在使用上都相當的直觀而且單純（當然，這也同時意味著2D渲染的難點不在於對API的理解，而是在於運算的過程）</p>
+<p>  隨然說2D渲染環境的api數量繁多，但是為了避免一條一條介紹有點流水帳，</p>
+<p>  在這邊我把常見的API/Property劃分成三種類型：</p>
+<ul>
+<li><p>路徑/上色相關</p>
+</li>
+<li><p>變形相關</p>
+</li>
+<li><p>像素操作相關</p>
+<p>在接下來的章節中我會根據上述的三種類型，一一介紹三種類型中常用的api和這些api相關的基礎常識</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2021-09-14 01:43:16 / 修改時間：02:08:08" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:16+08:00">2021-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="變形相關"><a href="#變形相關" class="headerlink" title="變形相關"></a>變形相關</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-12 00:32:40" itemprop="dateCreated datePublished" datetime="2021-09-12T00:32:40+08:00">2021-09-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-14 02:07:56" itemprop="dateModified" datetime="2021-09-14T02:07:56+08:00">2021-09-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="像素操作相關"><a href="#像素操作相關" class="headerlink" title="像素操作相關"></a>像素操作相關</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -323,7 +659,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/" class="post-title-link" itemprop="url">Day2 - Canvas基礎概論 II  - 我要成為Canvas Ninja！</a>
+          <a href="/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/" class="post-title-link" itemprop="url">Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！</a>
         </h2>
 
         <div class="post-meta-container">
@@ -341,7 +677,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-11 02:46:24" itemprop="dateModified" datetime="2021-09-11T02:46:24+08:00">2021-09-11</time>
+        <time title="修改時間：2021-09-12 00:33:15" itemprop="dateModified" datetime="2021-09-12T00:33:15+08:00">2021-09-12</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -378,7 +714,7 @@
 <p>  這是一個能夠顯示rgba顏色跟不同顏色底混合之後的樣子的網站，這邊我把底色設定為白色，也就是說合成出來的顏色就是該rgba色放置於白背景時候的樣子。  </p>
   <img src="https://i.imgur.com/VC25E8b.png" width="600">
 
-<p>  圖片中我們看到，當alpha設置為0.7時, R和G通道的0(也就是完全阻絕RG光線)，阻擋量的255都分別被乘以0.3而得到77這個數值，而B光線因為阻擋量是0, 所以最後在B數值上還是得到255，最終則呈現出(77,77,255)這個顏色。 </p>
+<p>  圖片中我們看到，當alpha設置為0.7時, R和G通道的0(也就是完全阻絕RG光線)，他們的阻擋量(也就是255 - 0 = 255)都分別被乘以0.3而得到77這個數值，而B光線因為阻擋量是0, 所以最後在B數值上還是得到255，最終則呈現出(77,77,255)這個顏色。 </p>
 <p>  從這邊我們就可以推論，alpha的數理意義其實就是同步的對三個通道的數值做比例性的消減。</p>
 <h3 id="從像素觀點來看Canvas"><a href="#從像素觀點來看Canvas" class="headerlink" title="從像素觀點來看Canvas"></a>從像素觀點來看Canvas</h3><p>  一張Canvas，其實也就是一個圖像，他也是由非常多個像素所組成，而每一個像素點上又各自都有rgba四個通道。  </p>
 <p>  一張寬度100px, 高度100px的canvas，它實際上就是100*100 = 10000個像素的集合體，而同時在程序上我們則可以把它轉換成一個長度為100*100*4的陣列(也就是一共40000個channel值)</p>
@@ -791,458 +1127,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" class="post-title-link" itemprop="url">高見龍為自己學 git 學習筆記-ep3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:51:58" itemprop="dateModified" datetime="2020-12-13T03:51:58+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="git-clone專案的方法"><a href="#git-clone專案的方法" class="headerlink" title="git clone專案的方法"></a>git clone專案的方法</h2><p>說到clone專案(這邊以github為例), 一般狀況下有下面幾種比較常見的狀況</p>
-<h3 id="作法一-遠端git倉庫直接clone到本地"><a href="#作法一-遠端git倉庫直接clone到本地" class="headerlink" title="作法一(遠端git倉庫直接clone到本地)"></a>作法一(遠端git倉庫直接clone到本地)</h3><ol>
-<li>首先第一步當然是直接在遠端倉庫的網頁(例如github的repo頁面)先開一個repo</li>
-<li>再來打開自己電腦的command line(或是也可以使用Vscode等IDE自帶的終端), 利用bash指令去把當前資料夾位置移到想要存放本地repo資料夾的地方</li>
-<li>然後就直接輸入<code>git clone &lt;遠端repo位址&gt;</code></li>
-<li>這樣就可以創建出一個和遠端倉庫關聯的本地倉庫</li>
-</ol>
-<h3 id="作法二-本地已經有一個裡面有檔案的資料夾-然後在遠端也有一個裡面有東西的git倉庫-上面有master-可能也有master以外的分支-想要把本地的東西推到遠端"><a href="#作法二-本地已經有一個裡面有檔案的資料夾-然後在遠端也有一個裡面有東西的git倉庫-上面有master-可能也有master以外的分支-想要把本地的東西推到遠端" class="headerlink" title="作法二(本地已經有一個裡面有檔案的資料夾, 然後在遠端也有一個裡面有東西的git倉庫,上面有master, 可能也有master以外的分支, 想要把本地的東西推到遠端)"></a>作法二(本地已經有一個裡面有檔案的資料夾, 然後在遠端也有一個裡面有東西的git倉庫,上面有master, 可能也有master以外的分支, 想要把本地的東西推到遠端)</h3><ol>
-<li>首先第一步先把本地的資料夾做git的初始化 <code>git init</code></li>
-<li>再來 <code>git remote add &lt;遠端資料庫的暱稱, 可以自訂&gt; &lt;遠端資料庫的位址&gt;</code></li>
-<li>上面這個動作是去為本地的這個倉庫”標記”, 他有關聯上哪一個遠端倉庫(所以其實一個本地倉庫可以關聯上很多個遠端倉庫，但是暱稱不能重複)</li>
-<li>所以說如果我想要去關聯一個新的遠端倉庫(我們這邊取名為apple), 那就是<code>git remote add apple &lt;apple的位址&gt;</code></li>
-<li>接下來因為我們這邊的狀況是本地已經有檔案, 想要推到遠端, 但遠端因為也是有東西的，所以這邊我們其實會有兩種做法，我們接著描述</li>
-</ol>
-<h4 id="作法二其1"><a href="#作法二其1" class="headerlink" title="作法二其1"></a>作法二其1</h4><ol>
-<li>直接 <code>git fetch &lt;指定遠端倉庫的暱稱&gt;</code> 這邊以apple為例, 也就是 <code>git fetch apple</code></li>
-<li>這麼做之後就可以把遠端倉庫的最新改動、所有分支與檔案下載回來, 而我們這邊因為本地倉庫是新開的，這個狀況叫做 “unborn branch”, 是一個只有HEAD在本地的狀況(這部分以後再討論)。</li>
-<li>在這邊講的”unborn branch”的狀況下去做 fetch, 以這邊來講，就會把遠端的master下載回拉本地端，這樣就會在本地端看到一個origin/master分支, 這個就是遠端master在本地的備份, 這時候我們可以直接<code>git checkout master</code>或者直接把本地本來就存在的檔案做<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>, 這樣就會發現第4步的狀況。</li>
-<li>我們會發現本地出現了本地自己的master(關於 unborn branch的介紹可以看這一篇<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/21252876/git-repository-created-without-a-master-branch">stackoverflow</a> )。</li>
-<li>如果我們在4.的時候是透過<code>git checkout master</code>產生本地master的話，會發現本地master是會自動跟遠端的備份(origin/master)同步好的, 而且遠端master也會同時被視為上游分支(上游分支的解釋可以看第7步)，這樣就可以直接跳過第6步進階到第7步。</li>
-<li>但是如果我們在4的時候是透過<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>去走到第5步，則會發現本地master只有原本就存在本地的檔案，這時候如果用的IDE是 vscode, 如過利用左下角的分支切換功能, 去切到apple/master , 就會發現報錯 “Git: fatal: A branch named ‘master’ already exists.”，這種狀況下我們要去執行 <code>git pull apple master</code>，然後就會發現多出了一個新的分支叫做 FETCHED_HEAD，我們接著可以進階到第7步(FETCHED_HEAD只是暫時的, 第七步結束後,FETCHED_HEAD就會消失, IDE也不會再報一樣的錯)。</li>
-<li><code>git push -u &lt;遠端倉庫的暱稱&gt; &lt;想要push過去的遠端倉庫分支&gt;</code> , 以這邊來講就是<code>git push -u apple master</code></li>
-<li>這邊的 <strong>-u</strong> 代表的是去把apple master去定為這個分支的上游分支，這樣以後在這個分支上做的git push, 最後都會把改動push到apple master。</li>
-<li>做完最後一步之後就會發現遠端repo的網頁上master的內容已經跟本地同步了</li>
-</ol>
-<h4 id="作法二其2"><a href="#作法二其2" class="headerlink" title="作法二其2"></a>作法二其2</h4><ol>
-<li>直接 <code>git pull &lt;指定遠端倉庫的暱稱&gt; &lt;指定想要pull下來的遠端倉庫分支&gt;</code>，這邊以apple上的master分支為例, 也就是 <code>git pull apple master</code></li>
-<li>其實這種狀況會跟前面其一的<code>git add -A &amp;&amp; git commit -m &#39;initial msg&#39;</code>狀況類似，接著也是直接<code>git push -u &lt;遠端倉庫的暱稱&gt; &lt;想要push過去的遠端倉庫分支&gt;</code> 就完事了（當然，如果有改動要commit的記得要commit）。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">高見龍為自己學 git 學習筆記-ep2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:51:54" itemprop="dateModified" datetime="2020-12-13T03:51:54+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="關於git-add的一些常識"><a href="#關於git-add的一些常識" class="headerlink" title="關於git add的一些常識"></a>關於git add的一些常識</h2><p>當我git add 一個檔案之後, 我如果再去修改他, 接著再commit。<br>其實在這個commit，git 並不會去紀錄該檔案的改動, 因為這個檔案只是被加到暫存區而已，git沒有辦法去refer到他的歷史改動狀況。</p>
-<p>所以建議如果要git add檔案, 一律add完之後commit一次再做改動</p>
-<blockquote>
-<p>要commit之前一定要先add –all, 或者可以直接使用 git commit -a</p>
-</blockquote>
-<blockquote>
-<p>想要add 一個資料夾, 包括底下的所有child folder, 可以使用git add ., 如果是想要 add 整個專案的內容，則可以用git add –all</p>
-</blockquote>
-<blockquote>
-<p>git commit –allowed-empty -m “” 這樣寫就可以產生一個空的commit點ˊ<br>log</p>
-</blockquote>
-<blockquote>
-<p>git 可以分成 工作目錄/暫存區/儲存區<br>用git add 把檔案從工作目錄記錄到暫存區, 用git commit 把檔案從暫存區記錄到儲存區</p>
-</blockquote>
-<h2 id="git-log-內容有些什麼"><a href="#git-log-內容有些什麼" class="headerlink" title="git log 內容有些什麼"></a>git log 內容有些什麼</h2><p>可以看到每一個commit點</p>
-<ol>
-<li>commit 的人是誰?</li>
-<li>時間點</li>
-<li>commit log</li>
-</ol>
-<blockquote>
-<p>可以搭配 –oneline 或 –graph 來做不同模式的log顯示<br>可以用 –author 查詢特定開發者的commit內容<br>–author=”” 的使用, 如果開發者有兩位以上, 可以使用 userA | userB<br>–grep=”” 的使用, 可以尋找commit log裡面有特定字串的commit點<br>-S”” 的使用, 可以尋找commit 點之中，改動內容含有特定字串的commit 點<br>–since=”” &amp; –until=”” &amp; –after=”2019-01”  可以顯示特定時間點區間的commit點</p>
-</blockquote>
-<h2 id="git-rm-是幹嘛用的-跟一般的rm-差在哪裡"><a href="#git-rm-是幹嘛用的-跟一般的rm-差在哪裡" class="headerlink" title="git rm 是幹嘛用的? 跟一般的rm 差在哪裡?"></a>git rm 是幹嘛用的? 跟一般的rm 差在哪裡?</h2><p>git rm 等於 先使用一般的rm , 然後再把這個rm 的改動 用add 加到暫存區</p>
-<blockquote>
-<p>可以使用 –cached ，這樣會變成單純的把檔案與git 斷聯，但是不會實際刪除檔案, 這樣該檔案在做完這個動作之後就會變成 untracked了</p>
-</blockquote>
-<h2 id="git-mv-改變檔名"><a href="#git-mv-改變檔名" class="headerlink" title="git mv 改變檔名"></a>git mv 改變檔名</h2><p>例如</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">git</span> <span class="selector-tag">mv</span> <span class="selector-tag">aa</span><span class="selector-class">.html</span> <span class="selector-tag">bb</span><span class="selector-class">.html</span></span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/%E9%AB%98%E8%A6%8B%E9%BE%8D%E7%82%BA%E8%87%AA%E5%B7%B1%E5%AD%B8%20git%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/" class="post-title-link" itemprop="url">高見龍為自己學 git 學習筆記-ep1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:54:21" itemprop="dateModified" datetime="2020-12-13T03:54:21+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="一些簡單的基本：終端機指令"><a href="#一些簡單的基本：終端機指令" class="headerlink" title="一些簡單的基本：終端機指令"></a>一些簡單的基本：終端機指令</h2><ol>
-<li>複製檔案<code>cp</code></li>
-<li>重新命名檔案 <code>mv &#39;舊檔名&#39; ‘新檔名‘</code></li>
-<li>列出目前位置 <code>pwd</code></li>
-<li>移除檔案 <code>rm</code></li>
-<li>到根資料夾<code>cd ~</code></li>
-<li>顯示所有包括隱藏的檔案<code>ls -al</code></li>
-</ol>
-<h2 id="Vim操作"><a href="#Vim操作" class="headerlink" title="Vim操作"></a>Vim操作</h2><p><img src="https://i.imgur.com/mXktH1C.png"></p>
-<h2 id="git-基本操作"><a href="#git-基本操作" class="headerlink" title="git 基本操作"></a>git 基本操作</h2><ol>
-<li>使用者基本資料設定(bt device)，設定姓名/電子郵件</li>
-</ol>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">&quot;Eddie Kao&quot;</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email <span class="string">&quot;eddiexxxx@gmail.com&quot;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>這邊拿掉global 的話就會對專案直接做個別設定</li>
-<li>存取的global使用者資料會在user根資料夾底下的.gitconfig檔案裡<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.gitconfig</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ul>
-<ol start="2">
-<li><p>列出當前使用者資料設定</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--list</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其實可以把git的預設編輯器改成 VSCODE<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git">https://stackoverflow.com/questions/30024353/how-to-use-visual-studio-code-as-default-editor-for-git</a></p>
-</li>
-<li><p>git 的操作指令其實也可以寫alias(縮寫)</p>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.co checkout</span><br><span class="line">&#x2F;&#x2F;把checkout指令改成co</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.l &quot;log--oneline--graph&quot;</span><br><span class="line">&#x2F;&#x2F;也可以把一些比較複雜的指令改成alias</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.ls &#39;log --graph --pretty&#x3D;format:&quot;%h &lt;%an&gt; %ar %s&quot;&#39;</span><br><span class="line">&#x2F;&#x2F;or more complicated</span><br><span class="line">&#x2F;&#x2F;把git log的格式簡化用</span><br></pre></td></tr></table></figure>
-
-<h2 id="專案git初始化的流程"><a href="#專案git初始化的流程" class="headerlink" title="專案git初始化的流程"></a>專案git初始化的流程</h2><ol>
-<li><code>cd &lt;folder&gt;</code></li>
-<li><code>git init</code></li>
-<li></li>
-</ol>
-<p><code>git add --all</code></p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">add</span> -A stages all changes</span><br><span class="line"></span><br><span class="line">git <span class="built_in">add</span> . stages <span class="built_in">new</span> <span class="built_in">files</span> <span class="keyword">and</span> modifications, <span class="keyword">without</span> deletions</span><br><span class="line"></span><br><span class="line">git <span class="built_in">add</span> -u stages modifications <span class="keyword">and</span> deletions, <span class="keyword">without</span> <span class="built_in">new</span> <span class="built_in">files</span></span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><code>git commit -m &lt;commit log&gt;</code></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/" class="post-title-link" itemprop="url">TYPESCRIPT學習筆記-ep3</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:53:00" itemprop="dateModified" datetime="2020-12-13T03:53:00+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="TS-的class-跟-es6-有什麼差別？"><a href="#TS-的class-跟-es6-有什麼差別？" class="headerlink" title="TS 的class 跟 es6 有什麼差別？"></a>TS 的class 跟 es6 有什麼差別？</h2><h4 id="1-private與-public-宣告的存在"><a href="#1-private與-public-宣告的存在" class="headerlink" title="1. private與 public 宣告的存在:"></a>1. private與 public 宣告的存在:</h4><p>如果一個方法/變數/constructor被宣告為public 則能在聲明它的類的外部被取用<br>反之若宣告為private， 那這個方法/變數/constructor 就只能在自己的class裡面被使用</p>
-<p>所以說這樣會錯</p>
-<blockquote>
-<p>實際上, 當private 方法/變數/constructor 在父類別被繼承出去的時候，<br>他是會進到子類別（或子類別的實例）裡面的，但是就是無法訪問而已</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">type</span> =<span class="string">&quot;fruit&quot;</span>;</span><br><span class="line">    <span class="function"><span class="title">method1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.type);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a  = <span class="keyword">new</span> fruit();</span><br><span class="line"><span class="built_in">console</span>.log(a.type);<span class="comment">//報錯, 因為type 只能在fruit裡面被使用，被new 出來的實例沒辦法取得他</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">apple</span> <span class="keyword">extends</span> <span class="title">fruit</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.type = <span class="string">&quot;aa&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">mm</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.type);<span class="comment">//報錯, 因為type 只能在fruit裡面被使用，就算是extend 過來也不行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-protect-宣告的存在"><a href="#2-protect-宣告的存在" class="headerlink" title="2. protect 宣告的存在:"></a>2. protect 宣告的存在:</h4><h5 id="如果一個class-的方法-變數-constructor被宣告為protected，-則"><a href="#如果一個class-的方法-變數-constructor被宣告為protected，-則" class="headerlink" title="如果一個class 的方法/變數/constructor被宣告為protected， 則:"></a>如果一個class 的方法/變數/constructor被宣告為protected， 則:</h5><ol>
-<li>這個方法/變數/constructor能在class裡面被叫用<br>但是我們不能透過這個class的實例去拿到他被 protect 的東西</li>
-<li>但若如果今天這個class被作為一個父類別被繼承下去的話，他的子類別在子類class的實例化前/後,<br>都可以去訪問這個被protected的東西</li>
-</ol>
-<h4 id="3-readonly-宣告的存在"><a href="#3-readonly-宣告的存在" class="headerlink" title="3. readonly 宣告的存在:"></a>3. readonly 宣告的存在:</h4><h5 id="如果一個class-的變數被宣告為readonly，-則"><a href="#如果一個class-的變數被宣告為readonly，-則" class="headerlink" title="如果一個class 的變數被宣告為readonly， 則:"></a>如果一個class 的變數被宣告為readonly， 則:</h5><ol>
-<li>這個方法/變數/constructor只能在class(實例化前後)被讀取，但不能被改變</li>
-<li>就算class被作為父類別繼承，他的子類別一樣不能去修改父類別繼承下來的變數</li>
-<li>注意 readonly只能用來把變數標注成唯讀，方法跟constructor 是不能設定的</li>
-</ol>
-<h4 id="4-getter與-setter"><a href="#4-getter與-setter" class="headerlink" title="4. getter與 setter"></a>4. getter與 setter</h4><blockquote>
-<p>typescript 的 class 可以把裡面的變數(屬性) 寫成 getter與setter 的形式[color=#36c169]</p>
-</blockquote>
-<blockquote>
-<p>如果是用VSCODE作為IDE的話，可以先把變數(屬性)反白，然後右鍵點左上角的小燈泡，這樣就可以自動產出ts 的get/set snippet 語法<br><img src="https://i.imgur.com/qGgO47X.png"></p>
-</blockquote>
-<p>以上面圖片這個例子來講, 當這個class的a屬性被改成get/set之後，就會變成下面這樣</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">private</span> _a: <span class="built_in">string</span> = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">get</span> <span class="title">a</span>(): <span class="title">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._a;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">set</span> <span class="title">a</span>(<span class="params">value: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._a = value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然後當這個class被實例化之後就可以透過setter去賦值，也就是</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> example  = <span class="keyword">new</span> test();</span><br><span class="line">test.a = <span class="string">&quot;def&quot;</span>;</span><br><span class="line"><span class="comment">//  這邊&quot;def&quot;會自動作為value 被帶入到set a(value)裡面去</span></span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/WFX-Maniac/page/2/">2</a><a class="extend next" rel="next" href="/WFX-Maniac/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/WFX-Maniac/page/2/">2</a><a class="page-number" href="/WFX-Maniac/page/3/">3</a><a class="extend next" rel="next" href="/WFX-Maniac/page/2/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 

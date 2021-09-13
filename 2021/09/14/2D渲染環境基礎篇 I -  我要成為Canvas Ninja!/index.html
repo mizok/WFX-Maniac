@@ -23,25 +23,23 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="Some Deeper Basics圖像的概念  我們在前面有說到，canvas本身是透過物件模型來繪製圖像，但是我們沒有提到何謂”圖像”。     實際上圖像的概念很簡單。   大家都知道，光的三原色分別是紅&#x2F;藍&#x2F;綠;  一束標準的白光，可以分裂成紅&#x2F;藍&#x2F;綠光來看。     而圖像的實作原理，其實就是透過阻擋掉紅&#x2F;藍&#x2F;綠光一部分的佔比，來形成不同的顏色。   這邊我找了兩張圖片，這兩張圖片很好的">
+<meta name="description" content="進入2D渲染的世界我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境 12let cvs &#x3D; document.querySelector(&amp;#x27;canvas&amp;#x27;);let ctx &#x3D; cvs.getContext(&amp;#x27;2d&amp;#x27;); &#x2F;&#x2F;這個ctx就是2d模式的渲染環境    2D渲染">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/index.html">
+<meta property="og:title" content="Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="Some Deeper Basics圖像的概念  我們在前面有說到，canvas本身是透過物件模型來繪製圖像，但是我們沒有提到何謂”圖像”。     實際上圖像的概念很簡單。   大家都知道，光的三原色分別是紅&#x2F;藍&#x2F;綠;  一束標準的白光，可以分裂成紅&#x2F;藍&#x2F;綠光來看。     而圖像的實作原理，其實就是透過阻擋掉紅&#x2F;藍&#x2F;綠光一部分的佔比，來形成不同的顏色。   這邊我找了兩張圖片，這兩張圖片很好的">
+<meta property="og:description" content="進入2D渲染的世界我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境 12let cvs &#x3D; document.querySelector(&amp;#x27;canvas&amp;#x27;);let ctx &#x3D; cvs.getContext(&amp;#x27;2d&amp;#x27;); &#x2F;&#x2F;這個ctx就是2d模式的渲染環境    2D渲染">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://i.imgur.com/dz53Fsi.jpg">
-<meta property="og:image" content="https://i.imgur.com/FmT2rzI.jpg">
-<meta property="og:image" content="https://i.imgur.com/VC25E8b.png">
-<meta property="article:published_time" content="2021-09-10T13:14:54.355Z">
-<meta property="article:modified_time" content="2021-09-11T16:33:15.974Z">
+<meta property="og:image" content="https://i.imgur.com/rJUSy76.png">
+<meta property="article:published_time" content="2021-09-13T17:43:17.271Z">
+<meta property="article:modified_time" content="2021-09-13T17:56:05.908Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.imgur.com/dz53Fsi.jpg">
+<meta name="twitter:image" content="https://i.imgur.com/rJUSy76.png">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
 
 
 <script class="page-configurations">
@@ -63,7 +61,7 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-<title>Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！ | WFX-Maniac</title>
+<title>Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja! | WFX-Maniac</title>
   
 
 
@@ -233,7 +231,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Deeper-Basics"><span class="nav-number">1.</span> <span class="nav-text">Some Deeper Basics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%96%E5%83%8F%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">圖像的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%9E%E5%83%8F%E7%B4%A0%E8%A7%80%E9%BB%9E%E4%BE%86%E7%9C%8BCanvas"><span class="nav-number">1.2.</span> <span class="nav-text">從像素觀點來看Canvas</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Context-What-The-Hell-Is-That"><span class="nav-number">2.</span> <span class="nav-text">Context? What The Hell Is That?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Start-From-2D"><span class="nav-number">3.</span> <span class="nav-text">Start From 2D</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%B2%E5%85%A52D%E6%B8%B2%E6%9F%93%E7%9A%84%E4%B8%96%E7%95%8C"><span class="nav-number">1.</span> <span class="nav-text">進入2D渲染的世界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E4%B8%8B%E7%9A%84%E5%BA%A7%E6%A8%99%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">2D渲染環境下的座標系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E4%B8%8B%E5%B8%B8%E8%A6%8B%E7%9A%84API%E8%88%87Property"><span class="nav-number">3.</span> <span class="nav-text">2D渲染環境下常見的API與Property</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -301,7 +299,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -314,7 +312,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！
+          Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!
         </h1>
 
         <div class="post-meta-container">
@@ -324,16 +322,10 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
+      
 
-      <time title="創建時間：2021-09-10 21:14:54" itemprop="dateCreated datePublished" datetime="2021-09-10T21:14:54+08:00">2021-09-10</time>
+      <time title="創建時間：2021-09-14 01:43:17 / 修改時間：01:56:05" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:17+08:00">2021-09-14</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-12 00:33:15" itemprop="dateModified" datetime="2021-09-12T00:33:15+08:00">2021-09-12</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -354,49 +346,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Some-Deeper-Basics"><a href="#Some-Deeper-Basics" class="headerlink" title="Some Deeper Basics"></a>Some Deeper Basics</h2><h3 id="圖像的概念"><a href="#圖像的概念" class="headerlink" title="圖像的概念"></a>圖像的概念</h3><p>  我們在前面有說到，canvas本身是透過物件模型來繪製圖像，但是我們沒有提到何謂”圖像”。  </p>
-<p>  實際上圖像的概念很簡單。</p>
-<p>  大家都知道，光的三原色分別是紅/藍/綠;  一束標準的白光，可以分裂成紅/藍/綠光來看。  </p>
-<p>  而圖像的實作原理，其實就是透過阻擋掉紅/藍/綠光一部分的佔比，來形成不同的顏色。</p>
-<p>  這邊我找了兩張圖片，這兩張圖片很好的說明了在計算機領域中圖像的概念(圖片來源：<a target="_blank" rel="noopener" href="https://dev.to/">https://dev.to/</a>)</p>
-  <img src="https://i.imgur.com/dz53Fsi.jpg" width="600">
-
-  <img src="https://i.imgur.com/FmT2rzI.jpg" width="600">
-
-<p>  一個圖像，其實可以直接被視為一大群像素的集合體，而每一個像素都具備了能分別對應三種光線(RGB)，還有透明值(alpha)的篩子,這些篩子就是所謂的通道(Channel)  </p>
-<p>  透明值的通道，光看字面上可能不太好理解他在數理上的意義，所以這邊我也找到了一個網頁，這個網頁上的範例可以為我們做一個適當的解釋。</p>
-<p>  <a target="_blank" rel="noopener" href="https://borderleft.com/toolbox/rgba/">https://borderleft.com/toolbox/rgba/</a></p>
-<p>  這是一個能夠顯示rgba顏色跟不同顏色底混合之後的樣子的網站，這邊我把底色設定為白色，也就是說合成出來的顏色就是該rgba色放置於白背景時候的樣子。  </p>
-  <img src="https://i.imgur.com/VC25E8b.png" width="600">
-
-<p>  圖片中我們看到，當alpha設置為0.7時, R和G通道的0(也就是完全阻絕RG光線)，他們的阻擋量(也就是255 - 0 = 255)都分別被乘以0.3而得到77這個數值，而B光線因為阻擋量是0, 所以最後在B數值上還是得到255，最終則呈現出(77,77,255)這個顏色。 </p>
-<p>  從這邊我們就可以推論，alpha的數理意義其實就是同步的對三個通道的數值做比例性的消減。</p>
-<h3 id="從像素觀點來看Canvas"><a href="#從像素觀點來看Canvas" class="headerlink" title="從像素觀點來看Canvas"></a>從像素觀點來看Canvas</h3><p>  一張Canvas，其實也就是一個圖像，他也是由非常多個像素所組成，而每一個像素點上又各自都有rgba四個通道。  </p>
-<p>  一張寬度100px, 高度100px的canvas，它實際上就是100*100 = 10000個像素的集合體，而同時在程序上我們則可以把它轉換成一個長度為100*100*4的陣列(也就是一共40000個channel值)</p>
-<p>  而所謂的『像素操作』，其實就是一種陣列運算，我們可以透過去疊加/轉換/削除陣列中的一部分channel值，來達到產生新圖像的效果。</p>
-<p>  Photoshop的濾鏡運算(例如彩色轉灰階)，或是在社群軟體上有時候可以看到的圖片轉符號(拼字圖畫)，就是典型的像素操作技術之運用。</p>
-<p>  另外，關於Canvas的寬高數值定義其實有一個<strong>有趣的點</strong>。</p>
-<p>  實際上在定義一張canvas的大小時，並不是使用css來賦值，而是使用width和height這兩個attribute，直接下在canvas元素上面。</p>
-<p>  只有width和height這兩個attribute數值才能夠直接定義canvas的像素總量，而如果這時硬是要用css去擴大一張100＊100的canvas為10000px*10000px，就會出現像素密度過低(也就是圖像模糊的情形)的狀況</p>
-<p>  關於Canvas的像素操作技術，我們在之後的章節會提到更多實操的範例。</p>
-<h2 id="Context-What-The-Hell-Is-That"><a href="#Context-What-The-Hell-Is-That" class="headerlink" title="Context? What The Hell Is That?"></a>Context? What The Hell Is That?</h2><blockquote>
-<p>SO, 你在前面的介紹文一直提到『渲染環境』這一個詞彙，那個到底指的是什麼？</p>
-</blockquote>
-<p>初來乍到的同學對於『渲染環境』這一個詞可能相當的陌生。<br>但是如果過去曾經有電腦繪圖/3D建模相關知識的人可能就能快速的領會這個詞所代表的意義。  </p>
-<p>『渲染環境』其實指的是透過<code>canvasElement.getContext(type)</code>這一個api所取得的一個物件。<br>我們其實可以把『渲染環境』想像成是繪圖軟體(例如小畫家)的概念，環境中會具備大量的工具（就像小畫家會提供畫圓形畫方形的功能），讓使用者可以應用在繪圖程序中。</p>
-<p>『渲染環境』實際的提取方式如下：</p>
+        <h2 id="進入2D渲染的世界"><a href="#進入2D渲染的世界" class="headerlink" title="進入2D渲染的世界"></a>進入2D渲染的世界</h2><p>我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cvs = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> ctx = cvs.getContext(<span class="string">&#x27;2d&#x27;</span>); <span class="comment">//這個ctx就是2d模式的渲染環境</span></span><br></pre></td></tr></table></figure>
 
-<p><code>getContext(type)</code> 這一個方法可以根據輸入的type字串來取得操作者所想要使用的渲染環境，而在目前html5的規制下，一共有四種渲染環境可供選擇，分別是:</p>
+
+
+<h2 id="2D渲染環境下的座標系"><a href="#2D渲染環境下的座標系" class="headerlink" title="2D渲染環境下的座標系"></a>2D渲染環境下的座標系</h2><p>  在國高中上數學課的提到座標系時，我們會很習慣的去畫一個X軸向右為正，Y軸向上為正的座標軸，像這樣的座標系也就是所謂的『卡氏座標』，他是一種遵循右手定則的坐標系。  </p>
+<p>  我猜大家應該都已經把過去學過的數學/理化都還給老師了，所以這邊我們稍微複習一下『右手定則』這個概念：  </p>
+<p>  所謂的『右手定則』指的是：  </p>
+  <img src="https://i.imgur.com/rJUSy76.png" width="250">
+
+<p>  把右手伸出來，掌心朝自己，四指的方向會跟上圖Y軸同向，而大拇指方向則跟X軸同向，同時，你不管怎麼旋轉這張圖，你都可以用你的右手(手心必須朝自己)四指去比出Ｙ軸方向/用大拇指比出Ｘ軸方向，這就是所謂的『右手定則座標系』</p>
+<p>  但是在Canvas 2D渲染環境的世界中，它所採取的座標系並不是『右手定則座標系』，而是『左手定則座標系』。</p>
+<p>  『左手定則座標系』其實就是『右手定則座標系』的鏡像版～也就是說，我們其實可以直接把上面這張圖水平翻轉，它就直接成為了『左手定則座標系』，這時候你會發現，像剛剛同樣的操作，會變成只有左手才做得到。</p>
+<p>  『左手定則座標系』和 『右手定則座標系』最重要的差別就在於：  </p>
+<blockquote>
+<p>右手定則的座標系，逆時針是正的旋轉方向，但是左手定則的座標系，順時針才是正的旋轉方向</p>
+</blockquote>
+<p>  這點必須要熟記。</p>
+<h2 id="2D渲染環境下常見的API與Property"><a href="#2D渲染環境下常見的API與Property" class="headerlink" title="2D渲染環境下常見的API與Property"></a>2D渲染環境下常見的API與Property</h2><p>  實際上，比起我們之後會提到的webgl環境，2D渲染環境的API在使用上都相當的直觀而且單純（當然，這也同時意味著2D渲染的難點不在於對API的理解，而是在於運算的過程）</p>
+<p>  隨然說2D渲染環境的api數量繁多，但是為了避免一條一條介紹有點流水帳，</p>
+<p>  在這邊我把常見的API/Property劃分成三種類型：</p>
 <ul>
-<li>2d : 最基礎同時也最適合新手入門的渲染環境，具備多種2d繪圖的api</li>
-<li>webgl : 是一種速度更快，功能更多，具備原生 3D API，可讓使用者能夠完全訪問渲染管道的渲染環境。(很多人可能會誤會3D圖像只能透過webgl渲染環境所提供的api來達成，但實際上不是的，這點後面的章節會講。)</li>
-<li>webgl2 : 簡而言之就是webgl環境的上位版，具備更多的功能，但是相對的，對部分舊型瀏覽器/移動裝置瀏覽器的支援度也略低，算是實驗性的功能</li>
-<li>bitmaprenderer : 這也同樣是一種只有少數瀏覽器有支援的實驗性功能，它的用途很單純，是用來轉移指定圖像的bitmap到指定的canvas上</li>
+<li><p>路徑/上色相關</p>
+</li>
+<li><p>變形相關</p>
+</li>
+<li><p>像素操作相關</p>
+<p>在接下來的章節中我會根據上述的三種類型，一一介紹三種類型中常用的api和這些api相關的基礎常識</p>
+</li>
 </ul>
-<p>在這個系列的文章中，我會針對比較常見的兩種環境(2D,webgl)做案例探討。</p>
-<h2 id="Start-From-2D"><a href="#Start-From-2D" class="headerlink" title="Start From 2D"></a>Start From 2D</h2><p>雖然說講到網頁前端的Canvas技術，大多數人都會直接地想到像是Three.js/Webgl那樣的渲染環境/套件做出來的各種絢麗特效。<br>但是我個人認為，初學Canvas應該還是先從2D的基礎學起，雖然說到了webgl渲染環境時，webgl環境整體提供的API和2D環境所提供的API在本質上有很巨大的差異，<br>但是實際上在做渲染運算、模型規劃時的重點還是有其相似之處。</p>
-<p>在接下來的章節中，我們會先進入2D渲染的環節，當然還是會先從2D的基礎講起，然後再開始慢慢的進入一些更加複雜的案例。</p>
 
     </div>
 
@@ -413,12 +392,12 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81%20/" rel="prev" title="Day2 - Canvas基礎概論 I - 我要成為Canvas Ninja!">
-                  <i class="fa fa-chevron-left"></i> Day2 - Canvas基礎概論 I - 我要成為Canvas Ninja!
+                <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="prev" title="Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!">
+                  <i class="fa fa-chevron-left"></i> Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="next" title="Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!">
+                <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="next" title="Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!">
                   Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja! <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
