@@ -185,7 +185,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">21</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">22</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -259,7 +259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -310,6 +310,79 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day7 - 2D渲染環境基礎篇 IV -  我要成為Canvas Ninja!</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2021-09-14 02:15:06 / 修改時間：02:17:12" itemprop="dateCreated datePublished" datetime="2021-09-14T02:15:06+08:00">2021-09-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="像素操作相關"><a href="#像素操作相關" class="headerlink" title="像素操作相關"></a>像素操作相關</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -335,7 +408,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2021-09-14 01:43:18 / 修改時間：02:09:16" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:18+08:00">2021-09-14</time>
+      <time title="創建時間：2021-09-14 01:43:18 / 修改時間：02:12:28" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:18+08:00">2021-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -364,7 +437,8 @@
 <p>如果要白話一點的解釋『路徑(Path)』這個概念，可以想像成他是一種透明，但是有形的一段曲線，在canvas中我們可以利用(接下來會提到的)上色填充相關api為已經成形的路徑設定填充色(fill)/邊框色(stroke)。</p>
 <img src="https://i.imgur.com/7TfVMlG.png" width="500">
 
-<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標，假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
+<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標(但是你看不到)，打個比方:假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
+<p>接下來我們要藉由實作的方式來加速學習api的使用方式</p>
 <h2 id="來畫一條線看看吧"><a href="#來畫一條線看看吧" class="headerlink" title="來畫一條線看看吧!"></a>來畫一條線看看吧!</h2><h3 id="畫上框線！"><a href="#畫上框線！" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h2 id="接著來畫一個圓"><a href="#接著來畫一個圓" class="headerlink" title="接著來畫一個圓!"></a>接著來畫一個圓!</h2><h3 id="畫上框線！-1"><a href="#畫上框線！-1" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！"><a href="#填充！" class="headerlink" title="填充！"></a>填充！</h3><h2 id="畫一個不規則形狀"><a href="#畫一個不規則形狀" class="headerlink" title="畫一個不規則形狀!"></a>畫一個不規則形狀!</h2><h3 id="畫上框線！-2"><a href="#畫上框線！-2" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！-1"><a href="#填充！-1" class="headerlink" title="填充！"></a>填充！</h3><h2 id="Canvas-Property的紀錄-save-與復原-restore"><a href="#Canvas-Property的紀錄-save-與復原-restore" class="headerlink" title="Canvas Property的紀錄(save)與復原(restore)"></a>Canvas Property的紀錄(save)與復原(restore)</h2><h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2>
       
     </div>
@@ -416,7 +490,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2021-09-14 01:43:17 / 修改時間：01:56:05" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:17+08:00">2021-09-14</time>
+      <time title="創建時間：2021-09-14 01:43:17 / 修改時間：02:28:45" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:17+08:00">2021-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -451,7 +525,10 @@
 <p>  把右手伸出來，掌心朝自己，四指的方向會跟上圖Y軸同向，而大拇指方向則跟X軸同向，同時，你不管怎麼旋轉這張圖，你都可以用你的右手(手心必須朝自己)四指去比出Ｙ軸方向/用大拇指比出Ｘ軸方向，這就是所謂的『右手定則座標系』</p>
 <p>  但是在Canvas 2D渲染環境的世界中，它所採取的座標系並不是『右手定則座標系』，而是『左手定則座標系』。</p>
 <p>  『左手定則座標系』其實就是『右手定則座標系』的鏡像版～也就是說，我們其實可以直接把上面這張圖水平翻轉，它就直接成為了『左手定則座標系』，這時候你會發現，像剛剛同樣的操作，會變成只有左手才做得到。</p>
-<p>  『左手定則座標系』和 『右手定則座標系』最重要的差別就在於：  </p>
+  <img src="https://i.imgur.com/XnfXM9b.png" width="250">
+
+
+<p>  接著是重點，『左手定則座標系』和 『右手定則座標系』雖然看上去好像很相像，但最重要的差別就在於：  </p>
 <blockquote>
 <p>右手定則的座標系，逆時針是正的旋轉方向，但是左手定則的座標系，順時針才是正的旋轉方向</p>
 </blockquote>
@@ -519,7 +596,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2021-09-14 01:43:16 / 修改時間：02:09:23" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:16+08:00">2021-09-14</time>
+      <time title="創建時間：2021-09-14 01:43:16 / 修改時間：02:14:44" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:16+08:00">2021-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -541,7 +618,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="變形相關"><a href="#變形相關" class="headerlink" title="變形相關"></a>變形相關</h2>
+          <h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2><h2 id="變形相關api"><a href="#變形相關api" class="headerlink" title="變形相關api"></a>變形相關api</h2><h3 id="旋轉"><a href="#旋轉" class="headerlink" title="旋轉"></a>旋轉</h3><h3 id="縮放"><a href="#縮放" class="headerlink" title="縮放"></a>縮放</h3><h3 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h3>
       
     </div>
 
@@ -567,7 +644,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -580,7 +657,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day7 - 2D渲染環境基礎篇 IV -  我要成為Canvas Ninja!</a>
+          <a href="/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" class="post-title-link" itemprop="url">Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!</a>
         </h2>
 
         <div class="post-meta-container">
@@ -598,7 +675,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-14 02:09:29" itemprop="dateModified" datetime="2021-09-14T02:09:29+08:00">2021-09-14</time>
+        <time title="修改時間：2021-09-14 02:16:52" itemprop="dateModified" datetime="2021-09-14T02:16:52+08:00">2021-09-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -620,7 +697,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="像素操作相關"><a href="#像素操作相關" class="headerlink" title="像素操作相關"></a>像素操作相關</h2>
+          <h2 id="canvas動畫"><a href="#canvas動畫" class="headerlink" title="canvas動畫"></a>canvas動畫</h2>
       
     </div>
 
@@ -1031,85 +1108,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/" class="post-title-link" itemprop="url">rxjs 學習筆記 - ep1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-      
-
-      <time title="創建時間：2020-12-13 03:47:33 / 修改時間：18:01:36" itemprop="dateCreated datePublished" datetime="2020-12-13T03:47:33+08:00">2020-12-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Opening"><a href="#Opening" class="headerlink" title="Opening"></a>Opening</h1><p>前陣子講了很久要來學習RxJs, 但是實際上卻是拖到了現在才要認真開始把它學好~<br>事不宜遲，我們這邊就馬上開始基礎的部分</p>
-<h1 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h1><p>首先，我們先來說說為什麼要學<code>rxjs</code>, 平常寫前端UI真的有常常需要用到這東西嗎?</p>
-<p>之前偶爾有聽說<code>RxJs</code>可以用來做高頻率事件的監聽與處理(例如<code>mousemove</code>或<code>touchmove</code>), 但是這跟一般的<code>addEventListener</code> 或 <code>jquery</code> 的<code>.on</code> 方法又差在哪裡? 有必要為了一個高頻事件處理去特地學這麼一個看上去很複雜的東西嗎?</p>
-<p>實際上，如果只是要處理高頻事件監聽，確實是沒有需要特地去學習<code>Rxjs</code>。<br>但是<code>Rxjs</code> 其實並不是一個只能用來做高頻事件監聽控管的library。</p>
-<p>Rxjs最重要的意義之一就是<code>Reactive Programming</code>，也就是<code>當變數或資源發生變動時，由變數或資源自動告訴我發生變動了</code>。</p>
-<p>Rxjs 把很多東西都當成Reactive的對象, 除了前面提到的高頻事件的event object，另外也可以把單純的變數(物件/數值等)作為reavtive對象, 而這個概念也就是所謂的 <code>Observable</code>。</p>
-
       
     </div>
 

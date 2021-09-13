@@ -31,8 +31,9 @@
 <meta property="og:description" content="進入2D渲染的世界我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境 12let cvs &#x3D; document.querySelector(&amp;#x27;canvas&amp;#x27;);let ctx &#x3D; cvs.getContext(&amp;#x27;2d&amp;#x27;); &#x2F;&#x2F;這個ctx就是2d模式的渲染環境    2D渲染">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/rJUSy76.png">
+<meta property="og:image" content="https://i.imgur.com/XnfXM9b.png">
 <meta property="article:published_time" content="2021-09-13T17:43:17.271Z">
-<meta property="article:modified_time" content="2021-09-13T17:56:05.908Z">
+<meta property="article:modified_time" content="2021-09-13T18:28:45.817Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
@@ -172,7 +173,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">21</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">22</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -247,7 +248,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -324,7 +325,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2021-09-14 01:43:17 / 修改時間：01:56:05" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:17+08:00">2021-09-14</time>
+      <time title="創建時間：2021-09-14 01:43:17 / 修改時間：02:28:45" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:17+08:00">2021-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -359,7 +360,10 @@
 <p>  把右手伸出來，掌心朝自己，四指的方向會跟上圖Y軸同向，而大拇指方向則跟X軸同向，同時，你不管怎麼旋轉這張圖，你都可以用你的右手(手心必須朝自己)四指去比出Ｙ軸方向/用大拇指比出Ｘ軸方向，這就是所謂的『右手定則座標系』</p>
 <p>  但是在Canvas 2D渲染環境的世界中，它所採取的座標系並不是『右手定則座標系』，而是『左手定則座標系』。</p>
 <p>  『左手定則座標系』其實就是『右手定則座標系』的鏡像版～也就是說，我們其實可以直接把上面這張圖水平翻轉，它就直接成為了『左手定則座標系』，這時候你會發現，像剛剛同樣的操作，會變成只有左手才做得到。</p>
-<p>  『左手定則座標系』和 『右手定則座標系』最重要的差別就在於：  </p>
+  <img src="https://i.imgur.com/XnfXM9b.png" width="250">
+
+
+<p>  接著是重點，『左手定則座標系』和 『右手定則座標系』雖然看上去好像很相像，但最重要的差別就在於：  </p>
 <blockquote>
 <p>右手定則的座標系，逆時針是正的旋轉方向，但是左手定則的座標系，順時針才是正的旋轉方向</p>
 </blockquote>

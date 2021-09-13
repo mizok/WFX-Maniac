@@ -23,15 +23,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="變形相關">
+<meta name="description" content="非零纏繞與奇偶規則變形相關api旋轉縮放平移">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!">
 <meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="變形相關">
+<meta property="og:description" content="非零纏繞與奇偶規則變形相關api旋轉縮放平移">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2021-09-13T17:43:16.137Z">
-<meta property="article:modified_time" content="2021-09-13T18:09:23.392Z">
+<meta property="article:modified_time" content="2021-09-13T18:14:44.420Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
@@ -170,7 +170,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">21</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">22</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -229,7 +229,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E5%BD%A2%E7%9B%B8%E9%97%9C"><span class="nav-number">1.</span> <span class="nav-text">變形相關</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%9B%B6%E7%BA%8F%E7%B9%9E%E8%88%87%E5%A5%87%E5%81%B6%E8%A6%8F%E5%89%87"><span class="nav-number">1.</span> <span class="nav-text">非零纏繞與奇偶規則</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E5%BD%A2%E7%9B%B8%E9%97%9Capi"><span class="nav-number">2.</span> <span class="nav-text">變形相關api</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%89"><span class="nav-number">2.1.</span> <span class="nav-text">旋轉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%AE%E6%94%BE"><span class="nav-number">2.2.</span> <span class="nav-text">縮放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E7%A7%BB"><span class="nav-number">2.3.</span> <span class="nav-text">平移</span></a></li></ol></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -245,7 +245,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -322,7 +322,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2021-09-14 01:43:16 / 修改時間：02:09:23" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:16+08:00">2021-09-14</time>
+      <time title="創建時間：2021-09-14 01:43:16 / 修改時間：02:14:44" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:16+08:00">2021-09-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -344,7 +344,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="變形相關"><a href="#變形相關" class="headerlink" title="變形相關"></a>變形相關</h2>
+        <h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2><h2 id="變形相關api"><a href="#變形相關api" class="headerlink" title="變形相關api"></a>變形相關api</h2><h3 id="旋轉"><a href="#旋轉" class="headerlink" title="旋轉"></a>旋轉</h3><h3 id="縮放"><a href="#縮放" class="headerlink" title="縮放"></a>縮放</h3><h3 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h3>
     </div>
 
     
@@ -360,8 +360,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="prev" title="Day7 - 2D渲染環境基礎篇 IV -  我要成為Canvas Ninja!">
-                  <i class="fa fa-chevron-left"></i> Day7 - 2D渲染環境基礎篇 IV -  我要成為Canvas Ninja!
+                <a href="/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="prev" title="Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!">
+                  <i class="fa fa-chevron-left"></i> Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!
                 </a>
             </div>
             <div class="post-nav-item">

@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Day5 - 2D渲染環境基礎篇 II -  我要成為Canvas Ninja!</title>
-    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
-    <content><![CDATA[<h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，而且也可以快速掌握2D渲染環境路徑繪圖的概念。</p>
-<blockquote>
-<p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
-</blockquote>
-<p>如果要白話一點的解釋『路徑(Path)』這個概念，可以想像成他是一種透明，但是有形的一段曲線，在canvas中我們可以利用(接下來會提到的)上色填充相關api為已經成形的路徑設定填充色(fill)/邊框色(stroke)。</p>
-<img src="https://i.imgur.com/7TfVMlG.png" width="500">
-
-<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標，假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
-<h2 id="來畫一條線看看吧"><a href="#來畫一條線看看吧" class="headerlink" title="來畫一條線看看吧!"></a>來畫一條線看看吧!</h2><h3 id="畫上框線！"><a href="#畫上框線！" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h2 id="接著來畫一個圓"><a href="#接著來畫一個圓" class="headerlink" title="接著來畫一個圓!"></a>接著來畫一個圓!</h2><h3 id="畫上框線！-1"><a href="#畫上框線！-1" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！"><a href="#填充！" class="headerlink" title="填充！"></a>填充！</h3><h2 id="畫一個不規則形狀"><a href="#畫一個不規則形狀" class="headerlink" title="畫一個不規則形狀!"></a>畫一個不規則形狀!</h2><h3 id="畫上框線！-2"><a href="#畫上框線！-2" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！-1"><a href="#填充！-1" class="headerlink" title="填充！"></a>填充！</h3><h2 id="Canvas-Property的紀錄-save-與復原-restore"><a href="#Canvas-Property的紀錄-save-與復原-restore" class="headerlink" title="Canvas Property的紀錄(save)與復原(restore)"></a>Canvas Property的紀錄(save)與復原(restore)</h2><h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>2021鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!</title>
     <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
     <content><![CDATA[<h2 id="進入2D渲染的世界"><a href="#進入2D渲染的世界" class="headerlink" title="進入2D渲染的世界"></a>進入2D渲染的世界</h2><p>我們在前面的章節有提到，任何Canvas的相關程序，起手式必定是先取得渲染環境，所以2D渲染程序的第一步當然也就是先取得2D得渲染環境</p>
@@ -35,7 +16,10 @@
 <p>  把右手伸出來，掌心朝自己，四指的方向會跟上圖Y軸同向，而大拇指方向則跟X軸同向，同時，你不管怎麼旋轉這張圖，你都可以用你的右手(手心必須朝自己)四指去比出Ｙ軸方向/用大拇指比出Ｘ軸方向，這就是所謂的『右手定則座標系』</p>
 <p>  但是在Canvas 2D渲染環境的世界中，它所採取的座標系並不是『右手定則座標系』，而是『左手定則座標系』。</p>
 <p>  『左手定則座標系』其實就是『右手定則座標系』的鏡像版～也就是說，我們其實可以直接把上面這張圖水平翻轉，它就直接成為了『左手定則座標系』，這時候你會發現，像剛剛同樣的操作，會變成只有左手才做得到。</p>
-<p>  『左手定則座標系』和 『右手定則座標系』最重要的差別就在於：  </p>
+  <img src="https://i.imgur.com/XnfXM9b.png" width="250">
+
+
+<p>  接著是重點，『左手定則座標系』和 『右手定則座標系』雖然看上去好像很相像，但最重要的差別就在於：  </p>
 <blockquote>
 <p>右手定則的座標系，逆時針是正的旋轉方向，但是左手定則的座標系，順時針才是正的旋轉方向</p>
 </blockquote>
@@ -61,8 +45,39 @@
       </tags>
   </entry>
   <entry>
+    <title>Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!</title>
+    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
+    <content><![CDATA[<h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2><h2 id="變形相關api"><a href="#變形相關api" class="headerlink" title="變形相關api"></a>變形相關api</h2><h3 id="旋轉"><a href="#旋轉" class="headerlink" title="旋轉"></a>旋轉</h3><h3 id="縮放"><a href="#縮放" class="headerlink" title="縮放"></a>縮放</h3><h3 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h3>]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>2021鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Day5 - 2D渲染環境基礎篇 II -  我要成為Canvas Ninja!</title>
+    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
+    <content><![CDATA[<h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，而且也可以快速掌握2D渲染環境路徑繪圖的概念。</p>
+<blockquote>
+<p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
+</blockquote>
+<p>如果要白話一點的解釋『路徑(Path)』這個概念，可以想像成他是一種透明，但是有形的一段曲線，在canvas中我們可以利用(接下來會提到的)上色填充相關api為已經成形的路徑設定填充色(fill)/邊框色(stroke)。</p>
+<img src="https://i.imgur.com/7TfVMlG.png" width="500">
+
+<p>在Canvas上繪製路徑時有一個<strong>特別需要注意的地方</strong>，那就是當我們開始繪製路徑時，這個行為過程其實有點類似於用筆尖在紙面上作畫。<br>這個『筆尖』會是一個實際存在的座標(但是你看不到)，打個比方:假設我們現在畫了一段由A點畫向B點的路徑，那麼『筆尖』最後也會停在B上面。  </p>
+<p>接下來我們要藉由實作的方式來加速學習api的使用方式</p>
+<h2 id="來畫一條線看看吧"><a href="#來畫一條線看看吧" class="headerlink" title="來畫一條線看看吧!"></a>來畫一條線看看吧!</h2><h3 id="畫上框線！"><a href="#畫上框線！" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h2 id="接著來畫一個圓"><a href="#接著來畫一個圓" class="headerlink" title="接著來畫一個圓!"></a>接著來畫一個圓!</h2><h3 id="畫上框線！-1"><a href="#畫上框線！-1" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！"><a href="#填充！" class="headerlink" title="填充！"></a>填充！</h3><h2 id="畫一個不規則形狀"><a href="#畫一個不規則形狀" class="headerlink" title="畫一個不規則形狀!"></a>畫一個不規則形狀!</h2><h3 id="畫上框線！-2"><a href="#畫上框線！-2" class="headerlink" title="畫上框線！"></a>畫上框線！</h3><h3 id="填充！-1"><a href="#填充！-1" class="headerlink" title="填充！"></a>填充！</h3><h2 id="Canvas-Property的紀錄-save-與復原-restore"><a href="#Canvas-Property的紀錄-save-與復原-restore" class="headerlink" title="Canvas Property的紀錄(save)與復原(restore)"></a>Canvas Property的紀錄(save)與復原(restore)</h2><h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2>]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>2021鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Day7 - 2D渲染環境基礎篇 IV -  我要成為Canvas Ninja!</title>
-    <url>/WFX-Maniac/2021/09/12/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
+    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
     <content><![CDATA[<h2 id="像素操作相關"><a href="#像素操作相關" class="headerlink" title="像素操作相關"></a>像素操作相關</h2>]]></content>
       <categories>
         <category>前端技術學習心得</category>
@@ -72,57 +87,9 @@
       </tags>
   </entry>
   <entry>
-    <title>Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!</title>
-    <url>/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
-    <content><![CDATA[<h2 id="變形相關"><a href="#變形相關" class="headerlink" title="變形相關"></a>變形相關</h2>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>2021鐵人賽</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Day2 - Canvas基礎概論 I - 我要成為Canvas Ninja!</title>
-    <url>/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81%20/</url>
-    <content><![CDATA[<h2 id="Let’s-Start-From-Scratch"><a href="#Let’s-Start-From-Scratch" class="headerlink" title="Let’s Start From Scratch"></a>Let’s Start From Scratch</h2><p>本系列文章的頭幾篇我決定還是帶點基礎的東西，所以首先，我打算介紹一些不常被一般教學提到的資料來當熱身。</p>
-<blockquote>
-<p>The HTMLCanvasElement interface provides properties and methods for manipulating the layout and presentation of <code>&lt;canvas&gt;</code> elements. The HTMLCanvasElement interface also inherits the properties and methods of the HTMLElement interface.  — from MDN<br>The HTML <code>&lt;canvas&gt;</code> element is used to draw graphics on a web page. — from <a href="http://www.w3schools.com/">www.w3schools.com</a></p>
-</blockquote>
-<p>上述是在MDN還有W3school上關於<code>canvas</code> 元素 的解釋。簡單來說<code>canvas</code>就是一種自帶複數api, 然後可以用來在網頁上做動態繪圖的元素。<br>簡單的介紹就到這邊，接下來是疑問時間。<br>有些人看到上述的解釋，可能會覺得很疑惑，例如：</p>
-<blockquote>
-<p>那麼我們平常在用的CSS和html基礎元素，那樣子的東西難道不也是一種繪圖嗎? 差別在哪裡?</p>
-</blockquote>
-<p>接下來我們將針對這個問題做一系列的說明。</p>
-<h2 id="Canvas-與-一般-Dom元素的差異一：編譯流程"><a href="#Canvas-與-一般-Dom元素的差異一：編譯流程" class="headerlink" title="Canvas 與 一般 Dom元素的差異一：編譯流程"></a>Canvas 與 一般 Dom元素的差異一：編譯流程</h2><p>通常在80%以上的web專案內容中，我們都是使用普通的Dom元素來對頁面進行版面規劃。<br>所謂『普通』的Dom元素指的就是 <code>div</code>、<code>span</code>、<code>ul</code>、<code>li</code>…,etc. 而我們都知道，<code>HTML</code>本身是一種標記語言，<br>一篇完整的標記語言範本其實就有點像某種<strong>願望清單</strong>，為什麼說是願望清單呢? 那是因為瀏覽器在接收到一份HTML時，他做的事其實就是根據這份文件，上面提到的: 這份文件有多少元素? 元素個別是哪些？ 元素的先後排列順序、元素的巢狀化邏輯…etc. 去生成各個元素的物件實例，然後再透過瀏覽器的渲染引擎去把這些元素渲染在畫面上。</p>
-<p><img src="https://i.imgur.com/Ta8eGWm.png" alt="retain mode"></p>
-<p>像這樣子先確認頁面需求模型(也就是我們提到的願望清單)，然後將模型中的細節一一轉譯實現的這種行為模式，我們把它稱為<code>Retained Mode</code>(保留模式)。<br>接著一定就會有人問：  </p>
-<blockquote>
-<p>那麼是不是還有別的模式呢？</p>
-</blockquote>
-<p>Of course.<br>當瀏覽器需要做這類把文字邏輯轉化成視覺的工作時(我們把這種行為稱為轉譯)，會有兩種固定模式，其一是<code>Retained Mode</code>(保留模式), 然後再來就是與<code>Canvas</code>密切相關的<code>Immediate Mode</code>(立即模式)。  </p>
-<p><img src="https://i.imgur.com/d7l62h9.png" alt="img"></p>
-<p>從上面這張圖片我們可以發現，<code>Canvas</code> 元素和<code>Dom</code>元素最大的區別就是創建模型的這一個環節。<br>所謂的模型指的其實就是彼此之間具有<strong>關聯</strong>的物件(<code>Object</code>)的群集。<br>一個使用Canvas 畫一個藍色方塊，和一個使用<code>div</code>搭配<code>css</code>樣式做出的紅色方塊，本質上最大的區別除了顏色之外，就是這個方塊背後物件的內容差。  </p>
-<p>舉個簡單的例子，我們在做網頁動畫的時候，常常會需要用到<code>getBoundingClientRect</code> 這個<code>api</code> 來獲取一個區塊的大小、座標等。<br>而我們在使用這個api的時候，一般就是先去抓取(<code>query</code>)這個元素，然後就可以用這個元素實例底下的<code>api</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// ele 本身是透過selector 字串所抓到的元素實例(instance), 這個實例其實是在瀏覽器創建Dom模型的時候new出來的</span></span><br><span class="line"><span class="keyword">let</span> ele = <span class="built_in">document</span>.querySelecor(<span class="string">&#x27;div&#x27;</span>); </span><br><span class="line"><span class="comment">// getBoundingClientRect 則是ele 這個實例物件的一個方法</span></span><br><span class="line"><span class="keyword">let</span> divWidth = ele.getBoundingClientRect().width; </span><br></pre></td></tr></table></figure>
-<p>上述對大部分人來說應該都是一個稀鬆平常的操作。<br>但是當我們用Canvas 繪製一個方塊時，我們所創建的實例並不是透過去<code>new</code> 瀏覽器內建的<code>Element</code> 類(<code>class</code>)所建立出來的，而是透過我們自己定義的一個具有客製化方法的類，例如:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">block</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">ctx</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx = ctx;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">draw</span>(<span class="params">x, y, width, height</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx.fillRect(x, y, width, height);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>當我們用這樣的一個客製類<code>Block</code>去產生一個方塊的實例時，這個實例底下所有的方法，都是來自於這個客製類<code>Block</code>的定義（所以當然也就沒有<code>getBoundingClientRect</code>這麼方便的api可以用）。<br>但是相對的，因為產生實例的類可以自己定義，自由度也當然就跟著大幅提高，平常一些不能用基礎Dom元素做到的操作，甚至都變得有可能了（ex：繪製不規則圖形、創作複雜動畫）</p>
-<h2 id="Canvas-與-一般-Dom元素的差異二：使用情境"><a href="#Canvas-與-一般-Dom元素的差異二：使用情境" class="headerlink" title="Canvas 與 一般 Dom元素的差異二：使用情境"></a>Canvas 與 一般 Dom元素的差異二：使用情境</h2><p>前面我們有提到, Canvas 相較於 基礎Dom元素而言，具有相對高（不只高! 而是非常高！）的自由度。<br>用一個簡單的例子來描述，就好比<strong>訂製手工賽車</strong>和<strong>國產普通轎車</strong> 的區別，這邊絕對不是要說國產貨不好，畢竟我也沒有說訂製的手工賽車的來源是哪一家廠商XD  </p>
-<p>講到這邊應該就可以理解到兩種繪圖方式的使用情境其分野：</p>
-<h4 id="1-Dom元素適合的情境"><a href="#1-Dom元素適合的情境" class="headerlink" title="1. Dom元素適合的情境"></a>1. Dom元素適合的情境</h4><ul>
-<li>快速/大量生產的需求</li>
-<li>不想花費過多時間處理效能問題</li>
-<li>有大量的互動操作行為, 例如UI/UX</li>
-</ul>
-<h4 id="2-Canvas渲染適合的情境"><a href="#2-Canvas渲染適合的情境" class="headerlink" title="2. Canvas渲染適合的情境"></a>2. Canvas渲染適合的情境</h4><ul>
-<li>當有天馬行空的創意</li>
-<li>較少的時間壓力，且能夠自行處理圖形重繪/ 效能問題</li>
-<li>像素操作（這個後面的章節會提到）</li>
-</ul>
-<p>就像我們前面提到的，以現階段來講，前端工程師80%的職業生涯中面對到的多半是第一種情境(當然也有少數人不是)，<br>而我們需要為了這20%的狀況去學習的原因，除了要應對未來的不時之需以外，當然就是有挑戰自我創作的意義存在。</p>
-<p>那麼話就說到這邊。<br>在接下來的章節，我們將會進入下一階段基礎的講解，然後再逐漸的解釋Canvas繪圖的實作，還請各位拭目以待～。</p>
-]]></content>
+    <title>Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!</title>
+    <url>/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/</url>
+    <content><![CDATA[<h2 id="canvas動畫"><a href="#canvas動畫" class="headerlink" title="canvas動畫"></a>canvas動畫</h2>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>
@@ -176,6 +143,54 @@
 <p>在這個系列的文章中，我會針對比較常見的兩種環境(2D,webgl)做案例探討。</p>
 <h2 id="Start-From-2D"><a href="#Start-From-2D" class="headerlink" title="Start From 2D"></a>Start From 2D</h2><p>雖然說講到網頁前端的Canvas技術，大多數人都會直接地想到像是Three.js/Webgl那樣的渲染環境/套件做出來的各種絢麗特效。<br>但是我個人認為，初學Canvas應該還是先從2D的基礎學起，雖然說到了webgl渲染環境時，webgl環境整體提供的API和2D環境所提供的API在本質上有很巨大的差異，<br>但是實際上在做渲染運算、模型規劃時的重點還是有其相似之處。</p>
 <p>在接下來的章節中，我們會先進入2D渲染的環節，當然還是會先從2D的基礎講起，然後再開始慢慢的進入一些更加複雜的案例。</p>
+]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>2021鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Day2 - Canvas基礎概論 I - 我要成為Canvas Ninja!</title>
+    <url>/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81%20/</url>
+    <content><![CDATA[<h2 id="Let’s-Start-From-Scratch"><a href="#Let’s-Start-From-Scratch" class="headerlink" title="Let’s Start From Scratch"></a>Let’s Start From Scratch</h2><p>本系列文章的頭幾篇我決定還是帶點基礎的東西，所以首先，我打算介紹一些不常被一般教學提到的資料來當熱身。</p>
+<blockquote>
+<p>The HTMLCanvasElement interface provides properties and methods for manipulating the layout and presentation of <code>&lt;canvas&gt;</code> elements. The HTMLCanvasElement interface also inherits the properties and methods of the HTMLElement interface.  — from MDN<br>The HTML <code>&lt;canvas&gt;</code> element is used to draw graphics on a web page. — from <a href="http://www.w3schools.com/">www.w3schools.com</a></p>
+</blockquote>
+<p>上述是在MDN還有W3school上關於<code>canvas</code> 元素 的解釋。簡單來說<code>canvas</code>就是一種自帶複數api, 然後可以用來在網頁上做動態繪圖的元素。<br>簡單的介紹就到這邊，接下來是疑問時間。<br>有些人看到上述的解釋，可能會覺得很疑惑，例如：</p>
+<blockquote>
+<p>那麼我們平常在用的CSS和html基礎元素，那樣子的東西難道不也是一種繪圖嗎? 差別在哪裡?</p>
+</blockquote>
+<p>接下來我們將針對這個問題做一系列的說明。</p>
+<h2 id="Canvas-與-一般-Dom元素的差異一：編譯流程"><a href="#Canvas-與-一般-Dom元素的差異一：編譯流程" class="headerlink" title="Canvas 與 一般 Dom元素的差異一：編譯流程"></a>Canvas 與 一般 Dom元素的差異一：編譯流程</h2><p>通常在80%以上的web專案內容中，我們都是使用普通的Dom元素來對頁面進行版面規劃。<br>所謂『普通』的Dom元素指的就是 <code>div</code>、<code>span</code>、<code>ul</code>、<code>li</code>…,etc. 而我們都知道，<code>HTML</code>本身是一種標記語言，<br>一篇完整的標記語言範本其實就有點像某種<strong>願望清單</strong>，為什麼說是願望清單呢? 那是因為瀏覽器在接收到一份HTML時，他做的事其實就是根據這份文件，上面提到的: 這份文件有多少元素? 元素個別是哪些？ 元素的先後排列順序、元素的巢狀化邏輯…etc. 去生成各個元素的物件實例，然後再透過瀏覽器的渲染引擎去把這些元素渲染在畫面上。</p>
+<p><img src="https://i.imgur.com/Ta8eGWm.png" alt="retain mode"></p>
+<p>像這樣子先確認頁面需求模型(也就是我們提到的願望清單)，然後將模型中的細節一一轉譯實現的這種行為模式，我們把它稱為<code>Retained Mode</code>(保留模式)。<br>接著一定就會有人問：  </p>
+<blockquote>
+<p>那麼是不是還有別的模式呢？</p>
+</blockquote>
+<p>Of course.<br>當瀏覽器需要做這類把文字邏輯轉化成視覺的工作時(我們把這種行為稱為轉譯)，會有兩種固定模式，其一是<code>Retained Mode</code>(保留模式), 然後再來就是與<code>Canvas</code>密切相關的<code>Immediate Mode</code>(立即模式)。  </p>
+<p><img src="https://i.imgur.com/d7l62h9.png" alt="img"></p>
+<p>從上面這張圖片我們可以發現，<code>Canvas</code> 元素和<code>Dom</code>元素最大的區別就是創建模型的這一個環節。<br>所謂的模型指的其實就是彼此之間具有<strong>關聯</strong>的物件(<code>Object</code>)的群集。<br>一個使用Canvas 畫一個藍色方塊，和一個使用<code>div</code>搭配<code>css</code>樣式做出的紅色方塊，本質上最大的區別除了顏色之外，就是這個方塊背後物件的內容差。  </p>
+<p>舉個簡單的例子，我們在做網頁動畫的時候，常常會需要用到<code>getBoundingClientRect</code> 這個<code>api</code> 來獲取一個區塊的大小、座標等。<br>而我們在使用這個api的時候，一般就是先去抓取(<code>query</code>)這個元素，然後就可以用這個元素實例底下的<code>api</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// ele 本身是透過selector 字串所抓到的元素實例(instance), 這個實例其實是在瀏覽器創建Dom模型的時候new出來的</span></span><br><span class="line"><span class="keyword">let</span> ele = <span class="built_in">document</span>.querySelecor(<span class="string">&#x27;div&#x27;</span>); </span><br><span class="line"><span class="comment">// getBoundingClientRect 則是ele 這個實例物件的一個方法</span></span><br><span class="line"><span class="keyword">let</span> divWidth = ele.getBoundingClientRect().width; </span><br></pre></td></tr></table></figure>
+<p>上述對大部分人來說應該都是一個稀鬆平常的操作。<br>但是當我們用Canvas 繪製一個方塊時，我們所創建的實例並不是透過去<code>new</code> 瀏覽器內建的<code>Element</code> 類(<code>class</code>)所建立出來的，而是透過我們自己定義的一個具有客製化方法的類，例如:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">block</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">ctx</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx = ctx;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">draw</span>(<span class="params">x, y, width, height</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx.fillRect(x, y, width, height);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當我們用這樣的一個客製類<code>Block</code>去產生一個方塊的實例時，這個實例底下所有的方法，都是來自於這個客製類<code>Block</code>的定義（所以當然也就沒有<code>getBoundingClientRect</code>這麼方便的api可以用）。<br>但是相對的，因為產生實例的類可以自己定義，自由度也當然就跟著大幅提高，平常一些不能用基礎Dom元素做到的操作，甚至都變得有可能了（ex：繪製不規則圖形、創作複雜動畫）</p>
+<h2 id="Canvas-與-一般-Dom元素的差異二：使用情境"><a href="#Canvas-與-一般-Dom元素的差異二：使用情境" class="headerlink" title="Canvas 與 一般 Dom元素的差異二：使用情境"></a>Canvas 與 一般 Dom元素的差異二：使用情境</h2><p>前面我們有提到, Canvas 相較於 基礎Dom元素而言，具有相對高（不只高! 而是非常高！）的自由度。<br>用一個簡單的例子來描述，就好比<strong>訂製手工賽車</strong>和<strong>國產普通轎車</strong> 的區別，這邊絕對不是要說國產貨不好，畢竟我也沒有說訂製的手工賽車的來源是哪一家廠商XD  </p>
+<p>講到這邊應該就可以理解到兩種繪圖方式的使用情境其分野：</p>
+<h4 id="1-Dom元素適合的情境"><a href="#1-Dom元素適合的情境" class="headerlink" title="1. Dom元素適合的情境"></a>1. Dom元素適合的情境</h4><ul>
+<li>快速/大量生產的需求</li>
+<li>不想花費過多時間處理效能問題</li>
+<li>有大量的互動操作行為, 例如UI/UX</li>
+</ul>
+<h4 id="2-Canvas渲染適合的情境"><a href="#2-Canvas渲染適合的情境" class="headerlink" title="2. Canvas渲染適合的情境"></a>2. Canvas渲染適合的情境</h4><ul>
+<li>當有天馬行空的創意</li>
+<li>較少的時間壓力，且能夠自行處理圖形重繪/ 效能問題</li>
+<li>像素操作（這個後面的章節會提到）</li>
+</ul>
+<p>就像我們前面提到的，以現階段來講，前端工程師80%的職業生涯中面對到的多半是第一種情境(當然也有少數人不是)，<br>而我們需要為了這20%的狀況去學習的原因，除了要應對未來的不時之需以外，當然就是有挑戰自我創作的意義存在。</p>
+<p>那麼話就說到這邊。<br>在接下來的章節，我們將會進入下一階段基礎的講解，然後再逐漸的解釋Canvas繪圖的實作，還請各位拭目以待～。</p>
 ]]></content>
       <categories>
         <category>前端技術學習心得</category>
@@ -746,18 +761,6 @@
       </tags>
   </entry>
   <entry>
-    <title>rxjs 學習筆記 - ep2</title>
-    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/</url>
-    <content><![CDATA[<h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-        <tag>rxjs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>rxjs 學習筆記 - ep1</title>
     <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep1/</url>
     <content><![CDATA[<h1 id="Opening"><a href="#Opening" class="headerlink" title="Opening"></a>Opening</h1><p>前陣子講了很久要來學習RxJs, 但是實際上卻是拖到了現在才要認真開始把它學好~<br>事不宜遲，我們這邊就馬上開始基礎的部分</p>
@@ -767,6 +770,18 @@
 <p>Rxjs最重要的意義之一就是<code>Reactive Programming</code>，也就是<code>當變數或資源發生變動時，由變數或資源自動告訴我發生變動了</code>。</p>
 <p>Rxjs 把很多東西都當成Reactive的對象, 除了前面提到的高頻事件的event object，另外也可以把單純的變數(物件/數值等)作為reavtive對象, 而這個概念也就是所謂的 <code>Observable</code>。</p>
 ]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+        <tag>rxjs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>rxjs 學習筆記 - ep2</title>
+    <url>/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/</url>
+    <content><![CDATA[<h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>]]></content>
       <categories>
         <category>前端技術學習心得</category>
       </categories>

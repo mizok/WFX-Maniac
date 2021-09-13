@@ -23,20 +23,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="網頁特效開發&#x2F;個人前端學習歷程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/tags/index.html">
+<meta name="description" content="canvas動畫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="網頁特效開發&#x2F;個人前端學習歷程">
+<meta property="og:description" content="canvas動畫">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-11-11T16:14:19.000Z">
-<meta property="article:modified_time" content="2020-11-25T17:01:45.884Z">
+<meta property="article:published_time" content="2021-09-11T16:32:40.348Z">
+<meta property="article:modified_time" content="2021-09-13T18:16:52.965Z">
 <meta property="article:author" content="Mizok.H">
+<meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/tags/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
 
 
 <script class="page-configurations">
@@ -44,7 +45,7 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-TW'
   };
 </script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
@@ -58,8 +59,7 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-<title>tags | WFX-Maniac
-</title>
+<title>Day8 - Canvas動畫概論 -  我要成為Canvas Ninja! | WFX-Maniac</title>
   
 
 
@@ -216,7 +216,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目錄
@@ -229,6 +229,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#canvas%E5%8B%95%E7%95%AB"><span class="nav-number">1.</span> <span class="nav-text">canvas動畫</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -285,43 +286,103 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
   
   
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
 
-    
-    
-    
-    <div class="post-block" lang="zh-TW"><header class="post-header">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
 
-<h1 class="post-title" itemprop="name headline">tags
-</h1>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!
+        </h1>
 
-<div class="post-meta-container">
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-12 00:32:40" itemprop="dateCreated datePublished" datetime="2021-09-12T00:32:40+08:00">2021-09-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-14 02:16:52" itemprop="dateModified" datetime="2021-09-14T02:16:52+08:00">2021-09-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      <div class="post-body"><div class="tag-cloud">
-  <div class="tag-cloud-title">
-    目前共有 5 個標籤
-  </div>
-  <div class="tag-cloud-tags">
-    <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" style="font-size: 30px;" class="tag-cloud-10">2021鐵人賽</a> <a href="/WFX-Maniac/tags/git/" style="font-size: 16.5px;" class="tag-cloud-3">git</a> <a href="/WFX-Maniac/tags/js/" style="font-size: 25.5px;" class="tag-cloud-8">js</a> <a href="/WFX-Maniac/tags/rxjs/" style="font-size: 12px;" class="tag-cloud-0">rxjs</a> <a href="/WFX-Maniac/tags/ts/" style="font-size: 21px;" class="tag-cloud-5">ts</a>
-  </div>
-</div>
-
-      </div>
-      
-      
-      
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="canvas動畫"><a href="#canvas動畫" class="headerlink" title="canvas動畫"></a>canvas動畫</h2>
     </div>
 
     
     
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 2021鐵人賽</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/" rel="prev" title="Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！">
+                  <i class="fa fa-chevron-left"></i> Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="next" title="Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!">
+                  Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja! <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
 
