@@ -113,7 +113,7 @@
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 
-<h2 id="路徑繪製-上色-小結"><a href="#路徑繪製-上色-小結" class="headerlink" title="路徑繪製/上色 - 小結"></a>路徑繪製/上色 - 小結</h2><p>實際上，canvas 關於繪製路徑的api還遠不止只有上述提到的這幾種。<br>例如曲線還有 ctx.bezierCurveTo()(貝茲曲線), 設定邊框粗細可以用 ctx.lineWidth, 設定端點類型可以用ctx.lineJoin…,etc</p>
+<h2 id="路徑繪製-上色-小結"><a href="#路徑繪製-上色-小結" class="headerlink" title="路徑繪製/上色 - 小結"></a>路徑繪製/上色 - 小結</h2><p>實際上，canvas 關於繪製路徑的api還遠不止上述提到的這幾種。<br>例如曲線還有 ctx.bezierCurveTo()(貝茲曲線), 設定邊框粗細可以用 ctx.lineWidth, 設定端點類型可以用ctx.lineJoin…,etc</p>
 <p>這些api/property 如果要在文章中一一介紹其實多少會變得有點流水帳，所以我比較傾向讓大家自己去搜尋自己需要的api</p>
 <p>推薦在查詢api 的時候可以多使用MDN~ MDN 會是學習Canvas基礎的好幫手。</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D">https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D</a></p>
@@ -283,6 +283,17 @@
       </tags>
   </entry>
   <entry>
+    <title>Day10 - Canvas進階技巧 I -  成為Canvas Ninja ～ 理解2D渲染的精髓</title>
+    <url>/WFX-Maniac/2021/09/14/Canvas%E9%80%B2%E9%9A%8E%E6%8A%80%E5%B7%A7%20I%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>2021鐵人賽</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ES5/ES6學習筆記-ep1</title>
     <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/</url>
     <content><![CDATA[<h2 id="搞清楚並且用最簡單的方法解釋js的apply-call-bind"><a href="#搞清楚並且用最簡單的方法解釋js的apply-call-bind" class="headerlink" title="搞清楚並且用最簡單的方法解釋js的apply/call/bind"></a>搞清楚並且用最簡單的方法解釋js的apply/call/bind</h2><ul>
@@ -358,17 +369,6 @@
       </categories>
       <tags>
         <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Day10 - Canvas進階技巧 I -  成為Canvas Ninja ～ 理解2D渲染的精髓</title>
-    <url>/WFX-Maniac/2021/09/14/Canvas%E9%80%B2%E9%9A%8E%E6%8A%80%E5%B7%A7%20I%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>2021鐵人賽</tag>
       </tags>
   </entry>
   <entry>
@@ -464,59 +464,6 @@
 </ul>
 </li>
 </ol>
-]]></content>
-      <categories>
-        <category>前端技術學習心得</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ES5/ES6學習筆記-ep3</title>
-    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
-    <content><![CDATA[<h2 id="ES6-Promise-重點整理"><a href="#ES6-Promise-重點整理" class="headerlink" title="ES6 Promise 重點整理"></a>ES6 Promise 重點整理</h2><ol>
-<li>Promise 是什麼</li>
-</ol>
-<ul>
-<li>用來處理callback chain 的一種新JS語法</li>
-<li>本身是一個class, 但是他也有自己的靜態方法</li>
-<li>建立出來的實例物件具有三種狀態：pending/fulfilled/rejected</li>
-<li>狀態只可能是從pending 變成 fulfilled/rejected</li>
-</ul>
-<ol start="2">
-<li>promise.prototype.then()</li>
-</ol>
-<ul>
-<li>then()可以傳入兩個函數作為參數，第一個函數會在promise物件被fulfilled之後馬上發動，第二個函數則會在promise物件被reject的時候馬上發動</li>
-<li>會回傳一個新的promise物件</li>
-<li><strong>重要</strong> ： 當then與then串接的時候，後面的then 的 <strong>參數function</strong> 會得到前面的then 的 <strong>參數function</strong> return出來的值作為參數</li>
-</ul>
-<ol start="3">
-<li>promise.prototype.catch()</li>
-</ol>
-<ul>
-<li>catch()可以傳入一個函數作為參數，並且這個函數會接收到promise throw出來的error</li>
-<li>也會回傳一個新的promise物件</li>
-</ul>
-<ol start="4">
-<li>promise.all()</li>
-</ol>
-<ul>
-<li>也會回傳新的promise</li>
-<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
-<li>當這些內容物promise都被fullfill之後，all()本身回傳的promise就會被fullfill</li>
-<li>在all() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到all()的所有內容promise 在resolve 時使用的參數 所組成的陣列。</li>
-</ul>
-<ol start="5">
-<li>promise.race()</li>
-</ol>
-<ul>
-<li>也會回傳新的promise</li>
-<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
-<li>當這些內容物promise有其中一個被fullfill之後，race()本身回傳的promise就會被fullfill</li>
-<li>在race() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到race()的最快達成fullfilled 的內容promise 在resolve 時使用的參數。</li>
-</ul>
 ]]></content>
       <categories>
         <category>前端技術學習心得</category>
@@ -1045,6 +992,59 @@
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ES5/ES6學習筆記-ep3</title>
+    <url>/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep3/</url>
+    <content><![CDATA[<h2 id="ES6-Promise-重點整理"><a href="#ES6-Promise-重點整理" class="headerlink" title="ES6 Promise 重點整理"></a>ES6 Promise 重點整理</h2><ol>
+<li>Promise 是什麼</li>
+</ol>
+<ul>
+<li>用來處理callback chain 的一種新JS語法</li>
+<li>本身是一個class, 但是他也有自己的靜態方法</li>
+<li>建立出來的實例物件具有三種狀態：pending/fulfilled/rejected</li>
+<li>狀態只可能是從pending 變成 fulfilled/rejected</li>
+</ul>
+<ol start="2">
+<li>promise.prototype.then()</li>
+</ol>
+<ul>
+<li>then()可以傳入兩個函數作為參數，第一個函數會在promise物件被fulfilled之後馬上發動，第二個函數則會在promise物件被reject的時候馬上發動</li>
+<li>會回傳一個新的promise物件</li>
+<li><strong>重要</strong> ： 當then與then串接的時候，後面的then 的 <strong>參數function</strong> 會得到前面的then 的 <strong>參數function</strong> return出來的值作為參數</li>
+</ul>
+<ol start="3">
+<li>promise.prototype.catch()</li>
+</ol>
+<ul>
+<li>catch()可以傳入一個函數作為參數，並且這個函數會接收到promise throw出來的error</li>
+<li>也會回傳一個新的promise物件</li>
+</ul>
+<ol start="4">
+<li>promise.all()</li>
+</ol>
+<ul>
+<li>也會回傳新的promise</li>
+<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
+<li>當這些內容物promise都被fullfill之後，all()本身回傳的promise就會被fullfill</li>
+<li>在all() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到all()的所有內容promise 在resolve 時使用的參數 所組成的陣列。</li>
+</ul>
+<ol start="5">
+<li>promise.race()</li>
+</ol>
+<ul>
+<li>也會回傳新的promise</li>
+<li>必須要傳入一個陣列，這個陣列本身的內容物都是promise</li>
+<li>當這些內容物promise有其中一個被fullfill之後，race()本身回傳的promise就會被fullfill</li>
+<li>在race() 回傳得到的promise後面去使用then(), 該 then()的參數function會拿到race()的最快達成fullfilled 的內容promise 在resolve 時使用的參數。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端技術學習心得</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
       </tags>
   </entry>
 </search>
