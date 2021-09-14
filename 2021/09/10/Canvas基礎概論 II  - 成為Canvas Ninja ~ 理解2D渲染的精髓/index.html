@@ -25,8 +25,8 @@
   </script>
 <meta name="description" content="Some Deeper Basics圖像的概念  我們在前面有說到，canvas本身是透過物件模型來繪製圖像，但是我們沒有提到何謂”圖像”。     實際上圖像的概念很簡單。   大家都知道，光的三原色分別是紅&#x2F;藍&#x2F;綠;  一束標準的白光，可以分裂成紅&#x2F;藍&#x2F;綠光來看。     而圖像的實作原理，其實就是透過阻擋掉紅&#x2F;藍&#x2F;綠光一部分的佔比，來形成不同的顏色。   這邊我找了兩張圖片，這兩張圖片很好的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/index.html">
+<meta property="og:title" content="Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja ～ 理解2D渲染的精髓！">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
 <meta property="og:description" content="Some Deeper Basics圖像的概念  我們在前面有說到，canvas本身是透過物件模型來繪製圖像，但是我們沒有提到何謂”圖像”。     實際上圖像的概念很簡單。   大家都知道，光的三原色分別是紅&#x2F;藍&#x2F;綠;  一束標準的白光，可以分裂成紅&#x2F;藍&#x2F;綠光來看。     而圖像的實作原理，其實就是透過阻擋掉紅&#x2F;藍&#x2F;綠光一部分的佔比，來形成不同的顏色。   這邊我找了兩張圖片，這兩張圖片很好的">
 <meta property="og:locale" content="zh_TW">
@@ -34,14 +34,14 @@
 <meta property="og:image" content="https://i.imgur.com/FmT2rzI.jpg">
 <meta property="og:image" content="https://i.imgur.com/VC25E8b.png">
 <meta property="article:published_time" content="2021-09-10T13:14:54.355Z">
-<meta property="article:modified_time" content="2021-09-11T16:33:15.974Z">
+<meta property="article:modified_time" content="2021-09-14T17:15:33.471Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/dz53Fsi.jpg">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
 
 
 <script class="page-configurations">
@@ -63,7 +63,7 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-<title>Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！ | WFX-Maniac</title>
+<title>Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja ～ 理解2D渲染的精髓！ | WFX-Maniac</title>
   
 
 
@@ -174,7 +174,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">22</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">25</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -249,7 +249,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -301,7 +301,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -314,7 +314,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja！
+          Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja ～ 理解2D渲染的精髓！
         </h1>
 
         <div class="post-meta-container">
@@ -332,7 +332,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-12 00:33:15" itemprop="dateModified" datetime="2021-09-12T00:33:15+08:00">2021-09-12</time>
+        <time title="修改時間：2021-09-15 01:15:33" itemprop="dateModified" datetime="2021-09-15T01:15:33+08:00">2021-09-15</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -395,8 +395,8 @@
 <li>bitmaprenderer : 這也同樣是一種只有少數瀏覽器有支援的實驗性功能，它的用途很單純，是用來轉移指定圖像的bitmap到指定的canvas上</li>
 </ul>
 <p>在這個系列的文章中，我會針對比較常見的兩種環境(2D,webgl)做案例探討。</p>
-<h2 id="Start-From-2D"><a href="#Start-From-2D" class="headerlink" title="Start From 2D"></a>Start From 2D</h2><p>雖然說講到網頁前端的Canvas技術，大多數人都會直接地想到像是Three.js/Webgl那樣的渲染環境/套件做出來的各種絢麗特效。<br>但是我個人認為，初學Canvas應該還是先從2D的基礎學起，雖然說到了webgl渲染環境時，webgl環境整體提供的API和2D環境所提供的API在本質上有很巨大的差異，<br>但是實際上在做渲染運算、模型規劃時的重點還是有其相似之處。</p>
-<p>在接下來的章節中，我們會先進入2D渲染的環節，當然還是會先從2D的基礎講起，然後再開始慢慢的進入一些更加複雜的案例。</p>
+<h2 id="Start-From-2D"><a href="#Start-From-2D" class="headerlink" title="Start From 2D"></a>Start From 2D</h2><p>雖然說講到網頁前端的Canvas技術，大多數人都會直接地想到像是Three.js/Webgl那樣的渲染環境/套件做出來的各種絢麗特效。<br>但是我個人認為，初學Canvas應該還是先從2D的基礎學起，雖然說到了webgl渲染環境時，webgl環境整體提供的API和2D環境所提供的API在本質上有很巨大的差異，但是實際上在做渲染運算、模型規劃時的重點還是有其相似之處。</p>
+<p>在接下來的章節中，我們會先從2D的基礎講起，然後再開始慢慢地演進到一些更加複雜的案例～</p>
 
     </div>
 
@@ -413,13 +413,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja%EF%BC%81%20/" rel="prev" title="Day2 - Canvas基礎概論 I - 我要成為Canvas Ninja!">
-                  <i class="fa fa-chevron-left"></i> Day2 - Canvas基礎概論 I - 我要成為Canvas Ninja!
+                <a href="/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20/" rel="prev" title="Day2 - Canvas基礎概論 I - 成為Canvas Ninja ～ 理解2D渲染的精髓">
+                  <i class="fa fa-chevron-left"></i> Day2 - Canvas基礎概論 I - 成為Canvas Ninja ～ 理解2D渲染的精髓
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="next" title="Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!">
-                  Day8 - Canvas動畫概論 -  我要成為Canvas Ninja! <i class="fa fa-chevron-right"></i>
+                <a href="/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%95%88%E8%83%BD%E5%84%AA%E5%8C%96%20-%E6%88%90%E7%82%BACanvas%20Ninja%20-%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" rel="next" title="Day8 - Canvas動畫效能優化 -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+                  Day8 - Canvas動畫效能優化 -  成為Canvas Ninja ～ 理解2D渲染的精髓 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

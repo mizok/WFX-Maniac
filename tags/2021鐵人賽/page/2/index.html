@@ -23,21 +23,18 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="非零纏繞與奇偶規則變形相關api旋轉縮放平移">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/index.html">
+<meta name="description" content="網頁特效開發&#x2F;個人前端學習歷程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WFX-Maniac">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/page/2/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="非零纏繞與奇偶規則變形相關api旋轉縮放平移">
+<meta property="og:description" content="網頁特效開發&#x2F;個人前端學習歷程">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-09-13T17:43:16.137Z">
-<meta property="article:modified_time" content="2021-09-13T18:14:44.420Z">
 <meta property="article:author" content="Mizok.H">
-<meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/page/2/">
 
 
 <script class="page-configurations">
@@ -45,7 +42,7 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-TW'
   };
 </script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
@@ -59,7 +56,7 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-<title>Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja! | WFX-Maniac</title>
+<title>標籤: 2021鐵人賽 | WFX-Maniac</title>
   
 
 
@@ -170,7 +167,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">22</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">25</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -216,7 +213,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目錄
@@ -229,7 +226,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E9%9B%B6%E7%BA%8F%E7%B9%9E%E8%88%87%E5%A5%87%E5%81%B6%E8%A6%8F%E5%89%87"><span class="nav-number">1.</span> <span class="nav-text">非零纏繞與奇偶規則</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E5%BD%A2%E7%9B%B8%E9%97%9Capi"><span class="nav-number">2.</span> <span class="nav-text">變形相關api</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%8B%E8%BD%89"><span class="nav-number">2.1.</span> <span class="nav-text">旋轉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B8%AE%E6%94%BE"><span class="nav-number">2.2.</span> <span class="nav-text">縮放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B3%E7%A7%BB"><span class="nav-number">2.3.</span> <span class="nav-text">平移</span></a></li></ol></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -245,7 +241,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -286,98 +282,53 @@
 </noscript>
 
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner tag posts-collapse">
 
 
   
-
-
-<div class="post-block">
   
   
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h2 class="collection-header">2021鐵人賽
+          <small>標籤</small>
+        </h2>
+      </div>
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Day6 - 2D渲染環境基礎篇 III -  我要成為Canvas Ninja!
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
       
-
-      <time title="創建時間：2021-09-14 01:43:16 / 修改時間：02:14:44" itemprop="dateCreated datePublished" datetime="2021-09-14T01:43:16+08:00">2021-09-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="非零纏繞與奇偶規則"><a href="#非零纏繞與奇偶規則" class="headerlink" title="非零纏繞與奇偶規則"></a>非零纏繞與奇偶規則</h2><h2 id="變形相關api"><a href="#變形相關api" class="headerlink" title="變形相關api"></a>變形相關api</h2><h3 id="旋轉"><a href="#旋轉" class="headerlink" title="旋轉"></a>旋轉</h3><h3 id="縮放"><a href="#縮放" class="headerlink" title="縮放"></a>縮放</h3><h3 id="平移"><a href="#平移" class="headerlink" title="平移"></a>平移</h3>
+    <div class="collection-year">
+      <span class="collection-header">2021</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2021-09-02T02:21:29+08:00"
+              content="2021-09-02">
+          09-02
+        </time>
+      </div>
 
-    <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 2021鐵人賽</a>
-          </div>
+      <div class="post-title">
+          <a class="post-title-link" href="/WFX-Maniac/2021/09/02/%E5%BA%8F%E8%A8%80%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" itemprop="url">
+            <span itemprop="name">Day1 - 序言 - 成為Canvas Ninja ～ 理解2D渲染的精髓</span>
+          </a>
+      </div>
 
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/12/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="prev" title="Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!">
-                  <i class="fa fa-chevron-left"></i> Day8 - Canvas動畫概論 -  我要成為Canvas Ninja!
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20I%20-%20%20%E6%88%91%E8%A6%81%E6%88%90%E7%82%BACanvas%20Ninja!/" rel="next" title="Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja!">
-                  Day4 - 2D渲染環境基礎篇 I -  我要成為Canvas Ninja! <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
+      
+    </header>
   </article>
-</div>
 
-
-
-
-
+    </div>
+  </div>
+  
+  
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 <script>

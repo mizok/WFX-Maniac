@@ -185,7 +185,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">22</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">25</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -259,7 +259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -301,6 +301,295 @@
 
 
     <div class="main-inner index posts-montage">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/09/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20I%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20/" class="post-title-link" itemprop="url">Day2 - Canvas基礎概論 I - 成為Canvas Ninja ～ 理解2D渲染的精髓</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-09 21:42:59" itemprop="dateCreated datePublished" datetime="2021-09-09T21:42:59+08:00">2021-09-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-15 01:15:25" itemprop="dateModified" datetime="2021-09-15T01:15:25+08:00">2021-09-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Let’s-Start-From-Scratch"><a href="#Let’s-Start-From-Scratch" class="headerlink" title="Let’s Start From Scratch"></a>Let’s Start From Scratch</h2><p>本系列文章的頭幾篇我決定還是帶點基礎的東西，所以首先，我打算介紹一些不常被一般教學提到的資料來當熱身。</p>
+<blockquote>
+<p>The HTMLCanvasElement interface provides properties and methods for manipulating the layout and presentation of <code>&lt;canvas&gt;</code> elements. The HTMLCanvasElement interface also inherits the properties and methods of the HTMLElement interface.  — from MDN<br>The HTML <code>&lt;canvas&gt;</code> element is used to draw graphics on a web page. — from <a target="_blank" rel="noopener" href="http://www.w3schools.com/">www.w3schools.com</a></p>
+</blockquote>
+<p>上述是在MDN還有W3school上關於<code>canvas</code> 元素 的解釋。簡單來說<code>canvas</code>就是一種自帶複數api, 然後可以用來在網頁上做動態繪圖的元素。<br>簡單的介紹就到這邊，接下來是疑問時間。<br>有些人看到上述的解釋，可能會覺得很疑惑，例如：</p>
+<blockquote>
+<p>那麼我們平常在用的CSS和html基礎元素，那樣子的東西難道不也是一種繪圖嗎? 差別在哪裡?</p>
+</blockquote>
+<p>接下來我們將針對這個問題做一系列的說明。</p>
+<h2 id="Canvas-與-一般-Dom元素的差異一：編譯流程"><a href="#Canvas-與-一般-Dom元素的差異一：編譯流程" class="headerlink" title="Canvas 與 一般 Dom元素的差異一：編譯流程"></a>Canvas 與 一般 Dom元素的差異一：編譯流程</h2><p>通常在80%以上的web專案內容中，我們都是使用普通的Dom元素來對頁面進行版面規劃。<br>所謂『普通』的Dom元素指的就是 <code>div</code>、<code>span</code>、<code>ul</code>、<code>li</code>…,etc. 而我們都知道，<code>HTML</code>本身是一種標記語言，<br>一篇完整的標記語言範本其實就有點像某種<strong>願望清單</strong>，為什麼說是願望清單呢? 那是因為瀏覽器在接收到一份HTML時，他做的事其實就是根據這份文件，上面提到的: 這份文件有多少元素? 元素個別是哪些？ 元素的先後排列順序、元素的巢狀化邏輯…etc. 去生成各個元素的物件實例，然後再透過瀏覽器的渲染引擎去把這些元素渲染在畫面上。</p>
+<p><img src="https://i.imgur.com/Ta8eGWm.png" alt="retain mode"></p>
+<p>像這樣子先確認頁面需求模型(也就是我們提到的願望清單)，然後將模型中的細節一一轉譯實現的這種行為模式，我們把它稱為<code>Retained Mode</code>(保留模式)。<br>接著一定就會有人問：  </p>
+<blockquote>
+<p>那麼是不是還有別的模式呢？</p>
+</blockquote>
+<p>Of course.<br>當瀏覽器需要做這類把文字邏輯轉化成視覺的工作時(我們把這種行為稱為轉譯)，會有兩種固定模式，其一是<code>Retained Mode</code>(保留模式), 然後再來就是與<code>Canvas</code>密切相關的<code>Immediate Mode</code>(立即模式)。  </p>
+<p><img src="https://i.imgur.com/d7l62h9.png" alt="img"></p>
+<p>從上面這張圖片我們可以發現，<code>Canvas</code> 元素和<code>Dom</code>元素最大的區別就是創建模型的這一個環節。<br>所謂的模型指的其實就是彼此之間具有<strong>關聯</strong>的物件(<code>Object</code>)的群集。<br>一個使用Canvas 畫一個藍色方塊，和一個使用<code>div</code>搭配<code>css</code>樣式做出的紅色方塊，本質上最大的區別除了顏色之外，就是這個方塊背後物件的內容差。  </p>
+<p>舉個簡單的例子，我們在做網頁動畫的時候，常常會需要用到<code>getBoundingClientRect</code> 這個<code>api</code> 來獲取一個區塊的大小、座標等。<br>而我們在使用這個api的時候，一般就是先去抓取(<code>query</code>)這個元素，然後就可以用這個元素實例底下的<code>api</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// ele 本身是透過selector 字串所抓到的元素實例(instance), 這個實例其實是在瀏覽器創建Dom模型的時候new出來的</span></span><br><span class="line"><span class="keyword">let</span> ele = <span class="built_in">document</span>.querySelecor(<span class="string">&#x27;div&#x27;</span>); </span><br><span class="line"><span class="comment">// getBoundingClientRect 則是ele 這個實例物件的一個方法</span></span><br><span class="line"><span class="keyword">let</span> divWidth = ele.getBoundingClientRect().width; </span><br></pre></td></tr></table></figure>
+<p>上述對大部分人來說應該都是一個稀鬆平常的操作。<br>但是當我們用Canvas 繪製一個方塊時，我們所創建的實例並不是透過去<code>new</code> 瀏覽器內建的<code>Element</code> 類(<code>class</code>)所建立出來的，而是透過我們自己定義的一個具有客製化方法的類，例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">block</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">ctx</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx = ctx;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">draw</span>(<span class="params">x, y, width, height</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.ctx.fillRect(x, y, width, height);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當我們用這樣的一個客製類<code>Block</code>去產生一個方塊的實例時，這個實例底下所有的方法，都是來自於這個客製類<code>Block</code>的定義（所以當然也就沒有<code>getBoundingClientRect</code>這麼方便的api可以用）。<br>但是相對的，因為產生實例的類可以自己定義，自由度也當然就跟著大幅提高，平常一些不能用基礎Dom元素做到的操作，甚至都變得有可能了（ex：繪製不規則圖形、創作複雜動畫）</p>
+<h2 id="Canvas-與-一般-Dom元素的差異二：使用情境"><a href="#Canvas-與-一般-Dom元素的差異二：使用情境" class="headerlink" title="Canvas 與 一般 Dom元素的差異二：使用情境"></a>Canvas 與 一般 Dom元素的差異二：使用情境</h2><p>前面我們有提到, Canvas 相較於 基礎Dom元素而言，具有相對高（不只高! 而是非常高！）的自由度。<br>用一個簡單的例子來描述，就好比<strong>訂製手工賽車</strong>和<strong>國產普通轎車</strong> 的區別，這邊絕對不是要說國產貨不好，畢竟我也沒有說訂製的手工賽車的來源是哪一家廠商XD  </p>
+<p>講到這邊應該就可以理解到兩種繪圖方式的使用情境其分野：</p>
+<h4 id="1-Dom元素適合的情境"><a href="#1-Dom元素適合的情境" class="headerlink" title="1. Dom元素適合的情境"></a>1. Dom元素適合的情境</h4><ul>
+<li>快速/大量生產的需求</li>
+<li>不想花費過多時間處理效能問題</li>
+<li>有大量的互動操作行為, 例如UI/UX</li>
+</ul>
+<h4 id="2-Canvas渲染適合的情境"><a href="#2-Canvas渲染適合的情境" class="headerlink" title="2. Canvas渲染適合的情境"></a>2. Canvas渲染適合的情境</h4><ul>
+<li>當有天馬行空的創意</li>
+<li>較少的時間壓力，且能夠自行處理圖形重繪/ 效能問題</li>
+<li>像素操作（這個後面的章節會提到）</li>
+</ul>
+<p>就像我們前面提到的，以現階段來講，前端工程師80%的職業生涯中面對到的多半是第一種情境(當然也有少數人不是)，<br>而我們需要為了這20%的狀況去學習的原因，除了要應對未來的不時之需以外，當然就是有挑戰自我創作的意義存在。</p>
+<p>那麼話就說到這邊。<br>在接下來的章節，我們將會進入下一階段基礎的講解，然後再逐漸的解釋Canvas繪圖的實作，還請各位拭目以待～。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/02/%E5%BA%8F%E8%A8%80%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/02/%E5%BA%8F%E8%A8%80%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" class="post-title-link" itemprop="url">Day1 - 序言 - 成為Canvas Ninja ～ 理解2D渲染的精髓</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-02 02:21:29" itemprop="dateCreated datePublished" datetime="2021-09-02T02:21:29+08:00">2021-09-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-15 00:26:03" itemprop="dateModified" datetime="2021-09-15T00:26:03+08:00">2021-09-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="SO-Just-Who-The-Hell-Am-I"><a href="#SO-Just-Who-The-Hell-Am-I" class="headerlink" title="SO Just Who The Hell Am I?"></a>SO Just Who The Hell Am I?</h2><p>大家好! 首先先介紹一下我自己, 我是<strong>Mizok</strong> :D<br>小弟目前人在金融相關產業擔任前端工程師，到今年為止大約有三年左右的資歷。<br>我在就職的這幾年一直有意識到一件事: 不知道是不是因為個人學經歷的關係(過去並不是資訊本科生畢業), 我對前端感興趣的部分也比較奇怪(?)<br>比起鑽研那些最新的前端框架功能/API，我發現我自己更喜歡研究瀏覽器渲染與視覺呈現方面的技術(例如物理模擬程序背後的數學運算)。<br>今年首次挑戰參加鐵人賽，有一部分的目標也是想把自己目前曾經研究過的東西再整理一遍，並且加以深化。<br>那麼話不多說，接下來就開始介紹我的參賽主題 :D</p>
+<h2 id="What-Is-Ninja"><a href="#What-Is-Ninja" class="headerlink" title="What Is Ninja?"></a>What Is Ninja?</h2><p>首先必須老實說, 這個標題其實不是我想的ＸＤ, 而是來自於一本<a target="_blank" rel="noopener" href="https://www.amazon.com/HTML5-Canvas-Ninja-Kirupa-Chinnathambi/dp/1523978090">外文書</a><br>之所以取這個名字只是因為想要看起來<strong>潮潮的</strong>～然後我在這邊為這次的參賽主題畫了一個LOGO, <strong>我覺得很酷</strong>(自己說)</p>
+<p>平常在國外的前端社群中提到Ninja這個詞的時候～指的是一些習慣用很自由奔放(而且又讓人看不懂)的語法，來編寫專案源碼的工程師～<strong>是一個帶有負面意義的詞</strong>。<br>而小弟我對於自己的期許當然也不是成為那樣子的開發者ＸＤ。<br>Ninja這個詞彙對我來說，比較近似於對某種技藝有深度理解的人。<br>我期許自己不只能做到理解框架/套件怎麼使用，而且還要能深入它們背後的邏輯，並且把這部分的理解運用在自己的專案上。<br>這對我來說就是成為一個Ninja的必經過程。</p>
+<h2 id="Why-Canvas"><a href="#Why-Canvas" class="headerlink" title="Why Canvas?"></a>Why Canvas?</h2><p>大家都知道，IE近年已經逐漸退出市場，而這個趨勢也漸漸的對前端圈子造成了不小的影響，除了各大前端框架相繼放棄支援IE以外，過去因為IE實作問題而被限制的技術也漸漸的開始浮出水面<br>小弟本身因為是在金融相關的專案公司就職，對於這部分真的是很有感。 </p>
+<p>這三年以來，其實不難發現在台灣的業界中，<strong>前端專案視覺部分的複雜程度有一點一點的在逐漸提升</strong>，從過去那種用BS隨便套一套就可以交差的網頁， 到現在隨便一個Campaign Site可能就會要你用動畫引擎去實作一堆有的沒的特效。<br>個人覺得在未來的前端業界中，出現像遊戲公司技術美術(TA)那樣的職位，大概也是極其有可能的。  </p>
+<p>前端工程師對於技術的鑽研，其實某種程度上也是對於未來的投資。而我之所以選擇Canvas這項技術，大部分的原因也就是想要探求這門技術，它在未來是否有更多的可能性。</p>
+<h2 id="About-The-Road-Map"><a href="#About-The-Road-Map" class="headerlink" title="About The Road Map"></a>About The Road Map</h2><p>老實說我一開始在定下這個題目的時候也很猶豫，因為一開始是打算把webgl的內容一起包括進來這次的賽程的，但是後來實際評估了一下(有先試著寫了幾篇)，才意識到要在30天內把2D + Webgl 全部寫完對我而言還是太困難了，畢竟平常還有工作 ：（</p>
+<p>主題的規劃上，在賽程的前段會先從基本的2D渲染理論和技術講起，<br>中期開始則是會找一些實務上常見的特效範例/套件效果來作為研究目標。<br>目前預計會提到的技術:</p>
+<ol>
+<li>web 端粒子系統實作</li>
+<li>力學效果模擬（磁力/張力/引力）</li>
+<li>布料材質模擬</li>
+<li>二維以上的碰撞模擬</li>
+<li>像素操作  </li>
+</ol>
+<h2 id="敬請期待"><a href="#敬請期待" class="headerlink" title="敬請期待!"></a>敬請期待!</h2>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2020/12/13/rxjs%20%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%20-%20ep2/" class="post-title-link" itemprop="url">rxjs 學習筆記 - ep2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-12-13 18:02:26" itemprop="dateCreated datePublished" datetime="2020-12-13T18:02:26+08:00">2020-12-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-14 11:29:44" itemprop="dateModified" datetime="2020-12-14T11:29:44+08:00">2020-12-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -906,348 +1195,6 @@
 
 <p>這說明了optional屬性只能接受”存在”或“不存在”這兩種值，用一個本來就不符合interface的property是不合法的</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2.5/" class="post-title-link" itemprop="url">TYPESCRIPT學習筆記-ep2.5</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:52:54" itemprop="dateModified" datetime="2020-12-13T03:52:54+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="如何使用interface-為函數定義參數型別與回傳值型別"><a href="#如何使用interface-為函數定義參數型別與回傳值型別" class="headerlink" title="如何使用interface 為函數定義參數型別與回傳值型別"></a>如何使用interface 為函數定義參數型別與回傳值型別</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> SearchFunc &#123;</span><br><span class="line">  (source: <span class="built_in">string</span>, <span class="attr">subString</span>: <span class="built_in">string</span>): <span class="built_in">boolean</span>;</span><br><span class="line">&#125; <span class="comment">// 定義函數參數/return 的方式</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> customVariables &#123;</span><br><span class="line">  variableA: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="如何使用interface-定義”可索引類型”"><a href="#如何使用interface-定義”可索引類型”" class="headerlink" title="如何使用interface 定義”可索引類型”"></a>如何使用interface 定義”可索引類型”</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">  [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 意思指的是[]內只能輸入數字, 並且return 值為字串</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> readonlyArrayType &#123;</span><br><span class="line">  <span class="keyword">readonly</span> [index: <span class="built_in">number</span>]: <span class="built_in">string</span>;</span><br><span class="line">&#125; <span class="comment">// 與readonly屬性的搭配應用方式, 這樣就可以把陣列轉為唯讀陣列</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 問題狀況</span></span><br><span class="line"><span class="keyword">interface</span> arrayType &#123;</span><br><span class="line">   [index: <span class="built_in">string</span>]: <span class="built_in">number</span>; <span class="comment">//當索引值的型別是字串時會有一種特殊的問題, 會強制要求內部的變數型別跟這邊定義的一樣</span></span><br><span class="line">  value:<span class="built_in">string</span> <span class="comment">// 所以這樣會報錯 (必須是number)</span></span><br><span class="line">&#125; <span class="comment">// 當已經使用了strinf索引類型的定義時, 會強制要求回傳值是索引類型定義中的那個回傳值型別</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="使用implement-將class與-interface-對接"><a href="#使用implement-將class與-interface-對接" class="headerlink" title="使用implement 將class與 interface 對接"></a>使用implement 將class與 interface 對接</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">    currentTime: <span class="built_in">Date</span>;</span><br><span class="line">    setTime(d: <span class="built_in">Date</span>): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="title">implements</span> <span class="title">ClockInterface</span> </span>&#123;</span><br><span class="line">    currentTime: <span class="built_in">Date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(); <span class="comment">//如果class裡面沒有寫這個變數就會報錯</span></span><br><span class="line">    <span class="function"><span class="title">setTime</span>(<span class="params">d: <span class="built_in">Date</span></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.currentTime = d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="如何快速定義一個class的constructor-參數型別與其建立出來的實例型別？"><a href="#如何快速定義一個class的constructor-參數型別與其建立出來的實例型別？" class="headerlink" title="如何快速定義一個class的constructor 參數型別與其建立出來的實例型別？"></a>如何快速定義一個class的constructor 參數型別與其建立出來的實例型別？</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//建議直接使用表達式</span></span><br><span class="line"><span class="keyword">interface</span> ClockConstructor &#123;</span><br><span class="line">  <span class="keyword">new</span> (hour: <span class="built_in">number</span>, <span class="attr">minute</span>: <span class="built_in">number</span>); <span class="comment">//定義ctor 參數內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> ClockInterface &#123;</span><br><span class="line">  tick(); <span class="comment">// 定義實例內容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Clock: ClockConstructor = <span class="class"><span class="keyword">class</span> <span class="title">Clock</span> <span class="title">implements</span> <span class="title">ClockInterface</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">h: <span class="built_in">number</span>, m: <span class="built_in">number</span></span>)</span> &#123;&#125;</span><br><span class="line">  <span class="function"><span class="title">tick</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="interface也可以extend"><a href="#interface也可以extend" class="headerlink" title="interface也可以extend"></a>interface也可以extend</h4><blockquote>
-<p>實際使用起來就跟class的extend 差不多</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Shape &#123;</span><br><span class="line">    color: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Square <span class="keyword">extends</span> Shape &#123;</span><br><span class="line">    sideLength: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> square = &lt;Square&gt;&#123;&#125;;  </span><br><span class="line"><span class="comment">// 這邊也可以寫成 let square:Square = &#123;color:&#x27;blue&#x27;,sideLength=10&#125;, 但如果不寫預設值就會報錯</span></span><br><span class="line">square.color = <span class="string">&quot;blue&quot;</span>;</span><br><span class="line">square.sideLength = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
-<h4 id="interface-extend-class？-用意是什麼"><a href="#interface-extend-class？-用意是什麼" class="headerlink" title="interface extend class？ 用意是什麼?"></a>interface extend class？ 用意是什麼?</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> state: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> SelectableControl <span class="keyword">extends</span> Control &#123;</span><br><span class="line">    select(): <span class="built_in">void</span>; <span class="comment">// 這邊定義了一個extend了 control的接口, 所以意思是說，如果今天有class想要implement 這個接口，他必須要有control 的全內容, 不然就會報錯</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Control</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125; <span class="comment">// 因為button 有 extend Control, 所以他本身就具有private 的state, 所以這樣給過</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextBox</span> <span class="keyword">extends</span> <span class="title">Control</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Error: Property &#x27;state&#x27; is missing in type &#x27;Image&#x27;.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Image</span> <span class="title">implements</span> <span class="title">SelectableControl</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="title">select</span>(<span class="params"></span>)</span> &#123; &#125;</span><br><span class="line">    <span class="comment">// 因為Image 本身沒有private 的state, 所以不能implement SelectableControl</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/" class="post-title-link" itemprop="url">TYPESCRIPT學習筆記-ep1</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:52:51" itemprop="dateModified" datetime="2020-12-13T03:52:51+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="TYPESCRIPT的基礎常識"><a href="#TYPESCRIPT的基礎常識" class="headerlink" title="TYPESCRIPT的基礎常識"></a>TYPESCRIPT的基礎常識</h1><h2 id="基礎型別上與es5-es6-較有差異的部分"><a href="#基礎型別上與es5-es6-較有差異的部分" class="headerlink" title="基礎型別上與es5/es6 較有差異的部分"></a>基礎型別上與es5/es6 較有差異的部分</h2><ol>
-<li><p>數字<br>ts的數字另外有支援兩種格式：2進位＆8進位;除此之外,ts 的number同樣都是浮點數</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> decLiteral: <span class="built_in">number</span> = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">let</span> hexLiteral: <span class="built_in">number</span> = <span class="number">0xf00d</span>;</span><br><span class="line"><span class="keyword">let</span> binaryLiteral: <span class="built_in">number</span> = <span class="number">0b1010</span>;</span><br><span class="line"><span class="keyword">let</span> octalLiteral: <span class="built_in">number</span> = <span class="number">0o744</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>陣列</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原則上ts的變數都要寫型別，而如果一個變數的型別是array</span></span><br><span class="line"><span class="comment">//且這個array的子項型別都是number，則可寫成如下</span></span><br><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//承上，或如下利用泛型</span></span><br><span class="line"><span class="keyword">let</span> list: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>元組(陣列型別專用)</li>
-</ol>
-<ul>
-<li><p>最基本的範例：</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Declare a tuple type</span></span><br><span class="line"><span class="keyword">let</span> x: [<span class="built_in">string</span>, <span class="built_in">number</span>];</span><br><span class="line"><span class="comment">// Initialize it</span></span><br><span class="line">x = [<span class="string">&#x27;hello&#x27;</span>, <span class="number">10</span>]; <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// Initialize it incorrectly</span></span><br><span class="line">x = [<span class="number">10</span>, <span class="string">&#x27;hello&#x27;</span>]; <span class="comment">// Error</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>為陣列編寫型別的好處</p>
-</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x: [<span class="built_in">string</span>, <span class="built_in">number</span>];</span><br><span class="line">x = [<span class="string">&#x27;hello&#x27;</span>, <span class="number">10</span>]; <span class="comment">// OK</span></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">0</span>].substr(<span class="number">1</span>)); <span class="comment">// OK 因為x[0]在元組中定義為字串，可以使用substr方法</span></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">1</span>].substr(<span class="number">1</span>)); <span class="comment">// Error, 因為10屬於在元組中定義為數字，不能使用substr方法，所以會報錯</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>當偵測到陣列子項位置在元組定義範圍外的子項時，會用元組定義的型別的聯集來定義之</li>
-</ul>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x[<span class="number">3</span>] = <span class="string">&#x27;world&#x27;</span>; <span class="comment">// OK, 字符串可以赋值给(string | number)类型</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(x[<span class="number">5</span>].toString()); <span class="comment">// OK, &#x27;string&#x27; 和 &#x27;number&#x27; 都有 toString</span></span><br><span class="line"></span><br><span class="line">x[<span class="number">6</span>] = <span class="literal">true</span>; <span class="comment">// Error, 布尔不是(string | number)类型</span></span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>列舉（Enumerate）</li>
-</ol>
-<ul>
-<li><p>能夠把變數的範圍限制在某些限制下進行存取並賦予其定義</p>
-</li>
-<li><p>舉個實用的例子，團隊裡的後端在 Server 處理資料發生錯誤時，定義了一些代碼，來告訴前端說，這個代碼代表什麼錯誤，那個又是什麼：</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleWrongStatus = (status: string): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;C&#x27;</span>:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> (<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;No have wrong code!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>然而像上面這樣寫的話，缺點會在於各個case之間沒有語意化，你很難去釐清Case A 實際上是什麼, Case B又是什麼，在這種狀況下就可以去使用enumerate</p>
-<p>enumerate的寫法跟js的物件接近，如下</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> requestStatusCodes &#123;</span><br><span class="line">  error,</span><br><span class="line">  success,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>正常來講，如果不幫上述這個requestStatusCodes 的裡面每一個子項去做定義，TS的編譯器會直接把error的編號定為0, success的編號定為1（流水號）</p>
-<p>這樣我們就可以透過requestStatusCodes.error拿到0這個列舉值, requestStatusCodes.success拿到1這個列舉值;或者透過requestStatusCodes[0]拿到error 這個列舉子項</p>
-<p>這樣的話。上述的case switch就可以這樣改良</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">enum</span> requestWrongCodes &#123;</span><br><span class="line">  missingParameter = <span class="string">&#x27;A&#x27;</span>,</span><br><span class="line">  wrongParameterType = <span class="string">&#x27;B&#x27;</span>,</span><br><span class="line">  invalidToken = <span class="string">&#x27;C&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handleWrongStatus = (status: <span class="built_in">string</span>): <span class="function"><span class="params">void</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//es6解構賦值的寫法</span></span><br><span class="line">  <span class="keyword">const</span> &#123; missingParameter, wrongParameterType, invalidToken, &#125; = requestWrongCodes;</span><br><span class="line">  <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">    <span class="keyword">case</span> missingParameter:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> wrongParameterType:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> invalidToken:</span><br><span class="line">      <span class="comment">// Do something...</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> (<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;No have wrong code!&#x27;</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>5.any/void 任意值與虛空值</p>
-<p>變數的型別如果不確定的話可以直接帶any，而函數的return type如果為空的話則可以直接帶:void</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> notSure: <span class="built_in">any</span> = <span class="number">4</span>;</span><br><span class="line">notSure = <span class="string">&quot;maybe a string instead&quot;</span>; <span class="comment">//這樣不會報錯</span></span><br><span class="line">notSure = <span class="literal">false</span>; <span class="comment">//這樣也不會報錯</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">warnUser</span>(<span class="params"></span>): <span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;This is my warning message&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>6.undefined/null 未定義與空值</p>
-<blockquote>
-<p>TypeScript里，undefined和null两者各自有自己的类型分别叫做undefined和null。 和void相似，它们的本身的类型用处不是很大</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Not much else we can assign to these variables!</span><br><span class="line">let u: undefined &#x3D; undefined; </span><br><span class="line">let n: null &#x3D; null;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在默認狀況下 undefined和null 這兩種value也可以被賦予給任何型別作為其值</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> u: <span class="built_in">number</span> = <span class="literal">undefined</span>; </span><br><span class="line"><span class="keyword">let</span> n: syting = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>–strictNullChecks是什麼？<blockquote>
-<p>簡單來說就是typescript 的tsconfig.json裡面的一個設定，只要做了這個設定以後，undefined和null 這兩種value就再也不會被默認為任何型別的一種預設值。也許在某處你想嘗試一個字串或空或未定義，可以使用聯合類型 <code>ex: string|number|null</code></p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;compileOnSave&quot;</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">        ...</span><br><span class="line">        &quot;strictNullChecks&quot;: true,</span><br><span class="line">        &quot;skipLibCheck&quot;: true,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="7">
-<li>Never 這個型別是用來幹嘛用的?</li>
-</ol>
-<p>never類型表示的是那些根本就不會有值的類型，例如一個只會return new Error(‘string’) 的function；<br>要注意值為never型別不接受null作為其值。</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error</span>(<span class="params">message: <span class="built_in">string</span></span>): <span class="title">never</span> </span>&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> something: <span class="built_in">void</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">let</span> nothing: <span class="built_in">never</span> = <span class="literal">null</span>; <span class="comment">// Error: Type &#x27;null&#x27; is not assignable to type &#x27;never&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="8">
-<li>類型斷言</li>
-</ol>
-<p>類型斷言好比其它語言裡的類型轉換，但是不進行特殊的數據檢查和解構。<br>.jsx檔案裡面只能用as的方式做類型斷言</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someValue: <span class="built_in">any</span> = <span class="string">&quot;this is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> strLength: <span class="built_in">number</span> = (&lt;<span class="built_in">string</span>&gt;someValue).length;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> someValue: <span class="built_in">any</span> = <span class="string">&quot;this is a string&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> strLength: <span class="built_in">number</span> = (someValue <span class="keyword">as</span> <span class="built_in">string</span>).length;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/Proxy%20%E7%9A%84%E5%8A%9F%E7%94%A8_%E5%AF%A6%E7%94%A8%E7%9A%84%E9%BB%9E/" class="post-title-link" itemprop="url">Proxy 的功用/實用的點</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:52:16" itemprop="dateModified" datetime="2020-12-13T03:52:16+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="1-實作雙-單向-prop-trap綁定"><a href="#1-實作雙-單向-prop-trap綁定" class="headerlink" title="1. 實作雙/單向 prop trap綁定"></a>1. 實作雙/單向 prop trap綁定</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#username&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">target, key, value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (target.id &amp;&amp; key === <span class="string">&#x27;username&#x27;</span>) &#123;</span><br><span class="line">            target[key] = value;</span><br><span class="line">            <span class="built_in">document</span>.querySelector(<span class="string">`#<span class="subst">$&#123;target.id&#125;</span>`</span>)</span><br><span class="line">            .value = value;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(inputState, handler)</span><br><span class="line">proxy.value = <span class="string">&#x27;John Doe&#x27;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-trap呼叫無效-不存在方法的行為並throw-error"><a href="#2-trap呼叫無效-不存在方法的行為並throw-error" class="headerlink" title="2. trap呼叫無效/ 不存在方法的行為並throw error"></a>2. trap呼叫無效/ 不存在方法的行為並throw error</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Proxy</span>(<span class="built_in">this</span>, &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span> (<span class="params">object, property</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Reflect</span>.has(object, property)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(object, property);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">methodMissing</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;you called &#x27;</span> + property + <span class="string">&#x27; but it doesn\&#x27;t exist!&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.prototype.bar = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;you called bar. Good job!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo = <span class="keyword">new</span> Foo();</span><br><span class="line">foo.bar();</span><br><span class="line"><span class="comment">//=&gt; you called bar. Good job!</span></span><br><span class="line">foo.this_method_does_not_exist()</span><br><span class="line"><span class="comment">//=&gt; you called this_method_does_not_exist but it doesn&#x27;t exist</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
