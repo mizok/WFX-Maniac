@@ -125,7 +125,7 @@ void ctx.quadraticCurveTo(cpx, cpy, x, y);
 
 ## 路徑繪製/上色 - 小結
 
-實際上，canvas 關於繪製路徑的api還遠不止只有上述提到的這幾種。
+實際上，canvas 關於繪製路徑的api還遠不止上述提到的這幾種。
 例如曲線還有 ctx.bezierCurveTo()(貝茲曲線), 設定邊框粗細可以用 ctx.lineWidth, 設定端點類型可以用ctx.lineJoin...,etc
 
 這些api/property 如果要在文章中一一介紹其實多少會變得有點流水帳，所以我比較傾向讓大家自己去搜尋自己需要的api
