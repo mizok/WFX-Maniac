@@ -341,7 +341,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-16 03:15:26" itemprop="dateModified" datetime="2021-09-16T03:15:26+08:00">2021-09-16</time>
+        <time title="修改時間：2021-09-19 13:43:39" itemprop="dateModified" datetime="2021-09-19T13:43:39+08:00">2021-09-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -384,7 +384,7 @@
 </blockquote>
 <p>這邊我們可以發現，左邊evenodd規則所畫出來的圖形，中間並沒有被填滿，但是nonezero規則下的圖形卻是相反過來的狀況。</p>
 <p>這是為什麼？ 接下來我們就是要來解釋這兩種規則的差異。</p>
-<h2 id="解釋非零纏繞與奇偶規則"><a href="#解釋非零纏繞與奇偶規則" class="headerlink" title="解釋非零纏繞與奇偶規則"></a>解釋非零纏繞與奇偶規則</h2><p>非零纏繞(nonzero)、奇偶規則(evenodd) 其實是在電腦圖學一個很常見的概念(SVG也會牽涉到這兩個東西)，這兩種概念是用在“當判斷一個座標是否處於一個path內部時”，採用的兩種基準點。</p>
+<h2 id="解釋非零纏繞與奇偶規則"><a href="#解釋非零纏繞與奇偶規則" class="headerlink" title="解釋非零纏繞與奇偶規則"></a>解釋非零纏繞與奇偶規則</h2><p>非零纏繞(nonzero)、奇偶規則(evenodd) 其實是在電腦圖學一個很常見的概念(SVG也會牽涉到這兩個東西)，這兩種概念是用在“當判斷一個座標是否處於一個封閉路徑內部時”，採用的兩種基準點。</p>
 <img src="https://i.imgur.com/uw1xKbU.png" width="400">
 
 <p>上圖是同一個path , 採用不同的規則時，在被Fill之後的樣子<br>我們可以看到這個path是由相同的一組編號1~5的向量線所形成的一個path。</p>
@@ -392,9 +392,19 @@
 <p>這邊我們先來複習一下高中的數學/物理～所謂的向量，指的是一種從座標A移動到座標B的附帶方向的移動量。<br>而『向量的夾角』指的則是兩條向量之前夾的最小角度(意思就是說『夾角』永遠是指小於180度的那個角)。</p>
 <img src="https://i.imgur.com/zeZZ9at.png">
 
-<p>另外還有一點略微重要就是夾角必須要是讓兩組向量從同一個座標點出發才能夠判定(像這邊的案例是透過把A向量拉出延伸)</p>
+<p>另外，夾角的計算~必須要是讓兩組向量從同一個座標點出發才能夠判定</p>
+<blockquote>
+<p>像下面這邊的案例是透過把A向量拉出延伸, 直到Ａ向量與B向量自同一座標出發</p>
+</blockquote>
 <img src="https://i.imgur.com/dlxvUwK.png" width="400">
 
+<p>我們在接下來的講解其實還會提到向量夾角的正負值，所以我們這邊也簡單的做一些說明:</p>
+<p>向量夾角正負的判斷, 這邊就會牽涉到我們前面講到的canvas座標系問題</p>
+<blockquote>
+<p>還記得我們前面有提到過canvas的座標系是屬於左手定則坐標系嗎?而且左手定則坐標系是『順時針方向為正</p>
+</blockquote>
+<p>當我們有兩條向量(A與B), 假設今天我們要讓Ａ轉變成B, 其實可以想像有一台以A向量方向前進的車，而突然這台車受到某種外力的干涉，導致車子必須變成以B向量方向行駛:</p>
+<p><img src="https://i.imgur.com/FjkJeyd.png" alt="向量夾角"></p>
 <hr>
 <p>BTW，對高中數學還有印象的人可能還會記得這個公式～  </p>
 <p>假設有一個向量圍成的三角形如下：</p>
@@ -404,14 +414,19 @@
 <img src="https://i.imgur.com/POHe4mc.png" width="400">
 
 
-<p>接下來我們看看兩種規則是怎麼透過向量夾角機制來判定封閉區域是否存在</p>
+<blockquote>
+<p>而這樣的公式因爲完全是數理邏輯，所以我們其實也可以把它改寫成程式</p>
+</blockquote>
+<p>接下來我們看看兩種規則是怎麼透過向量夾角機制來判定封閉區域是否存在 :D</p>
 <h3 id="非零纏繞-nonzero"><a href="#非零纏繞-nonzero" class="headerlink" title="非零纏繞(nonzero)"></a>非零纏繞(nonzero)</h3><img src="https://i.imgur.com/ftLWrMo.png" width="400">  
 
 
 <p>由點A向外隨便一個方向拉一條無限延伸的線(淡藍色的線)，當這條線和1~5編號的向量交接時，若交接的夾角是呈逆時針，則-1，若為順時針則+1，最後的總和若不為0，代表點A在Path內部(也就是說A在一個封閉路徑內部)，若為0則反之。</p>
 <h3 id="奇偶規則-evenodd"><a href="#奇偶規則-evenodd" class="headerlink" title="奇偶規則(evenodd)"></a>奇偶規則(evenodd)</h3><img src="https://i.imgur.com/QT1XMRn.png" width="400">  
 
-
+<blockquote>
+<p>奇偶規則的判定比較簡單，同時他也跟向量判定沒太大關係。</p>
+</blockquote>
 <p>由點A向外隨便一個方向拉一條無限延伸的線(淡藍色的線)，當這條線和1~5編號的向量交接時，每碰到一條線就+1,<br>最後的總和若為奇數，代表點A在Path內部(也就是說A在一個封閉路徑內部)，若為偶數則反之。</p>
 <h2 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h2><p>一般來說，大部分情況下evenodd的填充方式不會去涵蓋到shade region<br>(就是容易因為模式改變而轉變為 開放/封閉 區域 的地方)。</p>
 <p>所以當我們想要用path去畫一個鏤空的圖形，一般會先把fillRule 改成evenodd。</p>
@@ -712,7 +727,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-15 02:48:22" itemprop="dateModified" datetime="2021-09-15T02:48:22+08:00">2021-09-15</time>
+        <time title="修改時間：2021-09-19 13:08:43" itemprop="dateModified" datetime="2021-09-19T13:08:43+08:00">2021-09-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -734,7 +749,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人多半沒有美術背景，所以這邊還是簡單做點說明~</p>
+          <h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人都沒有美術學經歷背景，所以這邊還是簡單做點說明~</p>
 <blockquote>
 <p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
 </blockquote>
@@ -955,7 +970,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" class="post-title-link" itemprop="url">Day6 - 2D渲染環境基礎篇 III -  成為Canvas Ninja ～ 理解2D渲染的精髓</a>
+          <a href="/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20III%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" class="post-title-link" itemprop="url">Day7 - 2D渲染環境基礎篇 III[ 變形與陣列運算 ] -  成為Canvas Ninja ～ 理解2D渲染的精髓</a>
         </h2>
 
         <div class="post-meta-container">
@@ -973,7 +988,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-16 03:05:49" itemprop="dateModified" datetime="2021-09-16T03:05:49+08:00">2021-09-16</time>
+        <time title="修改時間：2021-09-21 03:36:34" itemprop="dateModified" datetime="2021-09-21T03:36:34+08:00">2021-09-21</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -995,7 +1010,59 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+          <p>之前我們有提到過，canvas其實本身可以看做一群像素形成的2維陣列，而Canvas的圖像變形，其實就是對canvas自身做的一種陣列運算。  </p>
+<p>高中讀理組的同學可能還記得數學課學過的『旋轉矩陣』、『平移矩陣』…之類的東西~沒有錯，其實Canvas的變形API背後的原理就是矩陣運算～而第一次聽到這些名詞的人也不用太擔心如何理解這些數理常識，因為在2D渲染環境的case中，其實光靠API就已經可以處理絕大部分的變形問題。</p>
+<p>接下來我們就直接看看變形相關的API都有哪些～</p>
+<h1 id="Rotate-Translate-scale"><a href="#Rotate-Translate-scale" class="headerlink" title="Rotate/Translate/scale"></a>Rotate/Translate/scale</h1><p>之所以把這三個放在一起介紹，是因為這三個API常常會一同使用。</p>
+<p>有些人可能會想像canvas的旋轉應該就是旋轉當前畫好的圖像，但是實際上不是的。<br>Canvas的旋轉是固定以<strong>座標軸原點</strong>(0,0)為旋轉中心轉動整張canvas。</p>
+<p>就像MDN上面的這張圖片一樣</p>
+<p><img src="https://i.imgur.com/WWyvfm7.png" alt="img"></p>
+<p>到這邊一定會有人問~那如果說我需要以某個座標作為旋轉中心, 要怎麼辦？<br>這時候就會用到ctx.translate。ctx.translate的用途是把座標軸中心移動到指定新座標，這樣我們就可以透過移動<strong>座標軸原點</strong>來滿足移動旋轉中心的需求</p>
+<p><img src="https://i.imgur.com/QAUyriB.png" alt="img"></p>
+<p>而最後scale其實就跟rotate差不多，比較不同的是scale可以輸入兩個參數，一個參數是for X軸，另一個for Y軸(分別是兩個方向的縮放變形)，而當然因為縮放也同樣會有所謂的”變形中心”，變形中心也就跟rotate一樣固定默認為座標軸原點，所以要移動變形中心也是必須要依賴ctx.translate</p>
+<h1 id="Transform-setTransform-getTransform"><a href="#Transform-setTransform-getTransform" class="headerlink" title="Transform/setTransform/getTransform"></a>Transform/setTransform/getTransform</h1><p>之所以把Transform系列的API 獨立出來講，是因為Transform的參數稍多，一條一條拉出來講解比較清楚些。<br>而且因為這個API會牽涉到一點點矩陣運算的常識，所以我想也可以稍微提到點這部分背後的運算邏輯(其實還蠻有趣的)～</p>
+<blockquote>
+<p>由於這邊我們不會另外講解一般矩陣運算的做法，高中沒有學過或已經還給老師的人可以看<a target="_blank" rel="noopener" href="https://highscope.ch.ntu.edu.tw/wordpress/?p=50848">這邊</a></p>
+</blockquote>
+<h2 id="ctx-transform-的用法"><a href="#ctx-transform-的用法" class="headerlink" title="ctx.transform() 的用法"></a>ctx.transform() 的用法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ctx.transform(a, b, c, d, e, f); <span class="comment">//一共會有六個參數</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//a (m11): 水平scale參數, 最小值為1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//b (m12): Y軸傾斜參數(skewY) , 最小值為0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//c (m21): X軸傾斜參數(skewX) , 最小值為0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//d (m22): 垂直scale參數 , 最小值為1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//e (dx): X軸平移參數 , 最小值為0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//f (dy): Y軸平移參數 , 最小值為0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在這邊我們可以看到這些m11、m12..,etc.這些奇怪的代號，這邊m11,m12,m21,m22指的是<strong>當前變形矩陣</strong>(Current Transform Matrix, 簡稱CTM)的四個子項名稱(例如m11意思就是CTM的第一行第一列的元素)。</p>
+<p>所謂的<strong>當前變形矩陣</strong>(CTM)是一個3x3矩陣，用途是用來表示canvas元素當前的變形狀態，而當我們每次去使用ctx.scale/ctx.translate/ctx.transform/ctx.rotate 最終都會導致CTM產生變化。  </p>
+<p>仔細觀察上面a,b,c,d,e,f 這幾個參數，會發現一個有趣的地方，那就是這些參數似乎沒有跟Rotate相關的數值(例如角度)，這是因為~ Canvas的旋轉，其實是SkewX/SkewY 合併運用而產生的結果，所以這邊我們可以看到SkewX/SkewY相關的參數，但卻看不到Rotate的Degree值。</p>
+<h2 id="ctx-getTransform-ctx-setTransform-的用法"><a href="#ctx-getTransform-ctx-setTransform-的用法" class="headerlink" title="ctx.getTransform()/ctx.setTransform() 的用法"></a>ctx.getTransform()/ctx.setTransform() 的用法</h2><p>首先，這兩個方法其實就是直接去 取得/設定 CTM。<br>getTransform 本身並沒有參數，他會回傳當前渲染環境的CTM陣列值。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> storedTransform = ctx.getTransform();</span><br></pre></td></tr></table></figure>
+
+<p>setTransform 本身的參數則和transform一模一樣，但是他和transform的差別就在於setTransform是直接賦予CTM指定的新陣列值，而transform的陣列值則會透過矩陣乘積的方式累計到當前的CTM上(後面會提到)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> ctx.transform(a, b, c, d, e, f); <span class="comment">//一共會有六個參數</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="當前變形矩陣-CTM-與變形前後向量座標的關係"><a href="#當前變形矩陣-CTM-與變形前後向量座標的關係" class="headerlink" title="當前變形矩陣(CTM)與變形前後向量座標的關係"></a>當前變形矩陣(CTM)與變形前後向量座標的關係</h2><p>這邊我們實際用矩陣來表示CTM的組成:</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a(<span class="name">m11</span>) c(<span class="name">m21</span>) e(<span class="name">dx</span>)</span><br><span class="line"></span><br><span class="line">b(<span class="name">m12</span>) d(<span class="name">m22</span>) f(<span class="name">dy</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">0</span>   <span class="number">0</span>   <span class="number">1</span>   </span><br></pre></td></tr></table></figure>
+
+<p>假設今天我們要透過改寫CTM來引導Canvas的變形，則CTM與任意一個像素(Xi,Yi)的關係就如下圖：</p>
+<blockquote>
+<p>舊像素座標陣列  =  CTM * 新像素座標陣列</p>
+</blockquote>
+<p><img src="https://i.imgur.com/6jP31jy.png" alt="img"></p>
+<p>這邊我們可以發現一個有趣的點，那就是CTM竟然是放在等號後面的，這意味著若我們已知變形前座標和CTM的陣列值，我們其實就可以透過解二元一次聯立方程式來取得變形後座標。</p>
+<p>就像這樣:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Xin<span class="number">*a</span>+Yin<span class="number">*c</span>+dx = Xip</span><br><span class="line">Xin<span class="number">*b</span>+Yin<span class="number">*d</span>+dy = Yip</span><br></pre></td></tr></table></figure>
+<h2 id="當前變形矩陣-CTM-與變形的計算方法"><a href="#當前變形矩陣-CTM-與變形的計算方法" class="headerlink" title="當前變形矩陣(CTM)與變形的計算方法"></a>當前變形矩陣(CTM)與變形的計算方法</h2><p>我們前面有提到過Canvas的變形運算其實就是簡單的矩陣乘法，假設我們今天令一個canvas先後做了兩次Transform</p>
+<p>CTM的初始值:</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span><span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">1</span> <span class="number">0</span></span><br><span class="line"><span class="symbol">0 </span><span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>第一次Transform使用的a,b,c,d,e,f 值：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> -<span class="number">0.5</span>  <span class="number">30</span></span><br><span class="line"><span class="number">0.5</span>  <span class="number">1</span>  <span class="number">10</span></span><br><span class="line"><span class="symbol">0 </span>   <span class="number">0</span>   <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>第二次Transform使用的a,b,c,d,e,f 值：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span> -<span class="number">0.5</span>  <span class="number">30</span></span><br><span class="line"><span class="number">0.5</span>  <span class="number">1</span>  <span class="number">10</span></span><br><span class="line"><span class="symbol">0 </span>   <span class="number">0</span>   <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>則最終CTM將會變成一二兩次Transform陣列的乘積：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.75</span> -<span class="number">1</span>  <span class="number">55</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">1 </span>  <span class="number">0.75</span>  <span class="number">35</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">0 </span>   <span class="number">0</span>    <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h1><p>雖然說大部分人可能會覺得變形只是一種稀鬆平常的電腦繪圖操作，但是我覺得它背後的數學運算相當的有趣。  </p>
+<p>除此之外，雖然這次介紹的部分可能稍微比較需要花時間理解，而且在大部分的2D渲染案例，我們也比較少會需要理解到這麼深，但是未來若是要學習webgl環境的渲染編程，陣列運算會是相當重要的一環。  </p>
+<p>所以還是老話一句『學了不虧』～</p>
+
       
     </div>
 

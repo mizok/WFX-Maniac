@@ -23,17 +23,17 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="何謂路徑？要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人多半沒有美術背景，所以這邊還是簡單做點說明~  路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓">
+<meta name="description" content="何謂路徑？要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人都沒有美術學經歷背景，所以這邊還是簡單做點說明~  路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Day5 - 2D渲染環境基礎篇 II -  成為Canvas Ninja ～ 理解2D渲染的精髓">
 <meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/14/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="何謂路徑？要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人多半沒有美術背景，所以這邊還是簡單做點說明~  路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓">
+<meta property="og:description" content="何謂路徑？要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人都沒有美術學經歷背景，所以這邊還是簡單做點說明~  路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/7TfVMlG.png">
 <meta property="og:image" content="https://i.imgur.com/zW0Biud.png">
 <meta property="article:published_time" content="2021-09-13T17:43:18.147Z">
-<meta property="article:modified_time" content="2021-09-14T18:48:22.515Z">
+<meta property="article:modified_time" content="2021-09-19T05:08:43.585Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
@@ -331,7 +331,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-15 02:48:22" itemprop="dateModified" datetime="2021-09-15T02:48:22+08:00">2021-09-15</time>
+        <time title="修改時間：2021-09-19 13:08:43" itemprop="dateModified" datetime="2021-09-19T13:08:43+08:00">2021-09-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,7 +353,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人多半沒有美術背景，所以這邊還是簡單做點說明~</p>
+        <h2 id="何謂路徑？"><a href="#何謂路徑？" class="headerlink" title="何謂路徑？"></a>何謂路徑？</h2><p>要介紹路徑繪圖相關的api之前，必須要先理解什麼叫做『路徑』。<br>有學過電腦繪圖軟體，例如Adobe Photoshop, Adobe Illustrator的同學可能對『路徑』這個詞相當的熟悉，同時也可能可以更快速掌握2D渲染環境路徑繪圖的概念，但是考量到大多數人都沒有美術學經歷背景，所以這邊還是簡單做點說明~</p>
 <blockquote>
 <p>路徑是使用繪圖工具建立的任意形狀的曲線，用它可勾勒出物體的輪廓，所以也稱之為輪廓線。 為了滿足繪圖的需要，路徑又分為開放路徑和封閉路徑。 –維基百科</p>
 </blockquote>
