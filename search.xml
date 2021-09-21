@@ -279,7 +279,7 @@
     <title>Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓</title>
     <url>/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20%5B%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A6%82%E8%AB%96%5D%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/</url>
     <content><![CDATA[<p>『像素操作(Pixel Manipulation)』 顧名思義就是要去以單一像素為最小單位來進行操作，就像我們透過JS改變DOM結構所進行的『DOM操作』必須要先取得被操作元素一樣。  </p>
-<h1 id="canvas-取得像素陣列的方法"><a href="#canvas-取得像素陣列的方法" class="headerlink" title="canvas 取得像素陣列的方法"></a>canvas 取得像素陣列的方法</h1><p>上面我們提到了要做像素操作，就必須先取得像素。</p>
+<h1 id="canvas-像素操作起手式"><a href="#canvas-像素操作起手式" class="headerlink" title="canvas 像素操作起手式"></a>canvas 像素操作起手式</h1><p>上面我們提到了要做像素操作，就必須先取得像素。</p>
 <p>就像DOM操作一樣，在操作DOM的時候我們通常要先抓取(<code>query</code>)到目標元素，然後才可以接著做<code>append</code>/<code>prepend</code>/<code>setAttribute</code>之類的事情。  </p>
 <p>而像素操作的第一步就是要先取得canvas的像素數據(Image Data)。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> imageData = ctx.getImageData(sx, sy, sw, sh);</span><br><span class="line"><span class="comment">// sx: 想要取得的圖像區域的左上角x軸座標值</span></span><br><span class="line"><span class="comment">// sy: 想要取得的圖像區域的左上角y軸座標值</span></span><br><span class="line"><span class="comment">// sw: 想要取得的圖像區域的寬度</span></span><br><span class="line"><span class="comment">// sh: 想要取得的圖像區域的高度</span></span><br></pre></td></tr></table></figure>

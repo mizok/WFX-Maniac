@@ -341,7 +341,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2021-09-22 02:11:32" itemprop="dateModified" datetime="2021-09-22T02:11:32+08:00">2021-09-22</time>
+        <time title="修改時間：2021-09-22 02:13:59" itemprop="dateModified" datetime="2021-09-22T02:13:59+08:00">2021-09-22</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -364,7 +364,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>『像素操作(Pixel Manipulation)』 顧名思義就是要去以單一像素為最小單位來進行操作，就像我們透過JS改變DOM結構所進行的『DOM操作』必須要先取得被操作元素一樣。  </p>
-<h1 id="canvas-取得像素陣列的方法"><a href="#canvas-取得像素陣列的方法" class="headerlink" title="canvas 取得像素陣列的方法"></a>canvas 取得像素陣列的方法</h1><p>上面我們提到了要做像素操作，就必須先取得像素。</p>
+<h1 id="canvas-像素操作起手式"><a href="#canvas-像素操作起手式" class="headerlink" title="canvas 像素操作起手式"></a>canvas 像素操作起手式</h1><p>上面我們提到了要做像素操作，就必須先取得像素。</p>
 <p>就像DOM操作一樣，在操作DOM的時候我們通常要先抓取(<code>query</code>)到目標元素，然後才可以接著做<code>append</code>/<code>prepend</code>/<code>setAttribute</code>之類的事情。  </p>
 <p>而像素操作的第一步就是要先取得canvas的像素數據(Image Data)。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> imageData = ctx.getImageData(sx, sy, sw, sh);</span><br><span class="line"><span class="comment">// sx: 想要取得的圖像區域的左上角x軸座標值</span></span><br><span class="line"><span class="comment">// sy: 想要取得的圖像區域的左上角y軸座標值</span></span><br><span class="line"><span class="comment">// sw: 想要取得的圖像區域的寬度</span></span><br><span class="line"><span class="comment">// sh: 想要取得的圖像區域的高度</span></span><br></pre></td></tr></table></figure>
