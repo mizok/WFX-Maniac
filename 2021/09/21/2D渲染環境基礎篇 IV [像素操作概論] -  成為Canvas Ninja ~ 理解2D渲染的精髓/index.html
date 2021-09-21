@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/images/logo-x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/images/logo-x16.png">
+  <link rel="mask-icon" href="/WFX-Maniac/assets/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/WFX-Maniac/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="『像素操作(Pixel Manipulation)』 顧名思義就是要去以單一像素為最小單位來進行操作，就像我們透過JS改變DOM結構所進行的『DOM操作』必須要先取得被操作元素一樣。   canvas 取得像素陣列的方法上面我們提到了要做像素操作，就必須先取得像素。 就像DOM操作一樣，在操作DOM的時候我們通常要先抓取(query)到目標元素，然後才可以接著做append&#x2F;prepend&#x2F;set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20[%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A6%82%E8%AB%96]%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/index.html">
+<meta property="og:site_name" content="WFX-Maniac">
+<meta property="og:description" content="『像素操作(Pixel Manipulation)』 顧名思義就是要去以單一像素為最小單位來進行操作，就像我們透過JS改變DOM結構所進行的『DOM操作』必須要先取得被操作元素一樣。   canvas 取得像素陣列的方法上面我們提到了要做像素操作，就必須先取得像素。 就像DOM操作一樣，在操作DOM的時候我們通常要先抓取(query)到目標元素，然後才可以接著做append&#x2F;prepend&#x2F;set">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/8bzGT1G.png">
+<meta property="og:image" content="https://i.imgur.com/nhxwsL9.jpg">
+<meta property="article:published_time" content="2021-09-21T04:15:09.740Z">
+<meta property="article:modified_time" content="2021-09-21T18:01:02.191Z">
+<meta property="article:author" content="Mizok.H">
+<meta property="article:tag" content="2021鐵人賽">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/8bzGT1G.png">
+
+
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20[%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A6%82%E8%AB%96]%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
+
+<script src="/WFX-Maniac/js/ripple-logo.js"></script>
+<script src="/WFX-Maniac/js/silk-wave.js"></script>
+
+<style>
+  @font-face {
+  font-family: "Roboto";
+  src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
+}
+</style>
+<title>Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓 | WFX-Maniac</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/WFX-Maniac/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WFX-Maniac</h1>
+      <canvas id="logo-canvas"></canvas><i class="logo-line"></i>
+    </a>
+<script>
+  (()=>{
+    let canvas = document.querySelector('#logo-canvas');
+
+    let init= ()=>{
+      let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
+        points:2,
+        randomFill:false,
+        lineColor:'rgba(255,255,255,0.35)',
+        maxSize:250
+      });
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/WFX-Maniac/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/WFX-Maniac/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#canvas-%E5%8F%96%E5%BE%97%E5%83%8F%E7%B4%A0%E9%99%A3%E5%88%97%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">canvas 取得像素陣列的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%95%E8%AC%82%E5%83%8F%E7%B4%A0%E6%95%B8%E6%93%9A-Image-Data"><span class="nav-number">2.</span> <span class="nav-text">何謂像素數據(Image Data)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B6%93%E5%85%B8%E7%9A%84%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A1%88%E4%BE%8B%E8%A7%A3%E6%9E%90-%E6%8B%BC%E5%AD%97%E5%9C%96%E7%95%AB"><span class="nav-number">3.</span> <span class="nav-text">經典的像素操作案例解析 - 拼字圖畫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">4.</span> <span class="nav-text">小結</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mizok.H"
+      src="/WFX-Maniac/assets/images/logo.png">
+  <p class="site-author-name" itemprop="name">Mizok.H</p>
+  <div class="site-description" itemprop="description">網頁特效開發/個人前端學習歷程</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/WFX-Maniac/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/WFX-Maniac/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/WFX-Maniac/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20[%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A6%82%E8%AB%96]%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-21 12:15:09" itemprop="dateCreated datePublished" datetime="2021-09-21T12:15:09+08:00">2021-09-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-22 02:01:02" itemprop="dateModified" datetime="2021-09-22T02:01:02+08:00">2021-09-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>『像素操作(Pixel Manipulation)』 顧名思義就是要去以單一像素為最小單位來進行操作，就像我們透過JS改變DOM結構所進行的『DOM操作』必須要先取得被操作元素一樣。  </p>
+<h1 id="canvas-取得像素陣列的方法"><a href="#canvas-取得像素陣列的方法" class="headerlink" title="canvas 取得像素陣列的方法"></a>canvas 取得像素陣列的方法</h1><p>上面我們提到了要做像素操作，就必須先取得像素。</p>
+<p>就像DOM操作一樣，在操作DOM的時候我們通常要先抓取(<code>query</code>)到目標元素，然後才可以接著做<code>append</code>/<code>prepend</code>/<code>setAttribute</code>之類的事情。  </p>
+<p>而像素操作的第一步就是要先取得canvas的像素數據(Image Data)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> imageData = ctx.getImageData(sx, sy, sw, sh);</span><br><span class="line"><span class="comment">// sx: 想要取得的圖像區域的左上角x軸座標值</span></span><br><span class="line"><span class="comment">// sy: 想要取得的圖像區域的左上角y軸座標值</span></span><br><span class="line"><span class="comment">// sw: 想要取得的圖像區域的寬度</span></span><br><span class="line"><span class="comment">// sh: 想要取得的圖像區域的高度</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="何謂像素數據-Image-Data"><a href="#何謂像素數據-Image-Data" class="headerlink" title="何謂像素數據(Image Data)"></a>何謂像素數據(Image Data)</h1><p>我們在前面有提到過，canvas可以被視為一群像素的集合體，而每一個像素本身是由4個channel值所組成的。  </p>
+<blockquote>
+<p>『一張寬度100px, 高度100px的canvas，它實際上就是100*100 = 10000個像素的集合體，而同時在程序上我們則可以把它轉換成一個長度為100*100*4的陣列(也就是一共40000個channel值)。』  — 來自我們前面提過的內容</p>
+</blockquote>
+<p>當我們用ctx.getImageData去取得完整一張canvas(sx,sy定為0, sw, sh定為canvas寬高)的imageData時，我們實際上會取得一個含有全部像素channel值的Uint8ClampedArray（8位元無符號整型固定陣列）</p>
+<p>這邊我們透過console.log去檢驗一組由100px x 100px 大小canvas所提取的imageData</p>
+<p><img src="https://i.imgur.com/8bzGT1G.png" alt="img"></p>
+<blockquote>
+<p>codepen連結: <a target="_blank" rel="noopener" href="https://codepen.io/mizok_contest/pen/powKopj">https://codepen.io/mizok_contest/pen/powKopj</a></p>
+</blockquote>
+<p>簡單觀察一下首先可以發現, Uint8ClampedArray其實只是imageData的一部分(imageData.data)，其餘還會有height/width等屬性(imageData本身具備獨立的型別)。  </p>
+<p>然後接著看看Uint8ClampedArray的部分，可以發現他確實就是由全部像素的channel值所組成;由於我們填入的顏色是紅色(255,0,0,1)，所以channel值的分佈會是255,0,0,255這樣四個一組持續到結束的組合…..，這邊值得注意的一點是Uint8ClampedArray是以0到255來表示alpha channel的值，而不是0到1，那是因為8位元的關係(2的8次方是256, 而0~255剛好是256個數字)。</p>
+<h1 id="經典的像素操作案例解析-拼字圖畫"><a href="#經典的像素操作案例解析-拼字圖畫" class="headerlink" title="經典的像素操作案例解析 - 拼字圖畫"></a>經典的像素操作案例解析 - 拼字圖畫</h1><p>這邊我們馬上就來看一個很經典的像素操作案例 - 拼字圖畫(Image To Ascii)</p>
+<p>所謂的拼字圖畫就是像下圖這種，把圖像變成不同符號所形成的一幅圖</p>
+<p><img src="https://i.imgur.com/nhxwsL9.jpg" alt="img"></p>
+<p>這邊我分成幾個主要步驟稍微描述一下拼字圖畫的程序邏輯</p>
+<ul>
+<li><p>用ctx.drawImage() 先把指定的圖片繪製到canvas上</p>
+</li>
+<li><p>從繪製好圖像的canvas上取得imageData</p>
+</li>
+<li><p>透過把imageData的每個像素點channel值總合取平均來將圖像轉為灰階</p>
+</li>
+<li><p>根據灰階圖像的imageData來把不同的灰階值(例如0<del>50以@代替,51</del>100以#代替)轉換為特定符號，然後把這些符號作為字串植入pre元素</p>
+</li>
+</ul>
+<p>接著是源碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得圖像載入promise</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadImage</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    <span class="comment">// 把resolve暴露給外部變數</span></span><br><span class="line">    <span class="keyword">let</span> resolve;</span><br><span class="line">    <span class="keyword">let</span> loadPromise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">         resolve = res;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 這一步cross-origin是因為我們的圖片是外部來源</span></span><br><span class="line">    <span class="comment">// 如果沒有把外部來源設置為&quot;Anonymous&quot;,drawImage方法會排除掉非本地來源的圖片資訊, 導致無法進行下一步繪圖</span></span><br><span class="line">    img.crossOrigin = <span class="string">&quot;Anonymous&quot;</span>;</span><br><span class="line">    img.onload = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">       resolve(img);</span><br><span class="line">    &#125;</span><br><span class="line">    img.src = src;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">return</span> loadPromise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getImageDataFromImage</span>(<span class="params">src,ratio = <span class="number">0.5</span></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 這邊有一個ratio參數是因為我讀取的圖片稍微有點大張</span></span><br><span class="line">  <span class="comment">// 所以我補一個參數讓我可以自己決定要把圖片縮小多少倍率</span></span><br><span class="line">  <span class="keyword">let</span> img = <span class="keyword">await</span> loadImage(src);</span><br><span class="line">  <span class="keyword">let</span> width = img.width * ratio;</span><br><span class="line">  <span class="keyword">let</span> height = img.height * ratio;</span><br><span class="line">  <span class="comment">// 把外部圖源繪製到架空的canvas上面然後取得imageData</span></span><br><span class="line">  <span class="keyword">let</span> cvs = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> ctx = cvs.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">      cvs.width = width;</span><br><span class="line">      cvs.height = height;</span><br><span class="line">      ctx.drawImage(img,<span class="number">0</span>,<span class="number">0</span>,width,height);</span><br><span class="line">  <span class="keyword">let</span> imageData = ctx.getImageData(<span class="number">0</span>,<span class="number">0</span>,width,height);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> imageData;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">turnImageDataIntoGrayscale</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">let</span> imageData = <span class="keyword">await</span> getImageDataFromImage(src);</span><br><span class="line">   <span class="keyword">let</span> data = imageData.data;</span><br><span class="line">  <span class="comment">// 這邊這個loop的用意就在於把channel值依像素順序來執行程序</span></span><br><span class="line">   <span class="function"><span class="title">for</span>(<span class="params"><span class="keyword">let</span> i=<span class="number">0</span>;i&lt;data.length;i = i+<span class="number">4</span></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">let</span> r = data[i];</span><br><span class="line">     <span class="keyword">let</span> g = data[i+<span class="number">1</span>];</span><br><span class="line">     <span class="keyword">let</span> b = data[i+<span class="number">2</span>];</span><br><span class="line">     <span class="comment">//取得rgb值得平均, 如此一來因為rgb都變成同一個數值</span></span><br><span class="line">     <span class="comment">// 圖像就會變成灰階圖</span></span><br><span class="line">     <span class="keyword">let</span> average = (r+g+b)/<span class="number">3</span></span><br><span class="line">     data[i] = data[i+<span class="number">1</span>] = data[i+<span class="number">2</span>] = average;</span><br><span class="line">   &#125;</span><br><span class="line">  <span class="keyword">return</span> imageData;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">redrawAsASCII</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> grayscaleImageData = <span class="keyword">await</span> turnImageDataIntoGrayscale(src);</span><br><span class="line">  <span class="comment">// 取用的樣版字元</span></span><br><span class="line">  <span class="keyword">let</span> glyphSource = <span class="string">&quot;＄＠＃＊。&quot;</span>;</span><br><span class="line">  <span class="keyword">let</span> stringOutput = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="function"><span class="title">for</span>(<span class="params"><span class="keyword">let</span> i = <span class="number">0</span>;i&lt;grayscaleImageData.data.length;i = i+<span class="number">4</span></span>)</span>&#123;</span><br><span class="line">     </span><br><span class="line">     <span class="keyword">let</span> pixelIndex = <span class="built_in">Math</span>.ceil(i/<span class="number">4</span>);</span><br><span class="line">     <span class="comment">// 從像素的次序來判斷該像素是否為右邊緣像素</span></span><br><span class="line">     <span class="keyword">let</span> pixelIsRightRimPixel = (pixelIndex + <span class="number">1</span>) % grayscaleImageData.width === <span class="number">0</span>;</span><br><span class="line">     <span class="comment">// 根據像素的灰階值, 用內插的方式來決定要使用哪一個樣版字元來代表該像素</span></span><br><span class="line">     <span class="keyword">let</span> glyphIndex = </span><br><span class="line">       <span class="built_in">Math</span>.floor(grayscaleImageData.data[i] / <span class="number">255</span> * (glyphSource.length-<span class="number">1</span>));</span><br><span class="line">       </span><br><span class="line">       stringOutput+=glyphSource[glyphIndex];</span><br><span class="line">    </span><br><span class="line">     <span class="function"><span class="title">if</span>(<span class="params">pixelIsRightRimPixel</span>)</span>&#123;</span><br><span class="line">       <span class="comment">// 如果是最右邊緣像素, 則另外補一個換行符號</span></span><br><span class="line">        stringOutput+=<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 把字串填入pre tag</span></span><br><span class="line">  <span class="keyword">let</span> text = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;pre&#x27;</span>);</span><br><span class="line">  text.innerHTML = stringOutput;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  redrawAsASCII(<span class="string">&#x27;https://i.imgur.com/52TLlOk.png&#x27;</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>codepen連結：<a target="_blank" rel="noopener" href="https://codepen.io/mizok_contest/pen/vYZrXYP">https://codepen.io/mizok_contest/pen/vYZrXYP</a></p>
+<h1 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h1><p>老實說我在挑選展示像素操作案例的時候猶豫了很久，最後還是決定要拿拼字圖畫來作為案例介紹。<br>主要是因為我覺得這個案例相較於其他的例子似乎更能讓人提起興趣(雖然對初學者來說可能有點小複雜)。  </p>
+<p>在上面這個案例中，其實可以學到很多的小技巧，包括：</p>
+<ul>
+<li>canvas載入圖片的機制</li>
+<li>imageData的邊緣像素處理</li>
+<li>將channel值依像素順序來執行迴圈程序</li>
+<li>…</li>
+</ul>
+<p>這些小技巧在這個系列文的中後段都會持續用到，所以建議可以仔細讀一下源碼裡面的註解～</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 2021鐵人賽</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20V%20%5BCanvas%E5%8B%95%E7%95%AB%E5%8E%9F%E7%90%86%5D%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20copy/" rel="prev" title="Day9 - 2D渲染環境基礎篇 IV[Canvas動畫原理] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+                  <i class="fa fa-chevron-left"></i> Day9 - 2D渲染環境基礎篇 IV[Canvas動畫原理] -  成為Canvas Ninja ～ 理解2D渲染的精髓
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">Mizok.H</span>
+</div>
+  
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/WFX-Maniac/js/utils.js"></script><script src="/WFX-Maniac/js/motion.js"></script><script src="/WFX-Maniac/js/next-boot.js"></script>
+
+  
+
+<script src="/WFX-Maniac/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>

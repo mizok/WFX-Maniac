@@ -185,7 +185,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">25</span></a>
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">26</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -259,7 +259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/WFX-Maniac/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -301,6 +301,128 @@
 
 
     <div class="main-inner index posts-montage">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2021/09/10/Canvas%E5%9F%BA%E7%A4%8E%E6%A6%82%E8%AB%96%20II%20%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" class="post-title-link" itemprop="url">Day3 - Canvas基礎概論 II  - 我要成為Canvas Ninja ～ 理解2D渲染的精髓！</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-10 21:14:54" itemprop="dateCreated datePublished" datetime="2021-09-10T21:14:54+08:00">2021-09-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-15 01:15:33" itemprop="dateModified" datetime="2021-09-15T01:15:33+08:00">2021-09-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Some-Deeper-Basics"><a href="#Some-Deeper-Basics" class="headerlink" title="Some Deeper Basics"></a>Some Deeper Basics</h2><h3 id="圖像的概念"><a href="#圖像的概念" class="headerlink" title="圖像的概念"></a>圖像的概念</h3><p>  我們在前面有說到，canvas本身是透過物件模型來繪製圖像，但是我們沒有提到何謂”圖像”。  </p>
+<p>  實際上圖像的概念很簡單。</p>
+<p>  大家都知道，光的三原色分別是紅/藍/綠;  一束標準的白光，可以分裂成紅/藍/綠光來看。  </p>
+<p>  而圖像的實作原理，其實就是透過阻擋掉紅/藍/綠光一部分的佔比，來形成不同的顏色。</p>
+<p>  這邊我找了兩張圖片，這兩張圖片很好的說明了在計算機領域中圖像的概念(圖片來源：<a target="_blank" rel="noopener" href="https://dev.to/">https://dev.to/</a>)</p>
+  <img src="https://i.imgur.com/dz53Fsi.jpg" width="600">
+
+  <img src="https://i.imgur.com/FmT2rzI.jpg" width="600">
+
+<p>  一個圖像，其實可以直接被視為一大群像素的集合體，而每一個像素都具備了能分別對應三種光線(RGB)，還有透明值(alpha)的篩子,這些篩子就是所謂的通道(Channel)  </p>
+<p>  透明值的通道，光看字面上可能不太好理解他在數理上的意義，所以這邊我也找到了一個網頁，這個網頁上的範例可以為我們做一個適當的解釋。</p>
+<p>  <a target="_blank" rel="noopener" href="https://borderleft.com/toolbox/rgba/">https://borderleft.com/toolbox/rgba/</a></p>
+<p>  這是一個能夠顯示rgba顏色跟不同顏色底混合之後的樣子的網站，這邊我把底色設定為白色，也就是說合成出來的顏色就是該rgba色放置於白背景時候的樣子。  </p>
+  <img src="https://i.imgur.com/VC25E8b.png" width="600">
+
+<p>  圖片中我們看到，當alpha設置為0.7時, R和G通道的0(也就是完全阻絕RG光線)，他們的阻擋量(也就是255 - 0 = 255)都分別被乘以0.3而得到77這個數值，而B光線因為阻擋量是0, 所以最後在B數值上還是得到255，最終則呈現出(77,77,255)這個顏色。 </p>
+<p>  從這邊我們就可以推論，alpha的數理意義其實就是同步的對三個通道的數值做比例性的消減。</p>
+<h3 id="從像素觀點來看Canvas"><a href="#從像素觀點來看Canvas" class="headerlink" title="從像素觀點來看Canvas"></a>從像素觀點來看Canvas</h3><p>  一張Canvas，其實也就是一個圖像，他也是由非常多個像素所組成，而每一個像素點上又各自都有rgba四個通道。  </p>
+<p>  一張寬度100px, 高度100px的canvas，它實際上就是100*100 = 10000個像素的集合體，而同時在程序上我們則可以把它轉換成一個長度為100*100*4的陣列(也就是一共40000個channel值)</p>
+<p>  而所謂的『像素操作』，其實就是一種陣列運算，我們可以透過去疊加/轉換/削除陣列中的一部分channel值，來達到產生新圖像的效果。</p>
+<p>  Photoshop的濾鏡運算(例如彩色轉灰階)，或是在社群軟體上有時候可以看到的圖片轉符號(拼字圖畫)，就是典型的像素操作技術之運用。</p>
+<p>  另外，關於Canvas的寬高數值定義其實有一個<strong>有趣的點</strong>。</p>
+<p>  實際上在定義一張canvas的大小時，並不是使用css來賦值，而是使用width和height這兩個attribute，直接下在canvas元素上面。</p>
+<p>  只有width和height這兩個attribute數值才能夠直接定義canvas的像素總量，而如果這時硬是要用css去擴大一張100＊100的canvas為10000px*10000px，就會出現像素密度過低(也就是圖像模糊的情形)的狀況</p>
+<p>  關於Canvas的像素操作技術，我們在之後的章節會提到更多實操的範例。</p>
+<h2 id="Context-What-The-Hell-Is-That"><a href="#Context-What-The-Hell-Is-That" class="headerlink" title="Context? What The Hell Is That?"></a>Context? What The Hell Is That?</h2><blockquote>
+<p>SO, 你在前面的介紹文一直提到『渲染環境』這一個詞彙，那個到底指的是什麼？</p>
+</blockquote>
+<p>初來乍到的同學對於『渲染環境』這一個詞可能相當的陌生。<br>但是如果過去曾經有電腦繪圖/3D建模相關知識的人可能就能快速的領會這個詞所代表的意義。  </p>
+<p>『渲染環境』其實指的是透過<code>canvasElement.getContext(type)</code>這一個api所取得的一個物件。<br>我們其實可以把『渲染環境』想像成是繪圖軟體(例如小畫家)的概念，環境中會具備大量的工具（就像小畫家會提供畫圓形畫方形的功能），讓使用者可以應用在繪圖程序中。</p>
+<p>『渲染環境』實際的提取方式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cvs = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> ctx = cvs.getContext(<span class="string">&#x27;2d&#x27;</span>); <span class="comment">//這個ctx就是2d模式的渲染環境</span></span><br></pre></td></tr></table></figure>
+
+<p><code>getContext(type)</code> 這一個方法可以根據輸入的type字串來取得操作者所想要使用的渲染環境，而在目前html5的規制下，一共有四種渲染環境可供選擇，分別是:</p>
+<ul>
+<li>2d : 最基礎同時也最適合新手入門的渲染環境，具備多種2d繪圖的api</li>
+<li>webgl : 是一種速度更快，功能更多，具備原生 3D API，可讓使用者能夠完全訪問渲染管道的渲染環境。(很多人可能會誤會3D圖像只能透過webgl渲染環境所提供的api來達成，但實際上不是的，這點後面的章節會講。)</li>
+<li>webgl2 : 簡而言之就是webgl環境的上位版，具備更多的功能，但是相對的，對部分舊型瀏覽器/移動裝置瀏覽器的支援度也略低，算是實驗性的功能</li>
+<li>bitmaprenderer : 這也同樣是一種只有少數瀏覽器有支援的實驗性功能，它的用途很單純，是用來轉移指定圖像的bitmap到指定的canvas上</li>
+</ul>
+<p>在這個系列的文章中，我會針對比較常見的兩種環境(2D,webgl)做案例探討。</p>
+<h2 id="Start-From-2D"><a href="#Start-From-2D" class="headerlink" title="Start From 2D"></a>Start From 2D</h2><p>雖然說講到網頁前端的Canvas技術，大多數人都會直接地想到像是Three.js/Webgl那樣的渲染環境/套件做出來的各種絢麗特效。<br>但是我個人認為，初學Canvas應該還是先從2D的基礎學起，雖然說到了webgl渲染環境時，webgl環境整體提供的API和2D環境所提供的API在本質上有很巨大的差異，但是實際上在做渲染運算、模型規劃時的重點還是有其相似之處。</p>
+<p>在接下來的章節中，我們會先從2D的基礎講起，然後再開始慢慢地演進到一些更加複雜的案例～</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1102,98 +1224,6 @@
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> example  = <span class="keyword">new</span> test();</span><br><span class="line">test.a = <span class="string">&quot;def&quot;</span>;</span><br><span class="line"><span class="comment">//  這邊&quot;def&quot;會自動作為value 被帶入到set a(value)裡面去</span></span><br></pre></td></tr></table></figure>
 
 
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
-      <meta itemprop="name" content="Mizok.H">
-      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WFX-Maniac">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/WFX-Maniac/2020/11/26/TYPESCRIPT%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">TYPESCRIPT學習筆記-ep2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">發表於</span>
-
-      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新於</span>
-        <time title="修改時間：2020-12-13 03:52:57" itemprop="dateModified" datetime="2020-12-13T03:52:57+08:00">2020-12-13</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分類於</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="什麼是Interface-接口"><a href="#什麼是Interface-接口" class="headerlink" title="什麼是Interface(接口)?"></a>什麼是Interface(接口)?</h2><blockquote>
-<p>簡單來說就是一個用來定義一個物件內部 必要變數/變數型別的寫法<br>好用的點在於可以去限制一個物件必須要具備什麼樣的property</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  label: <span class="built_in">string</span>;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">  <span class="keyword">readonly</span> color:<span class="string">&#x27;red&#x27;</span></span><br><span class="line">  <span class="comment">//前面有寫readonly的property，</span></span><br><span class="line">  <span class="comment">//代表這個項目只要被interface初始定義之後就沒有辦法再被覆寫</span></span><br><span class="line">  <span class="comment">//注意readonly只能在interface裡面使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printLabel</span>(<span class="params">labeledObj: LabeledValue</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="comment">//直接把labeledObj 內容的型別定義為labeledValue 接口 </span></span></span></span><br><span class="line"><span class="function"><span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(labeledObj.label);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myObj = &#123;<span class="attr">size</span>: <span class="number">10</span>, <span class="attr">label</span>: <span class="string">&quot;Size 10 Object&quot;</span>&#125;;</span><br><span class="line">printLabel(myObj);</span><br></pre></td></tr></table></figure>
-
-<h2 id="什麼是ReadonlyArray-唯讀陣列"><a href="#什麼是ReadonlyArray-唯讀陣列" class="headerlink" title="什麼是ReadonlyArray(唯讀陣列)?"></a>什麼是ReadonlyArray(唯讀陣列)?</h2><blockquote>
-<p>用途是用來確保陣列被定義為唯獨之後再也不能被修改</p>
-</blockquote>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a: <span class="built_in">number</span>[] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> ro: ReadonlyArray&lt;<span class="built_in">number</span>&gt; = a;</span><br><span class="line">ro[<span class="number">0</span>] = <span class="number">12</span>; <span class="comment">// error!</span></span><br><span class="line">ro.push(<span class="number">5</span>); <span class="comment">// error!</span></span><br><span class="line">ro.length = <span class="number">100</span>; <span class="comment">// error!</span></span><br><span class="line">a = ro; <span class="comment">// error!</span></span><br><span class="line"><span class="comment">//但是可以用類型斷言強行複製</span></span><br><span class="line">a = ro <span class="keyword">as</span> <span class="built_in">number</span>[];</span><br></pre></td></tr></table></figure>
-
-<h2 id="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼"><a href="#我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼" class="headerlink" title="我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?"></a>我把函數的參數物件用一個具備optional屬性的interface來定義型別，然後我傳入不存在於該interface的property卻報錯了，為什麼?</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> LabeledValue &#123;</span><br><span class="line">  name?:<span class="built_in">string</span>; <span class="comment">//後面有問號的property代表是optional的項目</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//所以基本上這樣寫是合法的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> qq = <span class="function">(<span class="params">bb:LabeledValue</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">qq(&#123;&#125;)<span class="comment">//傳入空物件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 這樣寫也是合法的</span></span><br><span class="line"><span class="keyword">let</span> apple:LabeledValue =&#123;&#125;;</span><br><span class="line">apple.name = <span class="string">&#x27;fuji&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//但是這樣寫就會fail</span></span><br><span class="line">apple.color = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>這說明了optional屬性只能接受”存在”或“不存在”這兩種值，用一個本來就不符合interface的property是不合法的</p>
 
       
     </div>
