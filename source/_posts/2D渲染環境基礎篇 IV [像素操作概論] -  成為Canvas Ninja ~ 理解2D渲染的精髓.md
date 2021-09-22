@@ -37,13 +37,46 @@ let imageData = ctx.getImageData(sx, sy, sw, sh);
 ![img](https://i.imgur.com/8bzGT1G.png)
 > codepen連結: https://codepen.io/mizok_contest/pen/powKopj
 
-簡單觀察一下首先可以發現, Uint8ClampedArray其實只是imageData的一部分(imageData.data)，其餘還會有height/width等屬性(imageData本身具備獨立的型別)。  
+簡單觀察一下首先可以發現, Uint8ClampedArray其實只是imageData的一部分(imageData.data)，其餘還會有height/width等屬性，imageData本身具備獨立的型別，就像String/Array 那樣，他不只單純是個物件而已。
 
-然後接著看看Uint8ClampedArray的部分，可以發現他確實就是由全部像素的channel值所組成;由於我們填入的顏色是紅色(255,0,0,1)，所以channel值的分佈會是255,0,0,255這樣四個一組持續到結束的組合.....，這邊值得注意的一點是Uint8ClampedArray是以0到255來表示alpha channel的值，而不是0到1，那是因為8位元的關係(2的8次方是256, 而0~255剛好是256個數字)。
+> 有關於ImageData這個型別相關的資訊可以看[這邊](https://developer.mozilla.org/en-US/docs/Web/API/ImageData)
 
-# 經典的像素操作案例解析 - 拼字圖畫
+然後接著看看Uint8ClampedArray的部分，可以發現他確實就是由全部像素的channel值所組成;由於我們填入的顏色是紅色(255,0,0,1)，所以channel值的分佈會是255,0,0,255這樣四個一組持續到結束的組合.....，這邊值得注意的一點是Uint8ClampedArray是以0到255來表示alpha channel的值，而不是0到1，那是因為8位元的關係(2的8次方是256, 而0~255剛好是256個數字)。  
 
-這邊我們馬上就來看一個很經典的像素操作案例 - 拼字圖畫(Image To Ascii)
+> 人類的眼睛大約只可分辨 1,000 萬種顏色，之所以channel值是用8位元陣列來表示，是因為256的3次方(rgb三原色)為16,777,216 , 這個數字恰好落在1000萬的level。
+
+理解了ImageData的資料格式之後，接著可能就會有人問:  
+
+> 我們有沒有辦法從零自己建立一組新的ImageData?
+
+Sure, 當然是可以的，而且方法還不只一種。
+
+一般要自己create 新的ImageData，可以依靠:  
+- 2D渲染環境底下的createImageData方法（ctx.createImageData）
+- ImageData class的 constructor (支援性低)
+
+這兩種方法的最大差別就在於前者需要編譯環境下有2DContext存在，但是後者就是可以直接New一個物件出來(適用在部分非瀏覽器環境，另外IE不支援這方法)。  
+
+自己建立出來一個ImageData物件之後，接著可能就會有人再問：
+
+> 那要怎麼把建立出來的ImageData 放到Canvas渲染出來？
+
+這時候就該ctx.putImageData登場了～
+
+````javascript
+void ctx.putImageData(imageData, dx, dy);
+void ctx.putImageData(imageData, dx, dy, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
+// dx: 置放該ImageData渲染區的座標X值(置放在目標canvas上的位置)
+// dy: 置放該ImageData渲染區的座標Y值(置放在目標canvas上的位置)
+// dirtyX: 可以只渲染該ImageData的一部分, 這個值就是用來定義渲染區的起始座標X值(這個值是相對於該ImageData的0,0圓點而言)
+// dirtyY: 可以只渲染該ImageData的一部分, 這個值就是用來定義渲染區的起始座標Y值(這個值是相對於該ImageData的0,0圓點而言)
+// dirtyWidth: 可以只渲染該ImageData的一部分, 這個值就是用來定義渲染區的寬度
+// dirtyHeight: 可以只渲染該ImageData的一部分, 這個值就是用來定義渲染區的高度
+````
+
+介紹完基本的ImageData API，我們接著來看一個蠻經典的像素操作案例～
+
+# 經典的像素操作案例解析 - 拼字圖畫(Image To Ascii)
 
 所謂的拼字圖畫就是像下圖這種，把圖像變成不同符號所形成的一幅圖
 
