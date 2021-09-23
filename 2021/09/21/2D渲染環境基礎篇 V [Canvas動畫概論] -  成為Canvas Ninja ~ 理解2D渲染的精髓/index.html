@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/images/logo-x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/images/logo-x16.png">
+  <link rel="mask-icon" href="/WFX-Maniac/assets/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/WFX-Maniac/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="OK, 我們終於來到了基礎篇最後的部分，也就是Canvas動畫~!(撒花)在這個部分，我們會介紹：  canvas實作動畫的原理 一個簡易動畫的實作案例  Canvas動畫原理我們都知道，在現實生活中動畫(Animation)的原理其實是透過繪製很多不同但連貫的圖片，然後把這些圖片依序播放出來。canvas實作動畫的原理其實也是一模一樣。 假設今天有一個60FPS(Frame Per Second">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day9 - 2D渲染環境基礎篇 IV[Canvas動畫概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20V%20[Canvas%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96]%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/index.html">
+<meta property="og:site_name" content="WFX-Maniac">
+<meta property="og:description" content="OK, 我們終於來到了基礎篇最後的部分，也就是Canvas動畫~!(撒花)在這個部分，我們會介紹：  canvas實作動畫的原理 一個簡易動畫的實作案例  Canvas動畫原理我們都知道，在現實生活中動畫(Animation)的原理其實是透過繪製很多不同但連貫的圖片，然後把這些圖片依序播放出來。canvas實作動畫的原理其實也是一模一樣。 假設今天有一個60FPS(Frame Per Second">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-09-21T03:49:28.885Z">
+<meta property="article:modified_time" content="2021-09-23T14:47:21.295Z">
+<meta property="article:author" content="Mizok.H">
+<meta property="article:tag" content="2021鐵人賽">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20V%20[Canvas%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96]%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
+
+<script src="/WFX-Maniac/js/ripple-logo.js"></script>
+<script src="/WFX-Maniac/js/silk-wave.js"></script>
+
+<style>
+  @font-face {
+  font-family: "Roboto";
+  src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
+}
+</style>
+<title>Day9 - 2D渲染環境基礎篇 IV[Canvas動畫概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓 | WFX-Maniac</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/WFX-Maniac/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WFX-Maniac</h1>
+      <canvas id="logo-canvas"></canvas><i class="logo-line"></i>
+    </a>
+<script>
+  (()=>{
+    let canvas = document.querySelector('#logo-canvas');
+
+    let init= ()=>{
+      let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
+        points:2,
+        randomFill:false,
+        lineColor:'rgba(255,255,255,0.35)',
+        maxSize:250
+      });
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/WFX-Maniac/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/WFX-Maniac/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">26</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Canvas%E5%8B%95%E7%95%AB%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Canvas動畫原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E5%B9%80%E7%8E%87%EF%BC%88FPS%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">什麼是幀率（FPS）?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%A6%E9%9A%9B%E5%8B%95%E7%95%AB%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA-%E6%96%B9%E5%A1%8A%E7%A7%BB%E5%8B%95"><span class="nav-number">3.</span> <span class="nav-text">實際動畫案例演示 - 方塊移動</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E4%BD%BF%E7%94%A8requestAnimationFrame"><span class="nav-number">4.</span> <span class="nav-text">為什麼要使用requestAnimationFrame()?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E8%A6%81%E4%BD%BF%E7%94%A8performance-now"><span class="nav-number">5.</span> <span class="nav-text">為什麼要使用performance.now()?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">6.</span> <span class="nav-text">小結</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mizok.H"
+      src="/WFX-Maniac/assets/images/logo.png">
+  <p class="site-author-name" itemprop="name">Mizok.H</p>
+  <div class="site-description" itemprop="description">網頁特效開發/個人前端學習歷程</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/WFX-Maniac/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/WFX-Maniac/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/WFX-Maniac/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20V%20[Canvas%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96]%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day9 - 2D渲染環境基礎篇 IV[Canvas動畫概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-21 11:49:28" itemprop="dateCreated datePublished" datetime="2021-09-21T11:49:28+08:00">2021-09-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-23 22:47:21" itemprop="dateModified" datetime="2021-09-23T22:47:21+08:00">2021-09-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>OK, 我們終於來到了基礎篇最後的部分，也就是Canvas動畫~!(撒花)<br>在這個部分，我們會介紹：</p>
+<ul>
+<li><code>canvas</code>實作動畫的原理</li>
+<li>一個簡易動畫的實作案例</li>
+</ul>
+<h1 id="Canvas動畫原理"><a href="#Canvas動畫原理" class="headerlink" title="Canvas動畫原理"></a>Canvas動畫原理</h1><p>我們都知道，在現實生活中動畫(Animation)的原理其實是透過繪製很多不同但連貫的圖片，然後把這些圖片依序播放出來。<br><code>canvas</code>實作動畫的原理其實也是一模一樣。</p>
+<p>假設今天有一個60FPS(Frame Per Second, 意思就是每秒60幀)的動畫，如果我們要用Canvas來實作，那麼在動畫第一秒內的流程大約會是：  </p>
+<ul>
+<li>在canvas上面繪製第一幀的樣子</li>
+<li>在1/60 秒後清除畫面</li>
+<li>在canvas上面繪製第二幀的樣子</li>
+<li>持續重複上面的做法, 一直做到第60幀</li>
+<li>…</li>
+</ul>
+<p>原理面的部分大致上就這樣，雖然看起來很簡單，但是在實作的時候才真的會遭遇到各種問題。</p>
+<h1 id="什麼是幀率（FPS）"><a href="#什麼是幀率（FPS）" class="headerlink" title="什麼是幀率（FPS）?"></a>什麼是幀率（FPS）?</h1><blockquote>
+<p>你前面提到了<code>FPS</code>這個詞，那是一個什麼樣的概念？</p>
+</blockquote>
+<p>所謂的幀率就是『每秒被播出的圖像數量』。  </p>
+<blockquote>
+<p>延伸資源：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=npMreLeVD6o">不同幀率所帶來的視覺效果差</a></p>
+</blockquote>
+<p>在過去的年代，製作一部手繪卡通其實所費不貲，最主要的原因就是因為圖像需要逐幀人工繪製，而專案限期內能繪製的圖像有限，所以一般來說手繪動畫的幀率相對來講會比較低。<br>以常見的日式動畫來講，日式動畫的幀率平均落在<code>23.976幀/秒</code>, 這也就是我們常聽到的<code>24幀</code>。</p>
+<blockquote>
+<p>在現代則出現了更方便的AI中割模擬，大幅減少了人力成本，不過那是題外話了 。 BTW – 有看<strong>咒術迴戰</strong>的朋友可能對<code>24幀</code>這詞蠻熟悉的XD(投射咒法~!)</p>
+</blockquote>
+<p>而在科技進步之後，來到網頁 / 遊戲的領域，基本幀率則最少也會有<code>60幀/秒</code>（因為畫面是交由機器繪製）。  </p>
+<p>這邊有人可能會開始覺得很疑惑，網頁在沒有動畫時，本身不是靜態的圖像嗎？為什麼還會提到幀率？  </p>
+<p>這你就不懂了~  </p>
+<p>瀏覽器視窗本身可以其實可以看作一個大型且複雜的canvas，你在一秒內所看到的畫面，其實實際上是瀏覽器渲染引擎以極快的速度逐幀繪製出來的(就算是靜態畫面也是一樣)</p>
+<p>渲染引擎本身的繪製速度其實會受到編譯的速度，還有程序邏輯的複雜度等多重原因影響，而當渲染引擎的繪製速度被拖慢(或者說不夠快)，這時候就會出現所謂的<code>渲染延遲</code>，或<code>掉幀</code>的現象。</p>
+<p>舉個常見的<code>渲染延遲</code>案例 ~ 大家在菜鳥時期一定都有碰過。當有一個網頁具備一卡車的動態特效(尤其是onScroll Animation) ，使用者在網頁載入完畢的同時快速把scrollbar往下拉，這時候畫面會有很大的機率會白掉一大半，這個就是『渲染速度』跟不上『使用者操作UI速度』的典型案例。</p>
+<blockquote>
+<p>通常這種狀況的解決方式都是比較硬核的，需要深入程序修改細節以解決效能上的問題。</p>
+</blockquote>
+<p>而所謂的<code>掉幀</code>，其實就是我們常說的動畫卡頓問題，網頁的<code>掉幀</code>問題有大有小，大的例如畫面卡頓卡到跟靜態圖像一樣，小的則像是某些時候畫面會有微妙的停頓感(一般人可能分辨不出來這個XD)</p>
+<p>接下來我們會用實際範例來演示怎麼在Canvas環境下實現一個方塊移動的簡易動畫。</p>
+<h1 id="實際動畫案例演示-方塊移動"><a href="#實際動畫案例演示-方塊移動" class="headerlink" title="實際動畫案例演示 - 方塊移動"></a>實際動畫案例演示 - 方塊移動</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> startTime = performance.now();</span><br><span class="line"><span class="keyword">const</span> durationTotal = <span class="number">5000</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawRect</span>(<span class="params">ctx,x,y</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 這就是很普通的畫一個方塊在指定座標的位置上</span></span><br><span class="line">  <span class="comment">// 假設長寬都是40</span></span><br><span class="line">  <span class="keyword">const</span> size = <span class="number">20</span>;</span><br><span class="line">   <span class="comment">// 設定填充色</span></span><br><span class="line">  ctx.fillStyle=<span class="string">&quot;#fff&quot;</span>;</span><br><span class="line">  ctx.fillRect(x,y,size*<span class="number">2</span>,size*<span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">ctx</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 預設都先清除舊畫面然後重新畫一個方塊在新位置</span></span><br><span class="line">  <span class="keyword">let</span> timeNow = performance.now() - startTime;</span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  <span class="keyword">const</span> speed = <span class="number">0.05</span>; <span class="comment">//假設速度是0.05px/毫秒</span></span><br><span class="line">  </span><br><span class="line">  ctx.clearRect(<span class="number">0</span>,<span class="number">0</span>,ctx.canvas.width,ctx.canvas.height)</span><br><span class="line">  drawRect(ctx,speed*timeNow,<span class="number">50</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 在目前花費時間還沒超過總預設花費時間的狀況下就持續動作</span></span><br><span class="line">  <span class="function"><span class="title">if</span>(<span class="params">timeNow&lt;durationTotal</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 告訴瀏覽器下一幀要做的動作, 可以想像成一個極短的setTimeout, delay時間大約是1/60秒</span></span><br><span class="line">    <span class="comment">// 這邊我們透過遞迴執行animate來繪製下一幀的畫面</span></span><br><span class="line">     requestAnimationFrame(<span class="function">()=&gt;</span>&#123;animate(ctx)&#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> cvs = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> ctx = cvs.getContext(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line">  animate(ctx);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">  draw();</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>codepen連結： <a target="_blank" rel="noopener" href="https://codepen.io/mizok_contest/pen/qBjyVaa">https://codepen.io/mizok_contest/pen/qBjyVaa</a></p>
+</blockquote>
+<p>在上面這個看似簡單的範例中其實隱藏著兩個重點。</p>
+<ul>
+<li>用requestAnimationFrame(RAF)來告訴瀏覽器進行下一幀圖像的繪製</li>
+<li>用performance.now()來追蹤動畫進行時間</li>
+</ul>
+<p>接下來我們會就這兩個重點講解背後的原因。</p>
+<h1 id="為什麼要使用requestAnimationFrame"><a href="#為什麼要使用requestAnimationFrame" class="headerlink" title="為什麼要使用requestAnimationFrame()?"></a>為什麼要使用requestAnimationFrame()?</h1><p>如果去找一些比較早期的Canvas教程，可能會發現它裡面都是用SetTimeOut 或是SetInterval去計算幀間時差(將時間設置為1000/60 毫秒) 。<br>雖然說用setTimeOut/setInterval 來計算幀間時差並不算錯，但是就是比較粗糙。<br>使用requestAnimationFrame(以下簡稱RAF)的優點有二：</p>
+<ul>
+<li>不像setTimeOut/setInterval是固定給一個固定的時間差，RAF可以視為一個動畫幀結束之後的callback，所以相對的他比較不會受到幀率誤差的影響</li>
+<li>不像setTimeOut/setInterval，RAF並不會在背景運作，當你把分頁切換到別的分頁，RAF就會被中斷，這個設計改善了瀏覽器運作的效能，同時也減少電源的消耗</li>
+</ul>
+<h1 id="為什麼要使用performance-now"><a href="#為什麼要使用performance-now" class="headerlink" title="為什麼要使用performance.now()?"></a>為什麼要使用performance.now()?</h1><p>我們先來說說<code>performance.now()</code>在這個案例裡面用途是什麼，還有他是一個什麼樣的api。</p>
+<p><code>performance.now()</code>簡單來說就是一個用來計算<code>document</code>生命週期的方法，他會在<code>document</code>物件被載入的時候開始計時。</p>
+<p>有些人接著可能會問:</p>
+<blockquote>
+<p>那他跟<code>Date.now()</code>差別差在哪？不能用<code>Date.now()</code>就好嗎?</p>
+</blockquote>
+<p><code>performance.now()</code>作為一個比較年輕的api，跟<code>Date.now()</code>比起來其實有更多適用的場景，原因有二：</p>
+<ul>
+<li>performance.now() 能夠提供超越毫秒的精準度，他所計算出來的時間會是附帶浮點數的毫秒，所以他更適合用在遊戲或動畫這種需要高精確度的運算場景</li>
+<li>Date.now()實際上是從1970年1月1日0分0秒開始估算(也就是所謂的Unix時間)，然而現今的年代其實很少需要一個從1970年開始計時的功能。而且Date實際上是會Base on 裝置的系統時間，當系統時間在某種狀況下受到變動，運用Date.now去計算時間差的Web APP 可能會出現誤差。</li>
+</ul>
+<p>根據developers.google.com的解釋，Date.now比較適用在確認絕對時間的場景，而performance.now則適用於計算相對時間的情境。</p>
+<blockquote>
+<p>developers.google.com上關於performance.now的解釋可以看<a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2012/08/When-milliseconds-are-not-enough-performance-now">這邊</a></p>
+</blockquote>
+<p>看到這邊大家應該已經很能理解使用performance.now的諸多好處～</p>
+<p>但是接著可能就又會有人再問：</p>
+<blockquote>
+<p>那為什麼不能直接用經過的幀數作計算？例如預設一個變數給定總幀數，然後每一圈RAF就-1，扣到0的時候就停止運動?</p>
+</blockquote>
+<p>原因很簡單～還記得我們前面有介紹過瀏覽器的FPS數字其實會受到其他因素的影響嗎？有時候如果FPS偏低，那麼就意味著可能有某幾幀的耗時比較長，這麼一來，如果用幀數來判斷移動距離，就會出現運動速度不均勻的狀況。  </p>
+<p>雖然說在過去這種誤差可能不容易被察覺，但是在現代，尤其是在開發遊戲的場景，物件移動的精確度其實越來越重要，所以相對的也要求開發人員不能隨便用舊方法交差。</p>
+<h1 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h1><p>這次我們介紹了如何在Canvas上實作動畫，但是這其實還是非常基本的部分，我們接下來即將要脫離基礎篇，正式來介紹一些比較複雜的Canvas應用場景~</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 2021鐵人賽</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/15/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20%5B%E8%A3%9C%E5%85%85%E7%AF%87%5D%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" rel="prev" title="Day6 - 2D渲染環境基礎篇 II [補充篇] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+                  <i class="fa fa-chevron-left"></i> Day6 - 2D渲染環境基礎篇 II [補充篇] -  成為Canvas Ninja ～ 理解2D渲染的精髓
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20%5B%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A6%82%E8%AB%96%5D%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" rel="next" title="Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+                  Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">Mizok.H</span>
+</div>
+  
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/WFX-Maniac/js/utils.js"></script><script src="/WFX-Maniac/js/motion.js"></script><script src="/WFX-Maniac/js/next-boot.js"></script>
+
+  
+
+<script src="/WFX-Maniac/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>
