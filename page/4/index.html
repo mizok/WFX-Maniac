@@ -23,29 +23,26 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="搞清楚並且用最簡單的方法解釋js的apply&#x2F;call&#x2F;bind 先解釋apply&#x2F;call apply&#x2F;call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”  1234567&#x2F;&#x2F;假設有一個變數叫做qq, 初始值為&amp;#x27;wow&amp;#x27;var qq &#x3D; &amp;#x27;wow&amp;#x27;;function poop(a,b)&amp;#123;    console.log(th">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ES5&#x2F;ES6學習筆記-ep1">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/index.html">
+<meta name="description" content="網頁特效開發&#x2F;個人前端學習歷程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WFX-Maniac">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/page/4/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="搞清楚並且用最簡單的方法解釋js的apply&#x2F;call&#x2F;bind 先解釋apply&#x2F;call apply&#x2F;call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”  1234567&#x2F;&#x2F;假設有一個變數叫做qq, 初始值為&amp;#x27;wow&amp;#x27;var qq &#x3D; &amp;#x27;wow&amp;#x27;;function poop(a,b)&amp;#123;    console.log(th">
+<meta property="og:description" content="網頁特效開發&#x2F;個人前端學習歷程">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-11-25T17:01:45.830Z">
-<meta property="article:modified_time" content="2020-12-12T19:52:00.887Z">
 <meta property="article:author" content="Mizok.H">
-<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/page/4/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'zh-TW'
   };
 </script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
@@ -59,7 +56,7 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-<title>ES5/ES6學習筆記-ep1 | WFX-Maniac</title>
+<title>WFX-Maniac</title>
   
 
 
@@ -104,8 +101,26 @@
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
 
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  
+    <div class="site-banner" id="site-banner">
+      <canvas id="site-banner-canvas"></canvas>
+      
+<script>
+  (()=>{
+    let canvas = document.querySelector('#site-banner-canvas');
+
+    let init= ()=>{
+      let silkWave = new SilkWave(canvas);
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
+    </div>
+    <main class="main">
+    <header class="header
+  " itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切換導航欄">
@@ -216,7 +231,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目錄
@@ -229,7 +244,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9E%E6%B8%85%E6%A5%9A%E4%B8%A6%E4%B8%94%E7%94%A8%E6%9C%80%E7%B0%A1%E5%96%AE%E7%9A%84%E6%96%B9%E6%B3%95%E8%A7%A3%E9%87%8Bjs%E7%9A%84apply-call-bind"><span class="nav-number">1.</span> <span class="nav-text">搞清楚並且用最簡單的方法解釋js的apply&#x2F;call&#x2F;bind</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%8A%E6%95%B8%E6%8F%90%E5%8D%87%E8%88%87let"><span class="nav-number">2.</span> <span class="nav-text">變數提升與let:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let%E8%88%87if%E7%9A%84%E6%90%AD%E9%85%8D"><span class="nav-number">3.</span> <span class="nav-text">let與if的搭配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const%E7%9A%84%E9%87%8D%E8%A6%81%E6%84%8F%E7%BE%A9-%E2%80%93-%E5%9B%BA%E5%AE%9A%E5%82%B3%E5%9D%80"><span class="nav-number">4.</span> <span class="nav-text">const的重要意義 – 固定傳址</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -286,10 +300,178 @@
 </noscript>
 
 
-    <div class="main-inner post posts-expand">
+    <div class="main-inner index posts-montage">
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2020-11-26 01:01:45" itemprop="dateCreated datePublished" datetime="2020-11-26T01:01:45+08:00">2020-11-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2020-12-13 03:52:04" itemprop="dateModified" datetime="2020-12-13T03:52:04+08:00">2020-12-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
 
   
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="ES6解構賦值重點整理"><a href="#ES6解構賦值重點整理" class="headerlink" title="ES6解構賦值重點整理"></a>ES6解構賦值重點整理</h2><ol>
+<li>模式匹配：<blockquote>
+<p>只要等号两边的模式相同，左边的变量就会被赋予对应的值。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<ul>
+<li>這個<br>  let [a, b, c] = [1, 2, 3];</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>等同於這個<br>  let a = 1;<br>  let b = 2;<br>  let c = 3;</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>這個<br>  let [foo, [[bar], baz]] = [1, [[2], 3]];</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>等同於這個<br>  let foo = 1;<br>  let bar = 2;<br>  let baz = 3;</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>如果解構不成功，變量的值就等於undefined。<br>  let [foo] = [];<br>  let [bar，foo] = [1];<br>  以上兩種情況都屬於解構失敗，foo的值都會等於undefined。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>解構賦值的等號右邊必須要是一個可以迭代的東西，如果不是的話會報錯<br>  let [qoo]=null //報錯</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>支援預設值，但也只有遇上對應的子項為 undefined才會採用預設值<br>  let [foo = true] = [];<br>  foo // true<br>  let [x, y = ‘b’] = [‘a’]; // x=’a’, y=’b’<br>  let [x, y = ‘b’] = [‘a’, undefined]; // x=’a’, y=’b’<br>  let [x = 1] = [null];x // null 因為子項不等於undefined</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>字串也可以做模式匹配<br>  const [a, b, c, d, e] = ‘hello’;<br>  會變成<br>  const a= ‘h’,<br>  const b= ‘e’<br>  …</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li><p>對象匹配</p>
+<ul>
+<li><p>Basic</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; bar, foo &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line">foo <span class="comment">// &quot;aaa&quot;</span></span><br><span class="line">bar <span class="comment">// &quot;bbb&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> &#123; baz &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line">baz <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></li>
+<li><p>如果變數的名稱與複製目標的屬性名稱不一樣的話可以這樣做</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; <span class="attr">foo</span>: baz &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br><span class="line">baz <span class="comment">// &quot;aaa&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">first</span>: <span class="string">&#x27;hello&#x27;</span>, <span class="attr">last</span>: <span class="string">&#x27;world&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> &#123; <span class="attr">first</span>: f, <span class="attr">last</span>: l &#125; = obj;</span><br><span class="line">f <span class="comment">// &#x27;hello&#x27;</span></span><br><span class="line">l <span class="comment">// &#x27;world&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>對象匹配也可以有預設值，而採用預設值的標準跟模式匹配一樣:undefined</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123;x = <span class="number">3</span>&#125; = &#123;&#125;;</span><br><span class="line">x <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> &#123;x, y = <span class="number">5</span>&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;</span><br><span class="line">x <span class="comment">// 1</span></span><br><span class="line">y <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//這個比較需要記憶</span></span><br><span class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>: y = <span class="number">3</span>&#125; = &#123;&#125;;</span><br><span class="line">y <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//這個比較需要記憶</span></span><br><span class="line"><span class="keyword">var</span> &#123;<span class="attr">x</span>: y = <span class="number">3</span>&#125; = &#123;<span class="attr">x</span>: <span class="number">5</span>&#125;;</span><br><span class="line">y <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> &#123; <span class="attr">message</span>: msg = <span class="string">&#x27;Something went wrong&#x27;</span> &#125; = &#123;&#125;;</span><br><span class="line">msg <span class="comment">// &quot;Something went wrong&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>注意不要把大括號寫在行首</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;x&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;<span class="comment">//報錯</span></span><br><span class="line"><span class="comment">//應該改寫成</span></span><br><span class="line"><span class="keyword">let</span> &#123;x&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line"><span class="keyword">let</span> x;<span class="comment">//這行不寫的話x 會變全域</span></span><br><span class="line">(&#123;x&#125; = &#123;<span class="attr">x</span>: <span class="number">1</span>&#125;;)<span class="comment">//這種方式盡量不要用</span></span><br></pre></td></tr></table></figure></li>
+<li><p>函數參數的解構</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">[x, y]</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add([<span class="number">1</span>, <span class="number">2</span>]); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数参数的解构也可以使用默认值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x = <span class="number">0</span>, y = <span class="number">0</span>&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>&#125;); <span class="comment">// [3, 8]</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>&#125;); <span class="comment">// [3, 0]</span></span><br><span class="line">move(&#123;&#125;); <span class="comment">// [0, 0]</span></span><br><span class="line">move(); <span class="comment">// [0, 0]</span></span><br></pre></td></tr></table></figure></li>
+<li><p>注意下列兩者的不同</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函數參數本身附帶預設值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x = <span class="number">0</span>, y = <span class="number">0</span>&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 傳進來的物件會取代掉&#123;&#125;</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>&#125;); <span class="comment">// [3, 8]</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>&#125;); <span class="comment">// [3, 0]</span></span><br><span class="line">move(&#123;&#125;); <span class="comment">// [0, 0]</span></span><br><span class="line">move(); <span class="comment">// [0, 0]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params">&#123;x, y&#125; = &#123; x: <span class="number">0</span>, y: <span class="number">0</span> &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [x, y];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 傳進來的物件會取代掉&#123; x: 0, y: 0 &#125;</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>, <span class="attr">y</span>: <span class="number">8</span>&#125;); <span class="comment">// [3, 8]</span></span><br><span class="line">move(&#123;<span class="attr">x</span>: <span class="number">3</span>&#125;); <span class="comment">// [3, undefined]</span></span><br><span class="line">move(&#123;&#125;); <span class="comment">// [undefined, undefined]</span></span><br><span class="line">move(); <span class="comment">// [0, 0]</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>解構賦值的用途</p>
+<ul>
+<li><p>交換變數值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> y = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">[x, y] = [y, x];</span><br></pre></td></tr></table></figure></li>
+<li><p>從物件/陣列 快速宣告多個值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> [a, b, c] = example();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个对象</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    foo: <span class="number">1</span>,</span><br><span class="line">    bar: <span class="number">2</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> &#123; foo, bar &#125; = example();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>快速指定函數預設參數值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$.ajax = <span class="function"><span class="keyword">function</span> (<span class="params">url, &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="keyword">async</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  beforeSend = <span class="keyword">function</span> () &#123;&#125;,</span></span></span><br><span class="line"><span class="function"><span class="params">  cache = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  complete = <span class="keyword">function</span> () &#123;&#125;,</span></span></span><br><span class="line"><span class="function"><span class="params">  crossDomain = <span class="literal">false</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="built_in">global</span> = <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="regexp">//</span> ... more config</span></span></span><br><span class="line"><span class="function"><span class="params">&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ... do stuff</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>generator function(生成器函數)是什麼？</p>
+<ul>
+<li><p>在ES6中定義一個生成器函數很簡單，在函數後跟上「*」即可：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo1</span>(<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">foo2</span>(<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> * <span class="title">foo3</span>(<span class="params"></span>) </span>&#123; &#125;;</span><br><span class="line"></span><br><span class="line">foo1.toString(); <span class="comment">// &quot;function* foo1() &#123; &#125;&quot;</span></span><br><span class="line">foo2.toString(); <span class="comment">// &quot;function* foo2() &#123; &#125;&quot;</span></span><br><span class="line">foo3.toString(); <span class="comment">// &quot;function* foo3() &#123; &#125;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>调用生成器函数会产生一个生成器（generator）。生成器拥有的最重要的方法是 next()，用来迭代：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">fibs</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> a = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">yield</span> a;<span class="comment">//碰到yield就會return 一個值</span></span><br><span class="line">    [a, b] = [b, a + b];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
 
 
 <div class="post-block">
@@ -309,9 +491,9 @@
       <meta itemprop="name" content="WFX-Maniac">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          ES5/ES6學習筆記-ep1
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep1/" class="post-title-link" itemprop="url">ES5/ES6學習筆記-ep1</a>
+        </h2>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -350,7 +532,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="搞清楚並且用最簡單的方法解釋js的apply-call-bind"><a href="#搞清楚並且用最簡單的方法解釋js的apply-call-bind" class="headerlink" title="搞清楚並且用最簡單的方法解釋js的apply/call/bind"></a>搞清楚並且用最簡單的方法解釋js的apply/call/bind</h2><ul>
+          <h2 id="搞清楚並且用最簡單的方法解釋js的apply-call-bind"><a href="#搞清楚並且用最簡單的方法解釋js的apply-call-bind" class="headerlink" title="搞清楚並且用最簡單的方法解釋js的apply/call/bind"></a>搞清楚並且用最簡單的方法解釋js的apply/call/bind</h2><ul>
 <li>先解釋apply/call<blockquote>
 <p>apply/call 最簡單的解釋其實就是“把一個參數丟進去指定的函數裡面當this”</p>
 </blockquote>
@@ -418,6 +600,7 @@
 
 
 
+      
     </div>
 
     
@@ -425,21 +608,8 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/WFX-Maniac/tags/js/" rel="tag"># js</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-            </div>
-            <div class="post-nav-item">
-                <a href="/WFX-Maniac/2020/11/26/ES5_ES6%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98-ep2/" rel="next" title="ES5/ES6學習筆記-ep2">
-                  ES5/ES6學習筆記-ep2 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        <div class="post-eof"></div>
+      
     </footer>
   </article>
 </div>
@@ -447,7 +617,9 @@
 
 
 
-
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/WFX-Maniac/page/3/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/WFX-Maniac/">1</a><span class="space">&hellip;</span><a class="page-number" href="/WFX-Maniac/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 
 
 <script>

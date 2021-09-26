@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/WFX-Maniac/assets/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/WFX-Maniac/assets/images/logo-x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/WFX-Maniac/assets/images/logo-x16.png">
+  <link rel="mask-icon" href="/WFX-Maniac/assets/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/WFX-Maniac/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="繼上一篇我們講到向量類的建立，接著我們在這一篇文機會提到反射行為的模擬~反射這種行為，在反射面為鉛直或水平時比較單純，所以大部分的Canvas彈跳球動畫教程都是針對這種狀況去做出來的。但是在本篇的案例中，我們會提到在傾斜面上如何透過向量運算來計算反射的角度，同時也會講解Canvas物理模擬和現實物理最大的差異之一：『幀間誤差』，以及應對『幀間誤差』的解決辦法『歸位(Reposition)』。 反射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day11 - 物理模擬篇 - 彈跳球世界II - 成為Canvas Ninja ～ 理解2D渲染的精髓.md">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/23/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CII%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/index.html">
+<meta property="og:site_name" content="WFX-Maniac">
+<meta property="og:description" content="繼上一篇我們講到向量類的建立，接著我們在這一篇文機會提到反射行為的模擬~反射這種行為，在反射面為鉛直或水平時比較單純，所以大部分的Canvas彈跳球動畫教程都是針對這種狀況去做出來的。但是在本篇的案例中，我們會提到在傾斜面上如何透過向量運算來計算反射的角度，同時也會講解Canvas物理模擬和現實物理最大的差異之一：『幀間誤差』，以及應對『幀間誤差』的解決辦法『歸位(Reposition)』。 反射">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/uUXsxes.png">
+<meta property="og:image" content="https://i.imgur.com/TT3WH7W.png">
+<meta property="og:image" content="https://i.imgur.com/HUzZcVh.png">
+<meta property="og:image" content="https://i.imgur.com/ytr8c2D.png">
+<meta property="og:image" content="https://i.imgur.com/6LD2Qd5.png">
+<meta property="article:published_time" content="2021-09-23T15:03:11.792Z">
+<meta property="article:modified_time" content="2021-09-26T18:46:35.289Z">
+<meta property="article:author" content="Mizok.H">
+<meta property="article:tag" content="2021鐵人賽">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/uUXsxes.png">
+
+
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/23/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CII%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script><script src="/WFX-Maniac/js/tool/canvas-fx-base.js"></script>
+
+<script src="/WFX-Maniac/js/ripple-logo.js"></script>
+<script src="/WFX-Maniac/js/silk-wave.js"></script>
+
+<style>
+  @font-face {
+  font-family: "Roboto";
+  src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
+}
+</style>
+<title>Day11 - 物理模擬篇 - 彈跳球世界II - 成為Canvas Ninja ～ 理解2D渲染的精髓.md | WFX-Maniac</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/WFX-Maniac/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">WFX-Maniac</h1>
+      <canvas id="logo-canvas"></canvas><i class="logo-line"></i>
+    </a>
+<script>
+  (()=>{
+    let canvas = document.querySelector('#logo-canvas');
+
+    let init= ()=>{
+      let ripple = new RippleLogo(canvas,{
+        title:'WFX-Maniac',
+        points:2,
+        randomFill:false,
+        lineColor:'rgba(255,255,255,0.35)',
+        maxSize:250
+      });
+    }
+   
+    window.addEventListener('DOMContentLoaded',init);
+  })()
+</script>
+
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/WFX-Maniac/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/WFX-Maniac/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/WFX-Maniac/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/WFX-Maniac/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>時間線<span class="badge">29</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜尋
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜尋..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%9E%E6%95%B8%E7%90%86%E5%B9%BE%E4%BD%95%E8%A7%80%E9%BB%9E%E4%BE%86%E7%9C%8B%E5%8F%8D%E5%B0%84"><span class="nav-number">1.</span> <span class="nav-text">從數理幾何觀點來看反射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%B5%90"><span class="nav-number">2.</span> <span class="nav-text">小結</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Mizok.H"
+      src="/WFX-Maniac/assets/images/logo.png">
+  <p class="site-author-name" itemprop="name">Mizok.H</p>
+  <div class="site-description" itemprop="description">網頁特效開發/個人前端學習歷程</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/WFX-Maniac/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/WFX-Maniac/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/WFX-Maniac/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/23/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CII%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
+      <meta itemprop="name" content="Mizok.H">
+      <meta itemprop="description" content="網頁特效開發/個人前端學習歷程">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WFX-Maniac">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day11 - 物理模擬篇 - 彈跳球世界II - 成為Canvas Ninja ～ 理解2D渲染的精髓.md
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2021-09-23 23:03:11" itemprop="dateCreated datePublished" datetime="2021-09-23T23:03:11+08:00">2021-09-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新於</span>
+        <time title="修改時間：2021-09-27 02:46:35" itemprop="dateModified" datetime="2021-09-27T02:46:35+08:00">2021-09-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/WFX-Maniac/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E8%A1%93%E5%AD%B8%E7%BF%92%E5%BF%83%E5%BE%97/" itemprop="url" rel="index"><span itemprop="name">前端技術學習心得</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>繼上一篇我們講到<code>向量類</code>的建立，接著我們在這一篇文機會提到<code>反射</code>行為的模擬~<br><code>反射</code>這種行為，在<code>反射面</code>為<code>鉛直</code>或<code>水平</code>時比較單純，所以大部分的Canvas彈跳球動畫教程都是針對這種狀況去做出來的。<br>但是在本篇的案例中，我們會提到在<code>傾斜面</code>上如何透過向量運算來計算反射的角度，同時也會講解Canvas物理模擬和現實物理最大的差異之一：『<code>幀間誤差</code>』，以及應對『<code>幀間誤差</code>』的解決辦法『<code>歸位</code>(Reposition)』。</p>
+<p><code>反射</code>會是整個案例最複雜的部分，所以我會盡可能地描述仔細一點～</p>
+<h1 id="從數理幾何觀點來看反射"><a href="#從數理幾何觀點來看反射" class="headerlink" title="從數理幾何觀點來看反射"></a>從數理幾何觀點來看反射</h1><p><img src="https://i.imgur.com/uUXsxes.png" alt="img"></p>
+<p>如果說反射面只是單純的水平或垂直面，那麼反射的運算其實就很簡單，就是把垂直於反射面的向量分量倒轉而已。</p>
+<p>但是如果今天反射面是傾斜的，那麼情況可就大不同了。</p>
+<p>下圖中描繪著一個即將碰撞到傾斜面的球。(坐標系是使用Canvas的坐標系)</p>
+<p><img src="https://i.imgur.com/TT3WH7W.png" alt="img"></p>
+<p>從上面這張圖，我們可以先定義兩個有關該球碰撞傾斜面當下瞬間的假設，也就是所謂的『碰撞偵測(Collision Detection)』</p>
+<ul>
+<li>球的中心到傾斜面距離低於球的半徑</li>
+<li>球的座標位置必須要介於傾斜面的兩個端點之間</li>
+</ul>
+<p>接著我們再來看看這張圖。</p>
+<p><img src="https://i.imgur.com/HUzZcVh.png" alt="img"></p>
+<p>假設我們一開始就知道球心的位置，和端點A&amp;B的座標，這樣我們就可以藉由這些數據去取得球心到斜面的垂直距離。</p>
+<p>算法大致上是這樣的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 已知球心座標和兩端點座標</span></span><br><span class="line"><span class="comment">// 所以這樣也就可以取得『向量AP』和『向量BP』還有反射面端點A到B形成的『向量AB』</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> vectorAPP = vectorAP.project(vectorAB); <span class="comment">//透過我們之前寫的向量類中的投射(project)方法來取得『向量APP』</span></span><br><span class="line"><span class="keyword">let</span> dist = vectorAP.substract(vectorAPP).length(); <span class="comment">// 透過向量差值來取得d的長度</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果對高中數學還有印象的人其實也可以用點到線公式去求取距離，不過那就會是另外一套算法了</p>
+</blockquote>
+<p>接下來我們要講講所謂的『<code>幀間誤差</code>』和『<code>歸位(reposition)</code>』。</p>
+<p>我們在前面有提到過，canvas的動畫是藉由不斷地清除畫面後再重繪來達成的，所以說事實上球的動畫並不是一個完全連續的運動。</p>
+<blockquote>
+<p>意思就是說假設1/60 秒的時候球的位置在0, 而2/60秒的時候球的位置在0.1，但是實際上1/60~2/60秒之間，球是沒有在運動的</p>
+</blockquote>
+<p>這意味著球的運動其實是『格進』，所以說球在接近反射面的過程中，非常可能不會剛好有『球心與反射面距離 = 半徑』的狀況，多半情況下可能是球『插』進去了反射面裡面。</p>
+<p>這個就是所謂的『<code>幀間誤差</code>』，而應對幀間誤差的方式之一就是使用『<code>歸位(reposition)</code>』：</p>
+<p>假設球已經『插』進去反射面，則把它歸位回正好『球心與反射面距離 = 球半徑』的位置。</p>
+<p>歸位後的位置，我們可以透過球心和反射面距離d，利用比例原理去計算出來。</p>
+<p><img src="https://i.imgur.com/ytr8c2D.png" alt="img"> </p>
+<blockquote>
+<p>圖片來自 Apress Physics for JavaScript Games Animation and Simulations, With HTML5 Canvas</p>
+</blockquote>
+<p>事實上，<code>幀間誤差</code>還有一個可能導致更大影響的問題在，那就是在球本身具有加速度時的狀況。</p>
+<p>在現實物理中，我們都知道若物體有受力，那麼它就必然的會產生加速度(牛頓第二定律)，而這種行為如果要用Canvas模擬出來，就會受到<code>幀間誤差</code>的影響。<br>我們在前面有提到，<code>幀間誤差</code>的成因是因為canvas動畫的物體實際上是格進式的運動，以『<code>球碰撞牆壁</code>』這個案例來看，球有很大的機會在判斷撞上牆壁的那一刻，他會『<code>插</code>』進去牆壁一小段距離，而這一小段距離實際上也會給球帶來比預期還要多的<code>速度加成</code>(原本在現實生活中頂多是加速到球心和牆壁距離為0而已)，這種現象最終將會造成球每碰撞一次牆壁，就變得越快，而在碰撞多次的情況下可能就會造成動畫走鐘。</p>
+<p>通常上述這種狀況的解法，我們可以為球加上一個值介於<code>0~1</code>之間的摩擦係數<code>K</code>，讓球在每次反彈的時候去把當下的速度向量做一部分的縮減，也就是變相地去抵銷<code>幀間誤差</code>所帶來的影響。</p>
+<p>但是畢竟摩擦係數算是比較消極一點的做法，比較積極且精確的做法當然還是有，那就是利用第三加速度公式：  </p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">V</span>^<span class="number">2</span>=V<span class="number">0</span>^<span class="number">2</span>+<span class="number">2</span>aS</span><br></pre></td></tr></table></figure>
+
+<p>由於我們在上面有提到，我們可以計算得出『<code>歸位(reposition)</code>』後的座標，那也就意味著我們可以計算出來歸為前一幀到歸位時所移動的長度，這樣也就可以進一步計算出歸位時的速度。</p>
+<p>最後我們來到<code>反射</code>角度的計算，這部分就相對簡單一些。</p>
+<p><img src="https://i.imgur.com/6LD2Qd5.png" alt="img"></p>
+<p><code>反射</code>後的速度向量，我們在這邊可以把他分割成<code>沿著反射面方向</code>的部分，和<code>垂直於反射面</code>的部分，而計算上則可以直接透過<code>向量類</code>的project方法來求得<code>沿著反射面方向</code>的部分，最後再用扣的去取得<code>垂直於反射面</code>的部分。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">normalVelocity</span> = dist.para(particle.velo2D.projection(dist))<span class="comment">;</span></span><br><span class="line"><span class="attr">tangentVelocity</span> = ball.velocity.subtract(normalVelocity)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h1><p>這邊我們講解完了<code>反射</code>的運算方法，在接下來的部分我們會繼續帶到<code>斜向拋射</code>的部分，然後在逐漸地去把我們在文章中描述的邏輯構建到程式中~</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/WFX-Maniac/tags/2021%E9%90%B5%E4%BA%BA%E8%B3%BD/" rel="tag"># 2021鐵人賽</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/21/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20IV%20%5B%E5%83%8F%E7%B4%A0%E6%93%8D%E4%BD%9C%E6%A6%82%E8%AB%96%5D%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" rel="prev" title="Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
+                  <i class="fa fa-chevron-left"></i> Day8 - 2D渲染環境基礎篇 IV[像素操作概論] -  成為Canvas Ninja ～ 理解2D渲染的精髓
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/WFX-Maniac/2021/09/26/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CI%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20copy/" rel="next" title="Day10 - 物理模擬篇 - 彈跳球世界I - 成為Canvas Ninja ～ 理解2D渲染的精髓.md">
+                  Day10 - 物理模擬篇 - 彈跳球世界I - 成為Canvas Ninja ～ 理解2D渲染的精髓.md <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">Mizok.H</span>
+</div>
+  
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/WFX-Maniac/js/utils.js"></script><script src="/WFX-Maniac/js/motion.js"></script><script src="/WFX-Maniac/js/next-boot.js"></script>
+
+  
+
+<script src="/WFX-Maniac/js/local-search.js"></script>
+
+
+
+
+
+
+  
+
+
+
+
+
+
+</body>
+</html>

@@ -23,21 +23,21 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"mizok.github.io","root":"/WFX-Maniac/","images":"/WFX-Maniac/images","scheme":"Pisces","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/WFX-Maniac/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="canvas動畫">
+<meta name="description" content="我們在上一次講到用數理觀點來觀察反射行為的諸多細節，而這篇文則是要講解斜向拋射。不過因為斜向拋射的概念其實不是挺複雜，所以為了不要浪費篇幅，我也會先把一些程式的實作面先在這一篇做一個簡單的引導～ 斜向拋射斜向拋射這個名詞，我想應該對很多人來說都有很深的印象。（想當年剛成為理組小菜雞的我在物理課上到這一段的時候真的有三觀被刷新的感覺XD）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Day7 - Canvas動畫概論 -  成為Canvas Ninja ～ 理解2D渲染的精髓">
-<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/15/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20-%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/index.html">
+<meta property="og:title" content="Day12 - 物理模擬篇 - 彈跳球世界III - 成為Canvas Ninja ～ 理解2D渲染的精髓.md">
+<meta property="og:url" content="https://mizok.github.io/WFX-Maniac/2021/09/27/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CIII%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20copy/index.html">
 <meta property="og:site_name" content="WFX-Maniac">
-<meta property="og:description" content="canvas動畫">
+<meta property="og:description" content="我們在上一次講到用數理觀點來觀察反射行為的諸多細節，而這篇文則是要講解斜向拋射。不過因為斜向拋射的概念其實不是挺複雜，所以為了不要浪費篇幅，我也會先把一些程式的實作面先在這一篇做一個簡單的引導～ 斜向拋射斜向拋射這個名詞，我想應該對很多人來說都有很深的印象。（想當年剛成為理組小菜雞的我在物理課上到這一段的時候真的有三觀被刷新的感覺XD）">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2021-09-14T17:19:39.582Z">
-<meta property="article:modified_time" content="2021-09-14T17:19:51.358Z">
+<meta property="article:published_time" content="2021-09-26T18:46:46.066Z">
+<meta property="article:modified_time" content="2021-09-26T19:10:35.841Z">
 <meta property="article:author" content="Mizok.H">
 <meta property="article:tag" content="2021鐵人賽">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/15/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20-%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+<link rel="canonical" href="https://mizok.github.io/WFX-Maniac/2021/09/27/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CIII%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20copy/">
 
 
 <script class="page-configurations">
@@ -59,7 +59,7 @@
   src: url(/WFX-Maniac/font/Roboto.ttf) format("truetype");
 }
 </style>
-<title>Day7 - Canvas動畫概論 -  成為Canvas Ninja ～ 理解2D渲染的精髓 | WFX-Maniac</title>
+<title>Day12 - 物理模擬篇 - 彈跳球世界III - 成為Canvas Ninja ～ 理解2D渲染的精髓.md | WFX-Maniac</title>
   
 
 
@@ -229,7 +229,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#canvas%E5%8B%95%E7%95%AB"><span class="nav-number">1.</span> <span class="nav-text">canvas動畫</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%9C%E5%90%91%E6%8B%8B%E5%B0%84"><span class="nav-number">1.</span> <span class="nav-text">斜向拋射</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -297,7 +297,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/15/Canvas%20%E5%8B%95%E7%95%AB%E6%A6%82%E8%AB%96%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20-%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/">
+    <link itemprop="mainEntityOfPage" href="https://mizok.github.io/WFX-Maniac/2021/09/27/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CIII%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20copy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/WFX-Maniac/assets/images/logo.png">
@@ -310,7 +310,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Day7 - Canvas動畫概論 -  成為Canvas Ninja ～ 理解2D渲染的精髓
+          Day12 - 物理模擬篇 - 彈跳球世界III - 成為Canvas Ninja ～ 理解2D渲染的精髓.md
         </h1>
 
         <div class="post-meta-container">
@@ -322,7 +322,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2021-09-15 01:19:39 / 修改時間：01:19:51" itemprop="dateCreated datePublished" datetime="2021-09-15T01:19:39+08:00">2021-09-15</time>
+      <time title="創建時間：2021-09-27 02:46:46 / 修改時間：03:10:35" itemprop="dateCreated datePublished" datetime="2021-09-27T02:46:46+08:00">2021-09-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -344,7 +344,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="canvas動畫"><a href="#canvas動畫" class="headerlink" title="canvas動畫"></a>canvas動畫</h2>
+        <p>我們在上一次講到用數理觀點來觀察<code>反射</code>行為的諸多細節，而這篇文則是要講解<code>斜向拋射</code>。<br>不過因為<code>斜向拋射</code>的概念其實不是挺複雜，所以為了不要浪費篇幅，我也會先把一些程式的實作面先在這一篇做一個簡單的引導～</p>
+<h1 id="斜向拋射"><a href="#斜向拋射" class="headerlink" title="斜向拋射"></a>斜向拋射</h1><p><code>斜向拋射</code>這個名詞，我想應該對很多人來說都有很深的印象。（想當年剛成為理組小菜雞的我在物理課上到這一段的時候真的有三觀被刷新的感覺XD）</p>
+
     </div>
 
     
@@ -360,14 +362,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/14/Canvas%E9%80%B2%E9%9A%8E%E6%8A%80%E5%B7%A7%20I%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" rel="prev" title="Day10 - Canvas進階技巧 I -  成為Canvas Ninja ～ 理解2D渲染的精髓">
-                  <i class="fa fa-chevron-left"></i> Day10 - Canvas進階技巧 I -  成為Canvas Ninja ～ 理解2D渲染的精髓
+                <a href="/WFX-Maniac/2021/09/26/%E7%89%A9%E7%90%86%E6%A8%A1%E6%93%AC%E7%AF%87%20-%20%E5%BD%88%E8%B7%B3%E7%90%83%E4%B8%96%E7%95%8CI%20-%20%E6%88%90%E7%82%BACanvas%20Ninja%20%EF%BD%9E%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93%20copy/" rel="prev" title="Day10 - 物理模擬篇 - 彈跳球世界I - 成為Canvas Ninja ～ 理解2D渲染的精髓.md">
+                  <i class="fa fa-chevron-left"></i> Day10 - 物理模擬篇 - 彈跳球世界I - 成為Canvas Ninja ～ 理解2D渲染的精髓.md
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/WFX-Maniac/2021/09/15/2D%E6%B8%B2%E6%9F%93%E7%92%B0%E5%A2%83%E5%9F%BA%E7%A4%8E%E7%AF%87%20II%20%5B%E8%A3%9C%E5%85%85%E7%AF%87%5D%20-%20%20%E6%88%90%E7%82%BACanvas%20Ninja%20~%20%E7%90%86%E8%A7%A32D%E6%B8%B2%E6%9F%93%E7%9A%84%E7%B2%BE%E9%AB%93/" rel="next" title="Day6 - 2D渲染環境基礎篇 II [補充篇] -  成為Canvas Ninja ～ 理解2D渲染的精髓">
-                  Day6 - 2D渲染環境基礎篇 II [補充篇] -  成為Canvas Ninja ～ 理解2D渲染的精髓 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
